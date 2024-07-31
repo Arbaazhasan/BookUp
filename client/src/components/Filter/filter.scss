@@ -1,0 +1,58 @@
+.filter {
+    width: 100%;
+    // border: 2px solid red;
+    background: linear-gradient(269.96deg, #e1ebf7 .02%, #daf8fe 99.99%);
+
+
+    >form {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%;
+        // border: 2px solid red;
+        margin: auto;
+
+        >div {
+
+            // border: 2px solid red;
+            padding: 1.3rem;
+            height: 100%;
+            font-weight: 400;
+            font-weight: bold;
+            font-size: small;
+
+
+            >span {
+                color: gray;
+                font-weight: lighter;
+            }
+
+        }
+
+        >.search {
+            display: flex;
+            padding: .4rem .5rem;
+            align-items: center;
+            background-color: white;
+            gap: .5rem;
+
+
+            >p {
+                font-size: large;
+            }
+
+            >input {
+                background-color: none;
+                border: none;
+                width: 11.5rem;
+
+                &:focus {
+                    outline: none;
+                }
+
+            }
+
+        }
+
+    }
+}

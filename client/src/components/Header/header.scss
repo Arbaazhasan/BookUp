@@ -1,0 +1,169 @@
+header {
+
+    // border: 2px solid red;
+    padding: 1rem 6em;
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1.5fr;
+    width: 100vw;
+    // height: 5vw;
+    margin: auto;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+
+    >.menuBurger {
+        display: none;
+    }
+
+    .menu {
+        // border: 2px solid blue;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+
+        >div {
+            // border: 2px solid blue;
+            width: 4.5rem;
+
+
+            >a {
+                text-decoration: none;
+                color: white;
+                font-size: medium;
+                position: relative;
+
+
+                &::before {
+                    content: '';
+                    border: 2px solid transparent;
+                    width: 0rem;
+                    position: absolute;
+                    bottom: -6px;
+
+                    transition: .7s all;
+
+
+                }
+
+                &:hover {
+                    transition: .4s all;
+                    font-weight: bold;
+
+                    &::before {
+                        content: '';
+                        border: 1.5px solid crimson;
+                        width: 100%;
+                        position: absolute;
+                        bottom: -6px;
+                        transition: .4s all;
+
+
+                    }
+
+                }
+            }
+
+
+        }
+
+    }
+
+    >.logo {
+        // border: 2px solid red;
+        font-weight: bolder;
+        color: white;
+        font-size: xxx-large;
+        text-shadow: 0px 0px 1px black;
+        text-align: center;
+    }
+
+
+
+
+    >.bookingBtn {
+        // border: 2px solid red;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        >button {
+            padding: .7vw 2vw;
+            background-color: #009DFF;
+            color: white;
+            border: 2px solid transparent;
+            transition: .5s all;
+            cursor: pointer;
+
+            &:hover {
+                border: 2px solid #009DFF;
+                background-color: transparent;
+
+                transition: .5s all;
+            }
+
+        }
+    }
+
+}
+
+
+@media screen and (max-width:1100px) {
+
+    header {
+
+        .menuBurger {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: xx-large;
+
+
+            >.menu {
+                // border: 2px solid red;
+                display: block;
+                position: absolute;
+                top: 0;
+                // left: -140px;
+                // left: -0;
+                height: 100vh;
+                display: grid;
+                background-color: rgba(0, 0, 0, 0.516);
+                transition: 1s all;
+
+
+                >div {
+                    // border: 2px solid red;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0rem 2rem;
+
+
+                    &:nth-child(1) {
+
+                        >a {
+                            font-size: x-large;
+                        }
+                    }
+
+                    &:hover {
+                        background-color: black;
+                    }
+
+                }
+
+
+            }
+        }
+
+        .menu {
+            display: none;
+        }
+
+
+    }
+
+}

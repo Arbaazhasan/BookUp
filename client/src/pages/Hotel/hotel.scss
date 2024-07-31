@@ -1,0 +1,187 @@
+.hotelpage {
+    // border: 2px solid red;
+    width: 100%;
+
+
+    >.hotel {
+        // border: 2px solid green;
+        width: 80%;
+        margin: auto;
+        padding: 1rem 0rem;
+
+        >.heading {
+            display: flex;
+            justify-content: space-between;
+
+            >.desc {
+                display: grid;
+                gap: .5rem;
+
+                >h1 {
+                    font-size: x-large;
+                }
+
+                >p {
+
+                    &:nth-child(2) {
+                        font-size: small;
+
+                        >span {
+                            font-size: small;
+                        }
+                    }
+
+                    &:nth-child(3) {
+                        color: #009DFF;
+                        font-weight: 500;
+                    }
+
+                    &:nth-child(4) {
+                        color: rgb(0, 180, 3);
+
+                    }
+
+
+                }
+
+            }
+
+            >.bookingBtn {
+                >button {
+                    width: 11rem;
+                    height: 2.7rem;
+                    background-color: #009DFF;
+                    color: white;
+                    border: 3px solid transparent;
+                    transition: .4s all;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #009DFF;
+                        background-color: white;
+                        border: 3px solid #009DFF;
+                        transition: .4s all;
+                    }
+
+
+                }
+
+            }
+        }
+
+        >.hotelImages {
+            // border: 2px solid blue;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 33%);
+            justify-content: space-between;
+            gap: .5rem 0rem;
+            padding: 1rem 0rem;
+
+            >div {
+                // border: 2px solid red;
+                height: 15rem;
+                width: 100%;
+                display: grid;
+                place-content: center;
+                overflow: hidden;
+
+                >img {
+                    max-width: 100%;
+
+                }
+            }
+
+
+        }
+
+
+        >.roomDetails {
+            // border: 2px solid red;
+            display: flex;
+            margin: 2rem 0rem;
+            justify-content: space-between;
+
+
+            >.left {
+
+                // border: 2px solid green;
+                width: 70%;
+
+                >h1 {
+                    font-size: x-large;
+                }
+
+                >p {
+
+                    font-size: .9rem;
+                    margin-top: .5rem;
+                    line-height: 1.3rem;
+                }
+
+            }
+
+            >.right {
+                // border: 2px solid blue;
+                width: 25%;
+
+                >div {
+                    background-color: #dbf1ff;
+                    display: grid;
+                    gap: 1rem;
+                    padding: 1.5rem;
+                    margin: auto;
+
+                    >h2 {
+                        font-size: 1.2rem;
+                    }
+
+                    >p {
+                        font-size: .9rem;
+                    }
+
+                    >h1 {
+                        font-size: 1.7rem;
+
+                        >span {
+                            font-weight: 300;
+                            color: rgb(74, 74, 74);
+                        }
+
+                    }
+
+                    >button {
+                        width: 100%;
+                        height: 3rem;
+                        color: white;
+                        background-color: #009DFF;
+                        border: 2px solid transparent;
+                        font-weight: bold;
+                        transition: .5s all;
+                        cursor: pointer;
+
+
+                        &:hover {
+                            background-color: #dbf1ff;
+                            border: 2px solid #009DFF;
+                            color: #009DFF;
+                            transition: .5s all;
+                        }
+                    }
+
+
+
+
+
+                }
+
+
+            }
+        }
+
+
+
+    }
+
+
+}
