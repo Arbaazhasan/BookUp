@@ -1,0 +1,145 @@
+.rooms {
+    // border: 2px solid green;
+    height: 89%;
+    width: 100%;
+    background-color: white;
+    border-radius: 1vw;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3rem 0rem;
+    padding: 2.5rem;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    >.room {
+        // border: 2px solid green;
+        width: 21.5rem;
+        padding: 1.5rem;
+        display: grid;
+        gap: 1rem;
+        // border: 1px solid gray;
+        box-shadow: 0px 0px 5px rgba(128, 128, 128, 0.406);
+        border-radius: 1vw;
+        transition: .4s all;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.02);
+            transition: .4s all;
+
+        }
+
+        >.images {
+            // border: 2px solid green;
+            width: 100%;
+            margin: auto;
+            border-radius: 1vw;
+            overflow: hidden;
+            // border: 1px solid gray;
+            box-shadow: 0px 0px 3px gray;
+
+            >.main {
+                // border: 2px solid green;
+                height: 12rem;
+                display: grid;
+                // place-content: center;
+                font-size: 10rem;
+
+                >img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+            }
+
+            >.imagesArray {
+                // border: 2px solid blue;
+                display: flex;
+                height: 4rem;
+
+                >div {
+                    // border: 2px solid green;
+                    height: 100%;
+                    width: 25%;
+                    display: grid;
+                    // place-content: center;
+                    position: relative;
+
+                    >div {
+                        // border: 2px solid green;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.495);
+                        display: grid;
+                        place-content: center;
+                        color: white;
+                    }
+
+                    >img {
+
+                        height: 100%;
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+
+        >.details {
+            // border: 2px solid green;
+            display: grid;
+            gap: 1rem;
+
+            >h1 {
+                font-size: x-large;
+                // color: #fb6340;
+            }
+
+            >p {
+                font-size: small;
+                color: gray;
+                font-weight: 400;
+            }
+
+            >div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                >p {
+                    font-weight: bold;
+                    font-size: large;
+                }
+
+                >a {
+
+                    >button {
+                        padding: .5rem 1.5rem;
+                        background-color: #fb6340;
+                        color: white;
+                        border: 2px solid transparent;
+                        font-size: small;
+                        transition: .3s all;
+                        cursor: pointer;
+
+
+                        &:hover {
+                            background-color: white;
+                            color: #fb6340;
+                            border: 2px solid #fb6340;
+                            transition: .3s all;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+}

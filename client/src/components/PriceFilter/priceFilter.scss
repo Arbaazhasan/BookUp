@@ -78,7 +78,8 @@
             width: 20%;
             height: 2.2rem;
             color: white;
-            background-color: #009DFF;
+            // background-color: #009DFF;
+            background-color: #b81010;
             border: 2px solid transparent;
             transition: .5s all;
             cursor: pointer;
@@ -90,8 +91,8 @@
 
 
             &:hover {
-                border: 2px solid #009DFF;
-                color: #009DFF;
+                border: 2px solid #b81010;
+                color: #b81010;
                 transition: .5s all;
                 background-color: white;
             }

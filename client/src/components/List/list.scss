@@ -42,7 +42,7 @@
             >.name {
 
                 >h1 {
-                    color: #009DFF;
+                    color: #b81010;
                 }
 
                 >p {
@@ -91,31 +91,33 @@
                 }
 
                 >h1 {
-                    color: orangered;
+                    color: #b81010;
                 }
             }
 
-            >button {
-                color: white;
-                background-color: #009DFF;
-                width: 10rem;
-                height: 2.5rem;
-                border: none;
-                border: 2px solid transparent;
-                transition: .5s all;
-                cursor: pointer;
-
-
-                &:hover {
-                    background-color: white;
-                    border: 2px solid #009DFF;
-                    color: #009DFF;
-
+            >a {
+                >button {
+                    color: white;
+                    background-color: #b81010;
+                    width: 10rem;
+                    height: 2.5rem;
+                    border: none;
+                    border: 2px solid transparent;
                     transition: .5s all;
+                    cursor: pointer;
+
+
+                    &:hover {
+                        background-color: white;
+                        border: 2px solid #b81010;
+                        color: #b81010;
+
+                        transition: .5s all;
+
+                    }
+
 
                 }
-
-
             }
 
         }

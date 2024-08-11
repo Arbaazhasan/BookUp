@@ -1,7 +1,8 @@
 .filter {
     width: 100%;
     // border: 2px solid red;
-    background: linear-gradient(269.96deg, #e1ebf7 .02%, #daf8fe 99.99%);
+    // background: linear-gradient(269.96deg, #e1ebf7 .02%, #daf8fe 99.99%);
+    background: linear-gradient(269.96deg, #f7e1e1 .02%, #fedada 99.99%);
 
 
     >form {
@@ -33,7 +34,7 @@
             display: flex;
             padding: .4rem .5rem;
             align-items: center;
-            background-color: white;
+            background-color: transparent;
             gap: .5rem;
 
 
@@ -45,6 +46,7 @@
                 background-color: none;
                 border: none;
                 width: 11.5rem;
+                background-color: transparent;
 
                 &:focus {
                     outline: none;

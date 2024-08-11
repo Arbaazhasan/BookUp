@@ -38,8 +38,8 @@ const Header = ({ headerBackground }) => {
     return (
         <
 
-            header style={{ backgroundColor: backgroundColor || headerBackground ? 'black' : 'transparent', transition: '1s all' }}
-
+            // header style={{ backgroundColor: backgroundColor || headerBackground ? 'black' : 'transparent', transition: '1s all' }}
+            header
         >
 
 

@@ -11,7 +11,7 @@ const Slider = () => {
 
             <div className="img">
                 <div>
-                    <img src="/public/images/resorts/img1.jpg" alt="" />
+                    <img src="images/resorts/img1.jpg" alt="" />
 
                 </div>
             </div>

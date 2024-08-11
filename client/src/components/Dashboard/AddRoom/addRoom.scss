@@ -1,0 +1,189 @@
+.addRoom {
+    // border: 2px solid green;
+    width: 100%;
+    height: 90%;
+    padding: 2rem 0rem;
+    background-color: white;
+    border-radius: 1vw;
+    margin: auto;
+
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    >form {
+        // border: 2px solid green;
+
+        >.images {
+            border: 2px solid green;
+            border: 2px dashed gray;
+            width: 90%;
+            margin: auto;
+            border-radius: 1vw;
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+            border-style: dashed;
+
+
+
+            >.dragNdrop {
+
+                // height: 20rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                cursor: pointer;
+
+                >h1 {
+                    font-size: 10rem;
+                    display: flex;
+                    // border: 2px solid green;
+                    color: #fb6340;
+
+                }
+
+                >div {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    color: gray;
+                    gap: 1rem;
+
+                    >label {
+                        background-color: #fb6340;
+                        padding: 0.5rem 1rem;
+                        color: white;
+                        cursor: pointer;
+                        border: 2px solid #fb6340;
+                        transition: .3s all;
+
+
+                        &:hover {
+                            background-color: white;
+                            color: #fb6340;
+                            transition: .3s all;
+
+                        }
+
+                    }
+
+                }
+            }
+
+
+            >.selectedImages {
+                // border: 2px solid red;
+                width: 95%;
+                height: 11rem;
+                margin: auto;
+                border: 1px solid gray;
+                margin-top: 2rem;
+
+                >.imagesArray {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    overflow-x: scroll;
+
+                    &::-webkit-scrollbar {
+                        display: none;
+
+                    }
+
+
+                    >.image {
+
+                        // border: 2px solid green;
+                        width: 12rem;
+                        min-width: 12rem;
+                        display: flex;
+                        place-content: center;
+                        margin: 1rem 1rem;
+                        box-shadow: 0px 0px 5px gray;
+                        border: 1px solid gray;
+                        padding: .5rem;
+                        position: relative;
+
+                        >button {
+                            position: absolute;
+                            right: 1rem;
+                            top: 1rem;
+                            border: none;
+                            color: white;
+                            font-size: large;
+                            padding: .1rem .38rem;
+                            background-color: rgba(0, 0, 0, 0.521);
+
+                            &:hover {
+                                color: #fb6340;
+                                cursor: pointer;
+                            }
+
+                        }
+
+                        >img {
+                            max-width: 100%;
+                            max-height: 100%;
+                        }
+
+                    }
+
+                }
+            }
+
+        }
+
+        .details {
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+
+            >div {
+                // border: 2px solid red;
+                width: 33rem;
+                height: 3rem;
+                display: flex;
+                justify-content: right;
+
+                >input {
+                    width: 100%;
+                    height: 100%;
+                    padding: 1rem;
+                    font-size: small;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                }
+
+                >button {
+                    padding: 0rem 1rem;
+                    background-color: #fb6340;
+                    color: white;
+                    font-weight: bold;
+                    border: 2px solid transparent;
+                    transition: .3s all;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: white;
+                        color: #fb6340;
+                        border: 2px solid #fb6340;
+                        transition: .3s all;
+                    }
+
+                }
+            }
+
+
+        }
+    }
+
+}

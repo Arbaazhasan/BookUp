@@ -1,15 +1,22 @@
 header {
 
     // border: 2px solid red;
-    padding: 1rem 6em;
+    padding: 1rem 5em;
     display: grid;
     grid-template-columns: 1.5fr 2fr 1.5fr;
-    width: 100vw;
+    width: 95.5%;
     // height: 5vw;
-    margin: auto;
     position: fixed;
     top: 0;
+    left: 1rem;
     z-index: 100;
+    box-shadow: 0px 3px 5px rgba(172, 172, 172, 0.668);
+    margin: 1rem;
+    border-radius: 1vw;
+
+    background-color: rgba(255, 255, 255, 0.73);
+    backdrop-filter: blur(5px);
+
 
     >.menuBurger {
         display: none;
@@ -29,9 +36,11 @@ header {
 
             >a {
                 text-decoration: none;
-                color: white;
+                color: rgb(244, 59, 38);
+                ;
                 font-size: medium;
                 position: relative;
+
 
 
                 &::before {
@@ -72,9 +81,9 @@ header {
     >.logo {
         // border: 2px solid red;
         font-weight: bolder;
-        color: white;
-        font-size: xxx-large;
-        text-shadow: 0px 0px 1px black;
+        color: rgb(244, 59, 38);
+        font-size: xx-large;
+        // text-shadow: 0px 0px 1px black;
         text-align: center;
     }
 
@@ -89,16 +98,16 @@ header {
 
         >button {
             padding: .7vw 2vw;
-            background-color: #009DFF;
+            background-color: rgb(244, 59, 38);
             color: white;
             border: 2px solid transparent;
             transition: .5s all;
             cursor: pointer;
 
             &:hover {
-                border: 2px solid #009DFF;
+                border: 2px solid rgb(244, 59, 38);
                 background-color: transparent;
-
+                color: rgb(244, 59, 38);
                 transition: .5s all;
             }
 
@@ -115,7 +124,7 @@ header {
         .menuBurger {
             display: flex;
             align-items: center;
-            color: white;
+            color: rgb(244, 59, 38);
             font-size: xx-large;
 
 
@@ -140,6 +149,11 @@ header {
                     align-items: center;
                     justify-content: center;
                     padding: 0rem 2rem;
+
+                    >a {
+                        color: white;
+
+                    }
 
 
                     &:nth-child(1) {

@@ -1,0 +1,110 @@
+.sidebar {
+    // border: 2px solid green;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 1vw;
+    box-shadow: 0px 0px 8px rgba(182, 182, 182, 0.52);
+
+
+    .heading {
+        // border: 2px solid red;
+        display: flex;
+        align-items: center;
+        padding: 1.5rem 1rem;
+        border-bottom: 1px solid rgba(215, 215, 215, 0.212);
+        gap: .5rem;
+
+        >span {
+            font-size: x-large;
+            display: flex;
+        }
+
+        >h1 {
+            // border: 2px solid green;
+            font-size: x-large;
+        }
+
+    }
+
+    .options {
+        // border: 2px solid green;
+
+        >.heading {
+            // border: 2px solid green;
+            border-bottom: none;
+            padding: 1rem 0rem 0rem 1rem;
+            cursor: default;
+
+            >p {
+                font-weight: 500;
+                font-size: small;
+                // color: salmon;
+
+            }
+
+
+            &:hover {
+                border-bottom: none;
+                background-color: white;
+
+                >p {
+                    color: gray;
+                    font-weight: 500;
+
+                }
+
+            }
+
+        }
+
+        >a {
+            // border: 2px solid red;
+            display: flex;
+            padding: 1.5rem;
+            gap: 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(174, 174, 174, 0.39);
+            color: gray;
+            text-decoration: none;
+
+
+            &:hover {
+                background-color: rgba(235, 235, 235, 0.706);
+                border-bottom: 1px solid rgb(220, 220, 220);
+
+                >span {
+                    font-weight: bolder;
+                }
+
+                >p {
+                    font-weight: bold;
+                    color: rgb(95, 95, 95);
+
+                }
+            }
+
+            &:nth-child(4) {
+                border: none;
+            }
+
+
+            >span {
+                color: salmon;
+                display: flex;
+                align-items: center;
+                font-size: large;
+                font-weight: bolder;
+            }
+
+            >p {
+                font-size: .9rem;
+                font-weight: 300;
+            }
+
+        }
+
+
+    }
+
+}

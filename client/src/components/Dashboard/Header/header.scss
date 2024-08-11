@@ -1,0 +1,67 @@
+.header {
+    // border: 2px solid green;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+
+    padding-right: 5rem;
+    padding-left: .5rem;
+    margin-bottom: 2rem;
+
+
+    >.left {
+        // border: 2px solid red;
+
+        >div {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+
+            >p {
+                color: rgba(217, 217, 217, 0.586);
+                font-size: small;
+            }
+
+            >span {
+                font-size: small;
+            }
+        }
+
+        >h2 {
+            font-size: large;
+        }
+
+    }
+
+    >.right {
+        // border: 2px solid green;
+
+        >input {
+            width: 11rem;
+            height: 2.5rem;
+            padding: 1rem;
+            border: none;
+            border-radius: .5vw;
+            // font-size: .5rem;
+            color: rgb(161, 161, 161);
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        >button {
+            margin-left: 2rem;
+            border: none;
+            background-color: transparent;
+            color: white;
+            font-size: medium;
+            font-weight: 500;
+            cursor: pointer;
+
+
+        }
+
+    }
+
+}

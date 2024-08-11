@@ -11,13 +11,13 @@ const FeaturedRooms = () => {
                 <h1>Choose a Better Room</h1>
             </div>
 
-            <div className="rooms">
+            <div className="fRooms">
 
 
                 <div className="room">
 
                     <div className="roomImage">
-                        <img src="/public/images/Rooms/img1.jpg" alt="" />
+                        <img src="images/Rooms/img1.jpg" alt="" />
 
                     </div>
 
@@ -35,7 +35,7 @@ const FeaturedRooms = () => {
                 <div className="room">
 
                     <div className="roomImage">
-                        <img src="/public/images/Rooms/img2.jpg" alt="" />
+                        <img src="images/Rooms/img2.jpg" alt="" />
 
                     </div>
 
@@ -53,7 +53,7 @@ const FeaturedRooms = () => {
                 <div className="room">
 
                     <div className="roomImage">
-                        <img src="/public/images/Rooms/img3.jpg" alt="" />
+                        <img src="images/Rooms/img3.jpg" alt="" />
 
                     </div>
 
@@ -71,7 +71,7 @@ const FeaturedRooms = () => {
                 <div className="room">
 
                     <div className="roomImage">
-                        <img src="/public/images/Rooms/img4.jpg" alt="" />
+                        <img src="images/Rooms/img4.jpg" alt="" />
 
                     </div>
 

@@ -19,11 +19,11 @@ const AboutUs = ({ contentDirection }) => {
             <div className="right">
 
                 <div data-aos="fade-down">
-                    <img src="/public/images/AboutUs/img1.jpg" alt="" />
+                    <img src="images/AboutUs/img1.jpg" alt="" />
                 </div>
 
                 <div data-aos="fade-up">
-                    <img src="/public/images/AboutUs/img2.jpg" alt="" />
+                    <img src="images/AboutUs/img2.jpg" alt="" />
                 </div>
 
             </div>

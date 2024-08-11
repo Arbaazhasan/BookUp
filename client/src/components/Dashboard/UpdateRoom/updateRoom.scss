@@ -1,0 +1,43 @@
+.inputBar {
+    // border: 2px solid green;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    >input {
+        padding: .6rem;
+        // width: 10rem;
+        border: 1px solid gray;
+        border-radius: 0.2vw;
+
+        &:focus {
+            outline: none;
+        }
+
+    }
+
+    >button {
+        padding: .6rem 1.5rem;
+        font-size: small;
+        color: white;
+        background-color: #fb6340;
+        border: none;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: .3s all;
+
+
+        &:hover {
+            background-color: white;
+            color: #fb6340;
+            transition: .3s all;
+            border: 2px solid #fb6340;
+
+        }
+
+
+    }
+
+}

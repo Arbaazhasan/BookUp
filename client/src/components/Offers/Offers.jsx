@@ -18,7 +18,7 @@ const Offers = () => {
                 <div className="hotelCard">
 
                     <div className="hotelImage">
-                        <img src="/public/images/Hotels/img1.jpg" alt="" />
+                        <img src="images/Hotels/img1.jpg" alt="" />
                     </div>
 
                     <div className="desc">
@@ -56,7 +56,7 @@ const Offers = () => {
                 <div className="hotelCard">
 
                     <div className="hotelImage">
-                        <img src="/public/images/Hotels/img2.jpg" alt="" />
+                        <img src="images/Hotels/img2.jpg" alt="" />
                     </div>
 
                     <div className="desc">
@@ -95,7 +95,7 @@ const Offers = () => {
                 <div className="hotelCard">
 
                     <div className="hotelImage">
-                        <img src="/public/images/Hotels/img3.jpg" alt="" />
+                        <img src="images/Hotels/img3.jpg" alt="" />
                     </div>
 
                     <div className="desc">

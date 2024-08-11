@@ -1,0 +1,220 @@
+.login {
+    // border: 2px solid orange;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    padding: 1rem;
+    box-sizing: border-box;
+    transition: .7s all;
+    flex-direction: row-reverse;
+
+
+    >.loginHeader {
+        // border: 2px solid red;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding: 2rem;
+
+        >div {
+            // border: 2px solid blue;
+            display: flex;
+            width: 80%;
+            margin: auto;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.875);
+            justify-content: space-between;
+            box-shadow: 0px 4px 5px rgba(128, 128, 128, 0.255);
+            align-items: center;
+
+            >h3 {
+                color: rgb(255, 125, 110)
+            }
+
+            >div {
+                display: flex;
+                gap: 2rem;
+                color: rgb(240, 240, 240);
+                color: rgb(244, 59, 38);
+
+                >p {
+                    cursor: pointer;
+
+                    border-bottom: 2px solid transparent;
+
+                    &:hover {
+
+                        border-bottom: 2px solid rgb(244, 59, 38);
+
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+
+    >.left {
+        // border: 2px solid green;
+        width: 50%;
+        display: grid;
+        place-content: center;
+        gap: 1.8rem;
+        margin-top: 2rem;
+
+
+        >.heading {
+            // border: 2px solid red;
+            color: rgb(53, 68, 72);
+            display: grid;
+            gap: .8rem;
+
+            >h1 {
+                font-weight: 500;
+                font-size: xx-large;
+            }
+
+            >p {
+                color: gray;
+                font-size: medium;
+
+            }
+
+        }
+
+
+        >form {
+            // border: 2px solid red;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            >input {
+                padding: 1rem;
+                width: 25rem;
+                height: 3rem;
+                font-size: 1rem;
+                border: 1px solid rgb(208, 208, 208);
+                border-radius: 10px;
+                color: gray;
+
+                &:focus {
+                    outline: 1px solid rgb(244, 59, 38);
+                    border: 1px solid transparent;
+                }
+
+                &::placeholder {
+                    color: rgb(187, 187, 187);
+                    font-weight: 100;
+
+                }
+
+            }
+
+            >button {
+                padding: 1rem;
+                font-size: medium;
+                color: white;
+                background-color: rgb(244, 59, 38);
+                border: 3px solid transparent;
+                transition: .4s all;
+                border-radius: 10px;
+
+
+                &:hover {
+                    border: 3px solid rgb(244, 59, 38);
+                    color: rgb(244, 59, 38);
+                    background-color: white;
+                    cursor: pointer;
+                    transition: .4s all;
+
+                }
+            }
+
+
+
+        }
+
+        >.anotherLinks {
+            color: rgb(53, 68, 72);
+
+            >p {
+
+                >span {
+                    color: rgb(244, 59, 38);
+
+                    &:hover {
+                        cursor: pointer;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+
+        >hr {
+            width: 80%;
+            margin: auto;
+            border: 1px solid rgb(216, 216, 216);
+        }
+
+        >.signWith {
+
+            border: 1px solid black;
+            padding: .5rem 1rem;
+            border-radius: 3vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            width: fit-content;
+            margin: auto;
+            cursor: pointer;
+
+            >div {
+                display: flex;
+                font-size: xx-large;
+            }
+
+        }
+
+    }
+
+    >.right {
+        width: 40%;
+        // border: 2px solid blue;
+        margin: auto;
+        background-image: url('images/Hotels/login.jpg');
+        background-position: center;
+        background-size: cover;
+        border-radius: 1vw;
+        overflow: hidden;
+        height: 100%;
+
+        >div {
+            background-color: rgba(255, 0, 0, 0.394);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 1rem;
+            height: 100%;
+
+            >h1 {
+                font-size: 2rem;
+            }
+
+
+        }
+
+
+    }
+
+
+}

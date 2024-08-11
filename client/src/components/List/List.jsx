@@ -2,6 +2,7 @@ import React from 'react';
 import './list.scss';
 import { MdOutlineStarOutline } from "react-icons/md";
 import { MdOutlineStarPurple500 } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 
 const List = () => {
@@ -11,7 +12,7 @@ const List = () => {
       <div className="hotel">
 
         <div className="hotemImage">
-          <img src="/public/images/Hotels/img3.jpg" alt="" />
+          <img src="images/Hotels/img3.jpg" alt="" />
         </div>
 
         <div className="details">
@@ -44,7 +45,9 @@ const List = () => {
 
           </div>
 
-          <button>Book Now</button>
+          <Link to={'/hotel'}>
+            <button>Book Now</button>
+          </Link>
         </div>
 
 

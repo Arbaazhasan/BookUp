@@ -35,6 +35,9 @@ const Home = () => {
 
             <ImagesBar />
 
+            <Footer />
+
+
 
         </div>
     );

@@ -9,6 +9,15 @@ import HotelsList from './pages/HotelsList/HotelsList';
 import Header from './components/Header/Header';
 import Hotel from './pages/Hotel/Hotel';
 import Footer from './components/Footer/Footer';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Rooms from './components/Dashboard/Rooms/Rooms';
+import AddRoom from './components/Dashboard/AddRoom/AddRoom';
+import RoomView from './components/Dashboard/RoomView/RoomView';
+import UpdateRoom from './components/Dashboard/UpdateRoom/UpdateRoom';
+import Bookings from './components/Dashboard/Bookings/Bookings';
+import Profile from './components/Dashboard/Profile/Profile';
+import ControlPanel from './components/Dashboard/ControlPanel/ControlPanel';
+import Login from './pages/Login/Login';
 
 
 function App() {
@@ -22,7 +31,7 @@ function App() {
 
     // console.log(currentPath);
     // setHeaderBackground(currentPath === '/home');
-    console.log(headerBackground);
+    // console.log(headerBackground);
 
   }, [headerBackground]);
 
@@ -32,10 +41,11 @@ function App() {
 
       {/* <CheckAvailability />  */}
 
-
       <Routes>
 
         {/* Home Page */}
+        <Route path='/login' element={<Login />} />
+
         <Route path='/' element={<Home />} />
 
         {/* Hotels List (it shows search result) */}
@@ -43,11 +53,35 @@ function App() {
 
         <Route path='/hotel' element={<Hotel />} />
 
+
+        {/* Dashboard Routes */}
+
+        <Route path='/dashboard/' element={<Dashboard currentPath={'Profile'} dashboardComponent={<ControlPanel />} />} />
+
+
+        <Route path='/dashboard/profile' element={<Dashboard currentPath={'Profile'} dashboardComponent={<Profile />} />} />
+
+        <Route path='/dashboard/bookings' element={<Dashboard currentPath={'Bookings'} dashboardComponent={<Bookings />} />} />
+
+        <Route path='/dashboard/rooms/room/view' element={<Dashboard currentPath={'Room'} dashboardComponent={<RoomView />} />} />
+
+
+
+        {/* Control Panel */}
+
+        <Route path='/dashboard/rooms' element={<Dashboard currentPath={'Rooms'} dashboardComponent={<Rooms />} />} />
+
+        <Route path='/dashboard/add' element={<Dashboard currentPath={'Add Room'} dashboardComponent={<AddRoom />} />} />
+
+        <Route path='/dashboard/update' element={<Dashboard currentPath={'Update Room'} dashboardComponent={<UpdateRoom />} />} />
+
+        <Route path='/dashboard/delete' element={<Dashboard currentPath={'Delete Room'} dashboardComponent={<RoomView isDelete={true} />} />} />
+
+
         <Route path='*' element={<Home />} />
 
       </Routes>
 
-      <Footer />
 
     </Router>
   );

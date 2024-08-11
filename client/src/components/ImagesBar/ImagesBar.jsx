@@ -18,7 +18,7 @@ const ImagesBar = () => {
 
 
 
-            <div className="hotelImage" style={{ backgroundImage: 'url(/public/images/ImagesArray/img2.jpg)' }}>
+            <div className="hotelImage" style={{ backgroundImage: 'url(images/ImagesArray/img2.jpg)' }}>
 
 
                 <div className='iconSlide'>
@@ -30,7 +30,7 @@ const ImagesBar = () => {
 
 
 
-            <div className="hotelImage" style={{ backgroundImage: 'url(/public/images/ImagesArray/img3.jpg)' }}>
+            <div className="hotelImage" style={{ backgroundImage: 'url(images/ImagesArray/img3.jpg)' }}>
 
 
                 <div className='iconSlide'>
@@ -42,7 +42,7 @@ const ImagesBar = () => {
 
 
 
-            <div className="hotelImage" style={{ backgroundImage: 'url(/public/images/ImagesArray/img4.jpg)' }}>
+            <div className="hotelImage" style={{ backgroundImage: 'url(images/ImagesArray/img4.jpg)' }}>
 
 
                 <div className='iconSlide'>
@@ -54,7 +54,7 @@ const ImagesBar = () => {
 
 
 
-            <div className="hotelImage" style={{ backgroundImage: 'url(/public/images/ImagesArray/img5.jpg)' }}>
+            <div className="hotelImage" style={{ backgroundImage: 'url(images/ImagesArray/img5.jpg)' }}>
 
 
                 <div className='iconSlide'>
