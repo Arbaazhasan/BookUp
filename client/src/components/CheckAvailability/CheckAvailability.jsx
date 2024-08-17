@@ -30,7 +30,7 @@ const CheckAvailability = () => {
 
                 <tr className='tr3'>
                     <td>
-                        <p>Check in date</p>
+                        <p>Check out date</p>
                         <input type="date" placeholder='Check out date' name="" id="" />
                     </td>
                 </tr>

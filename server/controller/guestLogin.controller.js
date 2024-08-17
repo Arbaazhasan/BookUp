@@ -1,4 +1,4 @@
-import { User } from "../model/userLogin.model.js";
+import { Guest } from "../model/guest.model.js";
 import bcrypt from 'bcrypt';
 import ErrorHandler from "../utils/errorHandler.js";
 import { catchAsyncError } from "../middleware/catchAsyncError.js";
@@ -9,7 +9,7 @@ export const register = catchAsyncError(async (req, res, next) => {
 
     const { name, email, password } = req.body;
 
-    const isUser = await User.findOne({ email });
+    const isUser = await Guest.findOne({ email });
 
     if (isUser)
         return next(new ErrorHandler("User already exits!", 409));
@@ -17,7 +17,7 @@ export const register = catchAsyncError(async (req, res, next) => {
     const hasedPassword = await bcrypt.hash(password, 10);
 
 
-    const user = await User.create({
+    const user = await Guest.create({
         name,
         email,
         password: hasedPassword
@@ -42,7 +42,7 @@ export const userLogin = catchAsyncError(async (req, res, next) => {
 
     const { email, password } = req.body;
 
-    const isUser = await User.findOne({ email }).select('+password');
+    const isUser = await Guest.findOne({ email }).select('+password');
 
     if (!isUser)
         return next(new ErrorHandler("User not exits!", 404));

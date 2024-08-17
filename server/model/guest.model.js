@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const guestSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
     phoneNo: {
         type: Number
     },
+
+
+
 });
 
-export const User = mongoose.model('User', userSchema);
+export const Guest = mongoose.model('Guest', guestSchema);

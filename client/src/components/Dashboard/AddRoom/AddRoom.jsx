@@ -108,6 +108,11 @@ const AddRoom = () => {
 
 
                     <div>
+                        <input type="text" placeholder='Room Name' />
+                    </div>
+
+
+                    <div>
                         <input type="text" placeholder='Number of Rooms.' />
                     </div>
 
@@ -137,9 +142,6 @@ const AddRoom = () => {
 
 
 
-                    <div>
-                        <input type="text" placeholder='Room Name' />
-                    </div>
 
 
 

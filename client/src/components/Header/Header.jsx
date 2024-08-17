@@ -4,18 +4,14 @@ import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
 
-
-import { FaFacebookF } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-
-
+import { FaRegCircleUser } from "react-icons/fa6";
 
 
 const Header = ({ headerBackground }) => {
 
     const [isMenu, setIsMenu] = useState(false);
     const [backgroundColor, setBackgroundColor] = useState(false);
+    const [loginMenu, setLoginMenu] = useState(false);
 
     const chanageBackground = () => {
         // window.scrollY > 625 ? setBackgroundColor(true) : setBackgroundColor(false);
@@ -52,7 +48,7 @@ const Header = ({ headerBackground }) => {
                 </div>
 
                 {/* <div className="menu" style={{ display: isMenu ? 'grid' : 'none', left: '0px' }}> */}
-                <div className="menu" style={{ left: isMenu ? '0px' : "-140px" }}>
+                <div className="menu" style={{ left: isMenu ? '-40px' : "-160px" }}>
 
                     <div>
                         <Link onClick={burgerMenuHandler}><IoMdClose /></Link>
@@ -115,12 +111,27 @@ const Header = ({ headerBackground }) => {
             <div className="logo" data-aos='fade-up' data-aos-delay="100">BookUp</div>
 
 
-            <div className="bookingBtn" data-aos='fade-left'>
-                <button>Book Room</button>
+            <div className="userMenu" data-aos='fade-left'>
+                {/* <button>Book Room</button> */}
+
+                <div className="userIcon" onClick={() => setLoginMenu((pre) => !pre)}>
+                    < FaRegCircleUser />
+                </div>
+
+
+                {
+                    loginMenu &&
+
+                    <div className="loginMenu" >
+
+                        <Link onClick={() => loginMenu(false)}>Profile</Link>
+                        <Link onClick={() => loginMenu(false)}>Logout</Link>
+
+                    </div>
+
+                }
+
             </div>
-
-
-
 
         </header>
     );

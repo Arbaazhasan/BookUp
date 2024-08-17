@@ -7,7 +7,7 @@ const ImagesBar = () => {
         <div className='imagesBar'>
 
 
-            <div className="hotelImage" style={{ backgroundImage: 'url(/public/images/ImagesArray/img1.jpg)' }}>
+            <div className="hotelImage" style={{ backgroundImage: 'url(/images/ImagesArray/img1.jpg)' }}>
 
                 <div className='iconSlide'>
 
