@@ -1,9 +1,11 @@
+import mongoose from "mongoose";
 import { dataUri } from "../data/dataUri.js";
 import { catchAsyncError } from "../middleware/catchAsyncError.js";
+import { BookingModel } from "../model/booking.model.js";
+import { BookingsRecord } from "../model/bookingsRecord.model.js";
 import { Room } from "../model/room.model.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { v2 as cloudinary } from 'cloudinary';
-
 
 
 export const searchRoom = catchAsyncError(async (req, res, next) => {
@@ -24,6 +26,17 @@ export const searchRoom = catchAsyncError(async (req, res, next) => {
 
 });
 
+export const reservationController = catchAsyncError(async (req, res, next) => {
+
+    const { roomNo } = req.params;
+    const { name, bookingDate, document, checkInDateTime, checkOutDateTime, roomStatus } = req.body;
+
+    if (!roomNo) return next(new ErrorHandler('Somethe wrong!', 500));
+
+
+
+});
+
 
 
 
@@ -32,7 +45,7 @@ export const addRoom = catchAsyncError(async (req, res, next) => {
 
     const files = req.files;
 
-    const { roomNo, name, noOfRooms, availableRooms, roomType, services, description, price } = req.body;
+    const { roomNo, name, roomArray, noOfRooms, availableRooms, roomType, services, description, price } = req.body;
 
     const vendor = req.vendor;
 
@@ -40,7 +53,7 @@ export const addRoom = catchAsyncError(async (req, res, next) => {
     if (!files.length || !files)
         return next(new ErrorHandler('Please upload at least one Image!', 400));
 
-    if (!roomNo || !name || !noOfRooms || !availableRooms || !roomType || !services || !description || !price)
+    if (!roomNo || !name || !roomArray.length || !noOfRooms || !availableRooms || !roomType || !services || !description || !price)
         return next(new ErrorHandler('Please fill all fields!', 400));
 
 
@@ -70,7 +83,7 @@ export const addRoom = catchAsyncError(async (req, res, next) => {
     // Uploading Data in database
     await Room.create({
         vendorId: vendor._id,
-        roomNo, name, noOfRooms, availableRooms, roomType, services, description, price,
+        roomNo, name, roomArray, noOfRooms, availableRooms, roomType, services, description, price,
         images
     });
 
@@ -199,3 +212,130 @@ export const deleteRoom = catchAsyncError(async (req, res, next) => {
 
 });
 
+
+// Update room status
+export const updateRoomStatus = catchAsyncError(async (req, res, next) => {
+
+    const { bookingId } = req.params;
+    const { document, updateType } = req.body;
+
+    if (!bookingId)
+        return next(new ErrorHandler('Please provide all required fields!', 400));
+
+    if (!['checkIn', 'checkOut', 'cancelled'].includes(updateType))
+        return next(new ErrorHandler('Invalid update type!', 400));
+
+    const isBooking = await BookingModel.findById(bookingId);
+
+    if (!isBooking)
+        return next(new ErrorHandler('Booking does not exists!', 404));
+
+    const isRoom = await Room.findById(isBooking.roomId);
+
+    if (!isRoom)
+        return next(new ErrorHandler('Room does not exists!', 404));
+
+
+    // Check-In Update
+    if (updateType === 'checkIn') {
+        const update = await BookingModel.findByIdAndUpdate(isBooking._id, {
+            customerDetails: {
+                ...isBooking.customerDetails,
+                document: {
+                    name: document.name,
+                    number: document.number
+                }
+            },
+            checkInDate: new Date(),
+        });
+
+        if (!update)
+            return next(new ErrorHandler('Something went wrong, please try again!', 500));
+
+
+        return res.status(200).json({
+            success: true,
+            message: 'Check-In Update successfully'
+        });
+
+    }
+
+
+
+    if (updateType === 'checkOut') {
+        const update = await BookingModel.findByIdAndUpdate(isBooking._id, {
+            checkOutDate: new Date(),
+        });
+
+        if (!update)
+            return next(new ErrorHandler('Something went wrong, please try again!', 500));
+
+    }
+
+    const isRecorded = await BookingsRecord.create({
+        bookingId: isBooking.bookingId,
+        guestId: isBooking.guestId,
+        roomId: isBooking.roomId,
+        roomNo: isBooking.roomNo,
+        customerDetails: isBooking.customerDetails,
+        reservationDates: isBooking.reservationDates,
+        checkInDate: isBooking.checkInDate,
+        checkOutDate: isBooking.checkOutDate,
+        isCancelled: updateType === 'cancelled',
+        bookingDate: isBooking.createdAt
+    });
+
+    if (!isRecorded)
+        return next(new ErrorHandler('Something went wrong, please try again!', 500));
+
+    const updateRoom = await Room.findByIdAndUpdate(isRoom._id, {
+        $push: {
+            roomArray: isBooking.roomNo
+        },
+        $inc: { availableRooms: +1 },
+
+        $pull: {
+            reservationDates: {
+                bookingId: isBooking._id
+            }
+        }
+
+    }, {
+        new: true
+    });
+
+    if (!updateRoom)
+        return next(new ErrorHandler('something wrong please try again!', 500));
+
+    await BookingModel.findByIdAndDelete(isBooking._id);
+
+
+    return res.status(200).json({
+        success: true,
+        message: updateType === 'checkOut' ?
+            'Check-Out updated successfully and now the room is free.' :
+            'Booking cancelled successfully!'
+    });
+
+});
+
+
+
+// get vendor all rooms
+export const getVendorRooms = catchAsyncError(async (req, res, next) => {
+
+    const vendorId = req.vendor._id;
+
+    const getRooms = await Room.find({ vendorId });
+
+    if (!getRooms)
+        return next(new ErrorHandler('No room exists!', 400));
+
+    res.status(200).json({
+        success: true,
+        message: getRooms
+
+    });
+
+
+});

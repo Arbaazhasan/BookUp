@@ -11,9 +11,11 @@ const roomSchema = new mongoose.Schema({
     roomNo: {
         type: String,
         required: true,
+    },
+    roomArray: {
+        type: [],
 
     },
-
     name: {
         type: String
     },
@@ -21,13 +23,13 @@ const roomSchema = new mongoose.Schema({
     noOfRooms: {
         type: Number,
         required: true,
-        min :0,
+        min: 0,
     },
 
     availableRooms: {
         type: Number,
         required: true,
-        min:0
+        min: 0
     },
 
     roomType: {
@@ -45,10 +47,14 @@ const roomSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        min:0
+        min: 0
     },
 
     images: {
+        type: [],
+    },
+
+    reservationDates: {
         type: [],
 
     }

@@ -4,14 +4,17 @@ import { server } from "./server.js";
 import { db_connect } from "./data/DatabaseConnection.js";
 import errorMiddleware from "./middleware/Error.js";
 import cors from 'cors';
+import cookieParser from "cookie-parser";
+import cloudinaryConfig from "./utils/cloudinary.js";
 
 
 
 // Routes
 import userRouter from './routes/guest.routes.js';
 import vendorRouter from './routes/vendor.routes.js';
-import cookieParser from "cookie-parser";
-import cloudinaryConfig from "./utils/cloudinary.js";
+import roomRouter from './routes/room.routes.js';
+import bookingRouter from './routes/booking.routes.js';
+
 
 
 config({
@@ -41,8 +44,11 @@ db_connect();
 
 
 // Application Routes
-app.use('/api/v1/user', userRouter);
+app.use('/api/v1/guest', userRouter);
+app.use('/api/v1/booking', bookingRouter);
 app.use('/api/v1/vendor', vendorRouter);
+app.use('/api/v1/vendor/room', roomRouter);
+
 
 
 

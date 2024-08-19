@@ -3,7 +3,10 @@ import { Vendor } from "../model/vendor.model.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import ErrorHandler from "../utils/errorHandler.js";
+import mongoose from "mongoose";
 
+
+// Vendor Registration
 export const vendorResigter = catchAsyncError(async (req, res, next) => {
 
     const { email, password } = req.body;
@@ -34,6 +37,7 @@ export const vendorResigter = catchAsyncError(async (req, res, next) => {
 });
 
 
+// vendor Login
 export const vendorLogin = catchAsyncError(async (req, res, next) => {
 
     const { email, password } = req.body;
@@ -58,7 +62,7 @@ export const vendorLogin = catchAsyncError(async (req, res, next) => {
 
 });
 
-
+// Logout
 export const vendorLogout = catchAsyncError((req, res, next) => {
 
     res.status(200).cookie('vendorToken', null, {
@@ -71,4 +75,45 @@ export const vendorLogout = catchAsyncError((req, res, next) => {
 
 });
 
+// Update profile
+export const updateVendorProfile = catchAsyncError(async (req, res, next) => {
 
+    const { vendorId } = req.params;
+    const { username, email, firstName, lastName, address, city, country, postalCode, about } = req.body;
+
+    // check vendor id is valid or not
+    if (!vendorId || !mongoose.Types.ObjectId.isValid(vendorId))
+        return next(new ErrorHandler('Vendor Id is required!', 400));
+
+    // Find vendor by Id
+    const isVendor = await Vendor.findById({ _id: vendorId });
+    if (!isVendor)
+        return next(new ErrorHandler('Vendor not exist!', 404));
+
+    //update vendor profile 
+    const isUpdate = await Vendor.findByIdAndUpdate(isVendor._id, {
+        username,
+        email,
+        firstName,
+        lastName,
+        address,
+        city,
+        country,
+        postalCode,
+        about
+    }, {
+        new: true
+    });
+
+    // if update could not be success
+    if (!isUpdate)
+        return next(new ErrorHandler('something went wrong, please try again', 500));
+
+    res.status(200).json({
+        success: true,
+        message: "Profule update successfully",
+        data: isUpdate
+    });
+
+
+});

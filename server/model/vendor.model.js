@@ -39,7 +39,7 @@ const vendorSchema = new mongoose.Schema({
     },
 
     postalCode: {
-        type: String
+        type: Number
     },
 
     aboutMe: {
@@ -48,4 +48,4 @@ const vendorSchema = new mongoose.Schema({
 
 });
 
-export const Vendor = mongoose.model('Vengor', vendorSchema);
+export const Vendor = mongoose.model('Vendor', vendorSchema);

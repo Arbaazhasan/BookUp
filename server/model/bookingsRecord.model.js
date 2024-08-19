@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const bookingSchema = new mongoose.Schema({
+const bookingsRecordSchema = new mongoose.Schema({
 
     bookingId: {
         type: String,
@@ -9,7 +9,6 @@ const bookingSchema = new mongoose.Schema({
     guestId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
-
     },
     roomId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -35,10 +34,19 @@ const bookingSchema = new mongoose.Schema({
     checkOutDate: {
         type: Date,
     },
+    bookingDate: {
+        type: Date,
+        required: true
+    },
+
+    isCancelled: {
+        type: Boolean,
+        default: false
+    }
 
 
 }, {
     timestamps: true
 });
 
-export const BookingModel = mongoose.model('Booking', bookingSchema);
+export const BookingsRecord = mongoose.model('BookingsRecord', bookingsRecordSchema);
