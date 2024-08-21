@@ -3,7 +3,7 @@ import './widgets.scss';
 
 import { FaRegBookmark } from "react-icons/fa6";
 
-const Widgets = ({ backgroundColor, heading, title, icon }) => {
+const Widgets = ({ heading, title, icon }) => {
 
     return (
         <div className="widget" >

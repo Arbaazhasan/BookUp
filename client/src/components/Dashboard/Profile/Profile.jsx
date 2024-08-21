@@ -1,7 +1,13 @@
 import React from 'react';
 import "./profile.scss";
 import Widgets from '../Widgets/Widgets';
-import { MdAddchart } from "react-icons/md";
+
+import { FaRegBookmark } from "react-icons/fa6";
+import { MdOutlineDateRange } from "react-icons/md";
+import { TbDoorEnter } from "react-icons/tb";
+import { TbDoorExit } from "react-icons/tb";
+import { PiDoorBold } from "react-icons/pi";
+
 
 
 
@@ -112,10 +118,14 @@ const Profile = () => {
 
 
                 <div className="right">
-                    <Widgets heading={"Availabler Rooms "} number={23} percent={23} icon={<MdAddchart />} />
-                    <Widgets heading={"Booked Rooms"} number={23} percent={23} icon={<MdAddchart />} />
-                    <Widgets heading={"Total Rooms"} number={23} percent={23} icon={<MdAddchart />} />
-                    <Widgets heading={"Total Bookings"} number={23} percent={23} icon={<MdAddchart />} />
+
+
+                    <Widgets heading={6} title={'New Bookings'} icon={<FaRegBookmark />} />
+                    <Widgets heading={21} title={'Pendind Bookings'} icon={<MdOutlineDateRange />} />
+                    <Widgets heading={4} title={'Check-In'} icon={<TbDoorEnter />} />
+                    <Widgets heading={12} title={'Check-Out'} icon={<TbDoorExit />} />
+                    <Widgets heading={9} title={'Available Rooms'} icon={<PiDoorBold />} />
+
 
                 </div>
 
