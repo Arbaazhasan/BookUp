@@ -1,112 +1,179 @@
-.bookings {
-    background-color: white;
-    height: 88vh;
-    overflow: hidden;
+.bookingsComponent {
+    // border: 2px solid red;
+    height: 88%;
+    width: 100%;
     border-radius: 1vw;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-    >.dasbaordHeader {
-        // border: 2px solid green;
+    >.option {
+        // border: 2px solid red;
+        background-color: white;
         display: flex;
-        // gap: 1rem;
-        box-shadow: 0px 0px 5px gray;
-        background-color: #fb62402f;
+        border-bottom: 1px solid rgb(213, 213, 213);
+        width: 100%;
 
+        // border: 2px solid red;
         >div {
-            // border: 2px solid blue;
-            padding: 1rem 1.5rem;
-            height: 3rem;
-            font-size: small;
-            // color: gray;
-            font-weight: bold;
-            border-bottom: 4px solid transparent;
+            padding: 1rem;
+            width: 10rem;
 
-            &:hover {
-                color: salmon;
-                border-bottom: 4px solid salmon;
+            >span {
+                padding: 1rem .1rem;
+                font-weight: 300;
                 cursor: pointer;
-            }
-
-        }
-    }
-
-    >.BookingDetails {
-        // border: 2px solid blue;
-        height: 89%;
-
-
-        .bookingData {
-            display: grid;
-            grid-template-columns: 5% 9% 7% 13% 10% 10% 16% 16% 14%;
-            // border: 2px solid green;
-            // background-color: #ffad9b2f;
-            background-color: rgba(215, 215, 215, 0.482);
-            font-weight: bold;
-
-
-            >div {
-                border: 1px solid rgba(128, 128, 128, 0.434);
-                padding: 1rem .5rem;
-                font-size: small;
-                cursor: pointer;
-
-
-
-
-
-                >div {
-
-                    text-align: center;
-                    display: grid;
-                    gap: 0.4rem;
-
-
-                    >input {
-                        font-size: small;
-
-                    }
-                }
-
-
-            }
-
-        }
-
-        >.informaiton {
-
-            overflow-y: scroll;
-            height: 94%;
-            // border: 1px solid green;
-
-            &::-webkit-scrollbar {
-                display: none;
-
-            }
-
-            >.bookingData {
-                background-color: rgba(215, 215, 215, 0.19);
-                font-weight: normal;
 
                 &:hover {
-                    background-color: rgba(215, 215, 215, 0.578);
                     font-weight: bold;
+                    color: salmon;
+                    border-bottom: 3px solid salmon;
                 }
+
             }
 
-            .document {
-                // border: 2px solid green;
-                display: flex;
-                flex-direction: column;
-                gap: .4rem;
 
-                >select {
-                    font-size: .7rem;
-                }
-
-                >input {
-                    font-size: .7rem;
-                    padding: .1rem;
-                }
-            }
         }
+
+
+    }
+
+    >table {
+
+        padding: 0rem 1rem;
+        width: 100%;
+        height: 85%;
+        background-color: white;
+        border-collapse: collapse;
+
+        // border: 2px solid red;
+
+        >thead {
+
+            >tr {
+                // border: 2px solid red;
+                display: grid;
+                grid-template-columns: 5% 10% 11% 10% 17% 12% 20% 15%;
+
+                >th {
+                    // border: 2px solid green;
+                    padding: 1rem;
+                    text-align: left;
+                }
+
+                >td {
+                    // border: 2px solid green;
+                    text-align: left;
+                    font-size: small;
+
+                    >div {
+                        // border: 2px solid green;
+                        display: flex;
+                        text-align: center;
+                    }
+
+                }
+
+
+            }
+
+        }
+
+        tbody {
+
+            >tr {
+                display: grid;
+                grid-template-columns: 5% 10% 11% 10% 17% 12% 20% 15%;
+                // border: 2px solid green;
+
+                &:hover {
+                    background-color: rgba(241, 241, 241, 0.59);
+
+                    cursor: pointer;
+                }
+
+                >td {
+                    padding: .9rem 1rem;
+                    text-align: left;
+                    font-size: small;
+
+                    >div {
+                        // border: 2px solid green;
+                        display: flex;
+                        text-align: center;
+                    }
+
+                    >.inputTab {
+                        // border: 2px solid red;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+
+                        >select {
+                            padding: .2rem
+                        }
+
+                        >input {
+                            padding: .2rem;
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+
+                        >button {
+                            border: 2px solid salmon;
+                            background-color: white;
+                            padding: .3rem;
+                            color: salmon;
+                            font-weight: bold;
+                            cursor: pointer;
+                            transition: .1s all;
+
+                            &:hover {
+                                background-color: salmon;
+                                color: white;
+                                transition: .1s all;
+                            }
+                        }
+
+                    }
+
+
+                }
+
+
+            }
+
+        }
+
+    }
+
+    >.nextPage {
+        // border: 2px solid red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: .5rem;
+        width: 90%;
+        border-top: 1px solid rgb(198, 198, 198);
+
+        >div {
+            // border: 2px solid crimson;
+            padding: .1rem .2rem;
+            font-size: 0.65em;
+            cursor: pointer;
+        }
+
+        >.currentPage {
+            font-size: small;
+            color: crimson;
+            border: 2px solid crimson;
+        }
+
     }
 }

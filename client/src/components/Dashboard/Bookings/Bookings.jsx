@@ -3,1065 +3,253 @@ import './bookings.scss';
 
 const Bookings = () => {
   return (
-    <div className='bookings'>
-      <div className='dasbaordHeader'>
-
-        <div> New Bookings</div>
-        <div> Booked </div>
-        <div>Records</div>
-
+    <div className='bookingsComponent'>
+      <div className="option">
+        <div><span>New Bookings</span></div>
+        <div><span>Booked Rooms</span></div>
+        <div><span>Record</span></div>
       </div>
 
-
-      <div className="BookingDetails">
-
-        <div className="bookingData">
-
-          <div>
-            <p>Sr. No</p>
-          </div>
-
-          <div>
-            <p>
-              Booking Date
-            </p>
-          </div>
-
-          <div>
-            <p>
-              Room no.
-            </p>
-          </div>
-
-          <div>
-            <p>
-              Name
-            </p>
-          </div>
-
-          <div>
-            <p>
-              No of peoples
-            </p>
-          </div>
-
-          <div>
-            <p>
-              Document
-            </p>
-          </div>
-
-          <div>
-            <p>
-              Check in Date
-            </p>
-          </div>
-
-          <div>
-            <p>
-              Check Out Date
-            </p>
-          </div>
-
-          <div>
-            <p>
-              Room Status
-            </p>
-          </div>
-
-        </div>
-
-        <div className="informaiton">
+      <table>
+        <thead>
+          <tr>
+            <th>Sr</th>
+            <th>BookingId</th>
+            <th>Reservation</th>
+            <th>Room No</th>
+            <th>Name</th>
+            <th>No of People</th>
+            <th>Document</th>
+            <th>Status</th>
+          </tr>
+        </thead>
 
 
-
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
+        <tbody>
+          {/* Repeated rows for illustration */}
 
 
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                08/08/2024
-              </p> */}
-
+          <tr>
+            <td>001</td>
+            <td>23423b2j</td>
+            <td>
               <div>
-                <input type="date" />
-                <input type="time" />
+                15/08/2024
+                <br /> to <br />
+                15/08/2024
               </div>
-            </div>
-
-            <div>
-              {/* <p>
-                08/08/2024
-              </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
+            </td>
+            <td>101a</td>
+            <td>Arbaz Hasan</td>
+            <td>
+              <div style={{ textAlign: 'left' }}>
+                Adults: 5 <br />
+                Children: 2
               </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Aadhar Card</option>
+                  <option>Pan Card</option>
+                  <option>Voter Card</option>
+                  <option>Bankpass Book</option>
                 </select>
-
+                <input type="text" />
+              </div>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Check-In</option>
+                  <option>Check-Out</option>
+                  <option>Cancelled</option>
+                </select>
                 <button>Update</button>
               </div>
-            </div>
-
-          </div>
-
+            </td>
+          </tr>
 
 
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                08/08/2024
-              </p> */}
-
+          <tr>
+            <td>001</td>
+            <td>23423b2j</td>
+            <td>
               <div>
-                <input type="date" />
-                <input type="time" />
+                15/08/2024
+                <br /> to <br />
+                15/08/2024
               </div>
-            </div>
-
-            <div>
-              {/* <p>
-                08/08/2024
-              </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
+            </td>
+            <td>101a</td>
+            <td>Arbaz Hasan</td>
+            <td>
+              <div style={{ textAlign: 'left' }}>
+                Adults: 5 <br />
+                Children: 2
               </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Aadhar Card</option>
+                  <option>Pan Card</option>
+                  <option>Voter Card</option>
+                  <option>Bankpass Book</option>
                 </select>
-
+                <input type="text" />
+              </div>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Check-In</option>
+                  <option>Check-Out</option>
+                  <option>Cancelled</option>
+                </select>
                 <button>Update</button>
               </div>
-            </div>
-
-          </div>
-
+            </td>
+          </tr>
 
 
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                08/08/2024
-              </p> */}
-
+          <tr>
+            <td>001</td>
+            <td>23423b2j</td>
+            <td>
               <div>
-                <input type="date" />
-                <input type="time" />
+                15/08/2024
+                <br /> to <br />
+                15/08/2024
               </div>
-            </div>
-
-            <div>
-              {/* <p>
-                08/08/2024
-              </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
+            </td>
+            <td>101a</td>
+            <td>Arbaz Hasan</td>
+            <td>
+              <div style={{ textAlign: 'left' }}>
+                Adults: 5 <br />
+                Children: 2
               </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Aadhar Card</option>
+                  <option>Pan Card</option>
+                  <option>Voter Card</option>
+                  <option>Bankpass Book</option>
                 </select>
-
+                <input type="text" />
+              </div>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Check-In</option>
+                  <option>Check-Out</option>
+                  <option>Cancelled</option>
+                </select>
                 <button>Update</button>
               </div>
-            </div>
-
-          </div>
-
+            </td>
+          </tr>
 
 
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
+          <tr>
+            <td>001</td>
+            <td>23423b2j</td>
+            <td>
               <div>
-                <input type="date" />
-                <input type="time" />
+                15/08/2024
+                <br /> to <br />
+                15/08/2024
               </div>
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
+            </td>
+            <td>101a</td>
+            <td>Arbaz Hasan</td>
+            <td>
+              <div style={{ textAlign: 'left' }}>
+                Adults: 5 <br />
+                Children: 2
               </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Aadhar Card</option>
+                  <option>Pan Card</option>
+                  <option>Voter Card</option>
+                  <option>Bankpass Book</option>
                 </select>
-
+                <input type="text" />
+              </div>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Check-In</option>
+                  <option>Check-Out</option>
+                  <option>Cancelled</option>
+                </select>
                 <button>Update</button>
               </div>
-            </div>
-
-          </div>
-
+            </td>
+          </tr>
 
 
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
+          <tr>
+            <td>001</td>
+            <td>23423b2j</td>
+            <td>
               <div>
-                <input type="date" />
-                <input type="time" />
+                15/08/2024
+                <br /> to <br />
+                15/08/2024
               </div>
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
+            </td>
+            <td>101a</td>
+            <td>Arbaz Hasan</td>
+            <td>
+              <div style={{ textAlign: 'left' }}>
+                Adults: 5 <br />
+                Children: 2
               </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Aadhar Card</option>
+                  <option>Pan Card</option>
+                  <option>Voter Card</option>
+                  <option>Bankpass Book</option>
                 </select>
-
+                <input type="text" />
+              </div>
+            </td>
+            <td>
+              <div className="inputTab">
+                <select>
+                  <option>Check-In</option>
+                  <option>Check-Out</option>
+                  <option>Cancelled</option>
+                </select>
                 <button>Update</button>
               </div>
-            </div>
+            </td>
+          </tr>
 
-          </div>
 
 
+        </tbody>
+      </table>
 
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
-                </select>
-
-                <button>Update</button>
-              </div>
-            </div>
-
-          </div>
-
-
-
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
-                </select>
-
-                <button>Update</button>
-              </div>
-            </div>
-
-          </div>
-
-
-
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
-                </select>
-
-                <button>Update</button>
-              </div>
-            </div>
-
-          </div>
-
-
-
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
-                </select>
-
-                <button>Update</button>
-              </div>
-            </div>
-
-          </div>
-
-
-
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
-                </select>
-
-                <button>Update</button>
-              </div>
-            </div>
-
-          </div>
-
-
-
-          <div className="bookingData">
-
-            <div>
-              <p>1</p>
-            </div>
-
-            <div style={{ textAlign: 'center' }}>
-              <p>
-                07/08/2024
-              </p>
-
-              <p>
-                to
-              </p>
-
-              <p>07/08/2024</p>
-            </div>
-
-            <div>
-              <p>
-                015C
-              </p>
-            </div>
-
-            <div>
-              <p>
-                John Deep
-
-              </p>
-            </div>
-
-            <div>
-
-              <p>2 Adult </p>
-              <p>5 Children </p>
-
-
-
-            </div>
-
-            <div className='document'>
-              <select name="" id="">
-
-                <option value="">Addhar Card</option>
-                <option value="">Pan Card</option>
-                <option value="">Voter Id</option>
-                <option value="">Bank Passbook</option>
-
-              </select>
-              <input type="text" placeholder='Doc. Number' />
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              {/* <p>
-                  08/08/2024
-                </p> */}
-
-              <div>
-                <input type="date" />
-                <input type="time" />
-              </div>
-            </div>
-
-            <div>
-              <div className='document'>
-                <select name="" id="">
-                  <option value="">Booked</option>
-                  <option value="">Free</option>
-                </select>
-
-                <button>Update</button>
-              </div>
-            </div>
-
-          </div>
-
-
-
-
-        </div>
-
-
+      <div className="nextPage">
+        <div>1</div>
+        <div className='currentPage'>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5...</div>
       </div>
-
-
-
     </div>
   );
 };
