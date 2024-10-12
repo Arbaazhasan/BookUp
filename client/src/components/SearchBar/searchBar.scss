@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: space-evenly;
     padding-top: .5rem;
-    
+
 
     >.searchTab {
         // border: 2px solid blue;
@@ -75,24 +75,30 @@
                 font-size: small;
                 color: white;
 
-                >tr {
-
-                    >td {
-
-                        >select {
-                            background-color: transparent;
-                            border: none;
-                            color: white;
-
-                            &:focus {
-                                outline: none;
-                            }
-
-                            >option {
-                                color: black;
-                                font-size: medium;
+                >tbody {
 
 
+                    display: flex;
+
+                    >tr {
+                        >td {
+
+                            >select {
+                                background-color: transparent;
+                                border: none;
+                                color: white;
+                                cursor: pointer;
+
+                                &:focus {
+                                    outline: none;
+                                }
+
+                                >option {
+                                    color: black;
+                                    font-size: medium;
+
+
+                                }
                             }
                         }
                     }

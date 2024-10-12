@@ -26,6 +26,7 @@ const Dashboard = ({ dashboardComponent, currentPath }) => {
 
                 {dashboardComponent}
 
+
             </div>
 
 

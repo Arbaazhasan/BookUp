@@ -1,17 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import './login.scss';
 
+import toast from 'react-hot-toast';
+import { guestLoginAction, guestRegisterAction } from '../../Redux/actions/guestAuthActions';
+import { useDispatch } from 'react-redux';
+
 import { FcGoogle } from "react-icons/fc";
+import { IoMdHome } from "react-icons/io";
+import { Link } from 'react-router-dom';
+import { vendorLoginAction } from '../../Redux/actions/vendorAuthAction';
 
 const Login = () => {
 
+    const dispatch = useDispatch();
+
     const [loginMethod, setLoginMethod] = useState('Sign In');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const submithHandler = (e) => {
+
+        e.preventDefault();
 
 
-    useEffect(() => {
-        console.log(loginMethod);
+        if (!email || !email.length > 8 || !password || !password.length > 3) {
+            return toast.error("please fill the correct values");
+        }
 
-    }, [loginMethod]);
+
+        loginMethod === 'Sign Up' && guestRegisterAction(dispatch, name, email, password);
+
+        loginMethod === 'Sign In' && guestLoginAction(dispatch, email, password);
+
+        loginMethod === 'Vendor Login' && vendorLoginAction(dispatch, email, password);
+
+
+    };
+
 
     return (
         <div className='login'>
@@ -22,7 +48,8 @@ const Login = () => {
                     <h3>BookUp</h3>
 
                     <div>
-                        <p onClick={() => setLoginMethod('Dashboard')}>Dasboard</p>
+                        <Link to="/"> Home</Link>
+                        <p onClick={() => setLoginMethod('Vendor Login')}>Vendor</p>
                         <p onClick={() => setLoginMethod('Sign In')}>Sign In</p>
                         <p onClick={() => setLoginMethod('Sign Up')}>Sign Up</p>
                     </div>
@@ -47,19 +74,21 @@ const Login = () => {
 
                 </div>
 
-                <form action="">
-                    <input type="text" placeholder='name' />
-                    <input type="text" placeholder='email' />
+                <form action="" onSubmit={submithHandler}>
 
                     {
                         loginMethod === 'Sign Up' ?
 
-                            <input type="text" placeholder='password' />
+                            <input type="text" placeholder='name' onChange={(e) => setName(e.target.value)} />
 
                             :
                             ''
                     }
 
+
+                    <input type="text" placeholder='email' onChange={(e) => setEmail(e.target.value)} />
+
+                    <input type="password" placeholder='password' onChange={(e) => setPassword(e.target.value)} />
                     <button>Sign In </button>
                 </form>
 

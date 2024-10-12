@@ -9,8 +9,6 @@ import { TbDoorExit } from "react-icons/tb";
 import { PiDoorBold } from "react-icons/pi";
 
 
-
-
 const Profile = () => {
     return (
         <div className='profile'>

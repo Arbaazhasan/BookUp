@@ -5,38 +5,36 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
 
 import { FaRegCircleUser } from "react-icons/fa6";
+import { useDispatch, useSelector } from 'react-redux';
+import { guestLogout } from '../../Redux/actions/guestAuthActions';
 
 
-const Header = ({ headerBackground }) => {
+const Header = () => {
+
+    const disptach = useDispatch();
+    const { isGuestAuthonticated } = useSelector(state => state.guestAuthReducer);
 
     const [isMenu, setIsMenu] = useState(false);
-    const [backgroundColor, setBackgroundColor] = useState(false);
     const [loginMenu, setLoginMenu] = useState(false);
-
-    const chanageBackground = () => {
-        // window.scrollY > 625 ? setBackgroundColor(true) : setBackgroundColor(false);
-        window.scrollY > 220 ? setBackgroundColor(true) : setBackgroundColor(false);
-        // console.log(window.scrollY);
-    };
-    window.addEventListener('scroll', () => chanageBackground());
-
 
     const burgerMenuHandler = () => {
         setIsMenu(!isMenu);
     };
 
+    const onSubmitHandler = () => {
+
+        guestLogout(disptach);
+
+    };
+
 
     useEffect(() => {
 
-        // console.log(headerBackground);
-    }, []);
+        // console.log(isGuestAuthonticated);
+    }, [isGuestAuthonticated]);
 
     return (
-        <
-
-            // header style={{ backgroundColor: backgroundColor || headerBackground ? 'black' : 'transparent', transition: '1s all' }}
-            header
-        >
+        <header>
 
 
             <div className="menuBurger">
@@ -69,9 +67,6 @@ const Header = ({ headerBackground }) => {
                         <Link to='/' >About</Link>
                     </div>
 
-                    <div>
-                        <Link to='/' >Blogs</Link>
-                    </div>
 
                     <div>
                         <Link to='/' >Contact</Link>
@@ -99,10 +94,6 @@ const Header = ({ headerBackground }) => {
                 </div>
 
                 <div>
-                    <Link to='/' >Blogs</Link>
-                </div>
-
-                <div>
                     <Link to='/' >Contact</Link>
                 </div>
 
@@ -114,20 +105,36 @@ const Header = ({ headerBackground }) => {
             <div className="userMenu" data-aos='fade-left'>
                 {/* <button>Book Room</button> */}
 
-                <div className="userIcon" onClick={() => setLoginMenu((pre) => !pre)}>
-                    < FaRegCircleUser />
-                </div>
+                {
+
+                    isGuestAuthonticated ?
+
+                        // If user login, then dropdown window will be show 
+                        <div className="userIcon" onClick={() => setLoginMenu((pre) => !pre)}>
+                            < FaRegCircleUser />
+                        </div>
+
+                        :
+
+                        <Link to='/guestProfile' className='userIcon'>< FaRegCircleUser /></Link>
+
+
+                }
+
 
 
                 {
+
                     loginMenu &&
 
                     <div className="loginMenu" >
 
-                        <Link onClick={() => loginMenu(false)}>Profile</Link>
-                        <Link onClick={() => loginMenu(false)}>Logout</Link>
+                        <Link to={'/guestProfile'} >Profile</Link>
+
+                        <Link to={'/login'} onClick={onSubmitHandler}>Logout</Link>
 
                     </div>
+
 
                 }
 

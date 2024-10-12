@@ -1,7 +1,14 @@
 import React from 'react';
 import './header.scss';
+import { vendorLogoutAction } from '../../../Redux/actions/vendorAuthAction';
+import { useDispatch } from 'react-redux';
 
 const Header = ({ currentPath }) => {
+
+    const dispatch = useDispatch();
+
+    const logoutHandler = () => vendorLogoutAction(dispatch);
+
     return (
         <div className='header'>
             <div className="left">
@@ -13,7 +20,7 @@ const Header = ({ currentPath }) => {
             </div>
             <div className="right">
                 <input type="text" placeholder='Type here...' />
-                <button>Log out</button>
+                <button onClick={logoutHandler}>Log out</button>
             </div>
 
         </div>

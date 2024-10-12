@@ -61,7 +61,7 @@
                 transition: .3s all;
 
                 &:hover {
-                    color: #fb6340;
+                    color: crimson;
                     background-color: white;
                     transition: .3s all;
                 }
@@ -101,13 +101,13 @@
                     >button {
                         padding: .6rem 1.5rem;
                         color: white;
-                        background-color: #fb6340;
+                        background-color: crimson;
                         border: none;
                         border-radius: 5px;
                         cursor: pointer;
 
                         &:hover {
-                            background-color: #e9431e;
+                            background-color: rgb(189, 1, 39);
                         }
 
                     }

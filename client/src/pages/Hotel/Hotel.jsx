@@ -4,6 +4,7 @@ import './hotel.scss';
 import SearchBar from '../../components/SearchBar/SearchBar';
 
 import { FaLocationDot } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const Hotel = () => {
     return (
@@ -30,9 +31,9 @@ const Hotel = () => {
                     </div>
 
 
-                    <div className="bookingBtn">
+                    <Link to={'/guestProfile/booking'} className="bookingBtn">
                         <button>Reserve or Book Now!</button>
-                    </div>
+                    </Link>
                 </div>
 
 

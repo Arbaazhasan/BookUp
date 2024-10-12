@@ -4,6 +4,9 @@ import { BookingModel } from "../model/booking.model.js";
 import { BookingsRecord } from "../model/bookingsRecord.model.js";
 import { Room } from "../model/room.model.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import { Vendor } from "../model/vendor.model.js";
+
+
 
 export const checkAvailability = catchAsyncError(async (req, res, next) => {
 
@@ -68,9 +71,39 @@ export const checkAvailability = catchAsyncError(async (req, res, next) => {
     }
 
 });
+export const searchRooms = catchAsyncError(async (req, res, next) => {
 
+    // localhost:5000/api/v1/booking/searchrooms?cityName=Moradabad&checkIn=2024-09-02&checkOut=2024-09-05&noOfRoom=2&adult=2&children=1
 
+    const { cityName, checkIn, checkOut, noOfRoom, adult, children } = req.query;
 
+    if (cityName && !checkIn && !checkOut) {
+
+        const getVendor = await Vendor.find({ city: cityName });
+
+        if (!getVendor) return res.status(404).json({
+            success: true,
+            message: "No room or property found!"
+        });
+
+        const getRoom = [];
+
+        getVendor.map(async (_id) => {
+            console.log(_id)
+            // const room = await Room.find({ vendorId: _id });
+            // getRoom.push(room)
+
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: getRoom
+
+        });
+
+    }
+
+});
 
 // Book Room
 export const bookRoom = catchAsyncError(async (req, res, next) => {

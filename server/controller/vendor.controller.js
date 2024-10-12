@@ -117,3 +117,19 @@ export const updateVendorProfile = catchAsyncError(async (req, res, next) => {
 
 
 });
+
+
+export const getVendor = catchAsyncError((req, res) => {
+
+    const { vendorToken } = req.cookies;
+    console.log(vendorToken);
+
+    if (!vendorToken) return res.status(200).json({
+        success: false
+    });
+
+    res.status(200).json({
+        success: true,
+    });
+
+});

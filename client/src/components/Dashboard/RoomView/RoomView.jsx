@@ -4,6 +4,7 @@ import './roomView.scss';
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { MdFullscreenExit } from "react-icons/md";
+import ImageViewer from '../../ImageViewer/ImageViewer';
 
 
 
@@ -39,6 +40,7 @@ const RoomView = ({ isDelete }) => {
     return (
         <div className='roomView'>
 
+            
             <div className="mainImage">
                 <div className="bgImg">
                     <img src="/public/images/Rooms/img1.jpg" alt="" />

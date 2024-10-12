@@ -31,7 +31,8 @@ export const register = catchAsyncError(async (req, res, next) => {
 
     }).json({
         success: true,
-        message: 'Registered'
+        message: 'Registered',
+        user
     });
 
 
@@ -61,7 +62,8 @@ export const userLogin = catchAsyncError(async (req, res, next) => {
         httpOnly: true,
     }).json({
         success: true,
-        message: `Welcome back ${isUser.name}`
+        message: `Welcome back ${isUser.name}`,
+        isUser
     });
 
 });
@@ -77,5 +79,19 @@ export const logout = catchAsyncError(async (req, res, next) => {
         message: 'Logout'
     });
 
-})
+});
 
+
+export const getGuest = catchAsyncError(async (req, res) => {
+    const { token } = req.cookies;
+
+    if (!token) return res.status(200).json({
+        success: false,
+    });
+
+    res.status(200).json({
+        success: true,
+        message: req.guest
+    });
+
+});
