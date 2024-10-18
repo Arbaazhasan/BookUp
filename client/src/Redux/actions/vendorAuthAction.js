@@ -24,7 +24,7 @@ export const vendorLoginAction = async (dispatch, email, password) => {
         console.log(data);
         toast.success(data.message);
 
-        dispatch(vendorLoginSuccess());
+        dispatch(vendorLoginSuccess(data.vendor));
 
     } catch (error) {
         // const errorMessage =  || "Something went wrong!";
@@ -60,22 +60,35 @@ export const vendorLogoutAction = async (dispatch) => {
 };
 
 
-
 export const isVendorAuthonticatedAction = async (dispatch) => {
+    try {
+        // Get token from localStorage
+        const token = localStorage.getItem('vendorToken');
 
-    const { data } = await axios.post(`${server}/vendor/getvendor`, {}, {
-        headers: {
-            "Content-Type": "application/json"
-        },
-        withCredentials: true
-    });
+        if (!token) {
+            // If no token, the vendor is not authenticated
+            return dispatch(vendorLogoutSuccess());
+        }
 
-    if (data.success === false)
-        return;
+        // Call backend to verify the token
+        const { data } = await axios.post(`${server}/vendor/getvendor`, {}, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` // Pass token in Authorization header
+            },
+            withCredentials: true
+        });
 
-    dispatch(vendorAuthonticated());
+        // If success, authenticate vendor
+        if (data.success) {
+            dispatch(vendorAuthonticated());
+        } else {
+            // If token invalid, log the vendor out
+            dispatch(vendorLogoutSuccess());
+        }
 
-
+    } catch (error) {
+        console.log(error);
+        dispatch(vendorLogoutFail(error.response?.data?.message || 'Failed to authenticate vendor'));
+    }
 };
-
-

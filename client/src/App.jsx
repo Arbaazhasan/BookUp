@@ -34,6 +34,8 @@ function App() {
   const dispatch = useDispatch();
   const { loading: guestLoading, error: guestAuthError, isGuestAuthonticated } = useSelector(state => state.guestAuthReducer);
   const { loading: vendorLoading, error: vendorAuthError, isVendorAuthonticated } = useSelector(state => state.vendorAuthReducer);
+  const { loading: bookingLoading, error: bookingError } = useSelector(state => state.bookingReducer);
+  const { loading: controlPanelLoading, error: controlPanelError } = useSelector(state => state.bookingReducer);
 
 
   useEffect(() => {
@@ -47,16 +49,23 @@ function App() {
       if (vendorAuthError)
         toast.error(vendorAuthError);
 
+      if (bookingError)
+        toast.error(bookingError);
+
+      if (controlPanelError)
+        toast.error(controlPanelError);
     }
 
-  }, [guestAuthError, vendorAuthError]);
+    isGuestAuthonticatedAction(dispatch);
+    isVendorAuthonticatedAction(dispatch);
+  }, [dispatch, guestAuthError, vendorAuthError, bookingError]);
 
 
   useEffect(() => {
-    isGuestAuthonticatedAction(dispatch);
-    isVendorAuthonticatedAction(dispatch);
+
 
   }, [dispatch]);
+
 
 
   return (
@@ -65,7 +74,12 @@ function App() {
 
       {
         /* Display Loading Component if loading */
-        guestLoading || vendorLoading && <Loading />
+        guestLoading ||
+        vendorLoading ||
+        bookingLoading ||
+        controlPanelLoading
+        && <Loading />
+
       }
 
 
@@ -135,7 +149,7 @@ function App() {
 
           <Route path='/dashboard/bookings' element={<Dashboard currentPath={'Bookings'} dashboardComponent={<Bookings />} />} />
 
-          <Route path='/dashboard/rooms/room/view' element={<Dashboard currentPath={'Room'} dashboardComponent={<RoomView />} />} />
+          <Route path='/dashboard/rooms/room/:roomNo' element={<Dashboard currentPath={'Room'} dashboardComponent={<RoomView />} />} />
 
 
 

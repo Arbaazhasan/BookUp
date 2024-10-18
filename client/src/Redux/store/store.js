@@ -1,12 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import guestAuthReducer from "../reducers/guestAuthReducer";
 import vendorAuthReducer from "../reducers/vendorAuthReducer";
-
+import bookingReducer from "../reducers/bookingReducer";
+import controlPanelReducer from "../reducers/controlPanelReducer";
 
 const store = configureStore({
     reducer: {
         guestAuthReducer: guestAuthReducer,
-        vendorAuthReducer: vendorAuthReducer
+        vendorAuthReducer: vendorAuthReducer,
+        bookingReducer: bookingReducer,
+        controlPanelReducer : controlPanelReducer
     },
 
 });

@@ -9,7 +9,7 @@ router.post('/login', vendorLogin);
 router.get('/logout', vendorLogout);
 router.post('/getvendor', getVendor);
 
-router.patch('/updatevendorprofile/:vendorId', vendorAuthontication, updateVendorProfile);
+router.patch('/updatevendorprofile', vendorAuthontication, updateVendorProfile);
 
 
 export default router;

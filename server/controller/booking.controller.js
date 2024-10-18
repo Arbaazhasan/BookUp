@@ -71,51 +71,86 @@ export const checkAvailability = catchAsyncError(async (req, res, next) => {
     }
 
 });
+
+
+
+// Search room according to city and Check-in and Check-Out dates
 export const searchRooms = catchAsyncError(async (req, res, next) => {
 
-    // localhost:5000/api/v1/booking/searchrooms?cityName=Moradabad&checkIn=2024-09-02&checkOut=2024-09-05&noOfRoom=2&adult=2&children=1
+    const { city, checkInDate, checkOutDate, rooms } = req.body;
 
-    const { cityName, checkIn, checkOut, noOfRoom, adult, children } = req.query;
 
-    if (cityName && !checkIn && !checkOut) {
+    if (!city)
+        return next(new ErrorHandler('Please select city!', 400));
 
-        const getVendor = await Vendor.find({ city: cityName });
 
-        if (!getVendor) return res.status(404).json({
-            success: true,
-            message: "No room or property found!"
+    // Parse the dates
+    const checkIn = new Date(checkInDate);
+    const checkOut = new Date(checkOutDate);
+
+
+    // Check that check-out date is after check-in date
+    if (checkIn >= checkOut) {
+        return res.status(400).json({
+            success: false,
+            message: "Check-out date must be after check-in date"
         });
-
-        const getRoom = [];
-
-        getVendor.map(async (_id) => {
-            console.log(_id)
-            // const room = await Room.find({ vendorId: _id });
-            // getRoom.push(room)
-
-        });
-
-        return res.status(200).json({
-            success: true,
-            message: getRoom
-
-        });
-
     }
 
+    // Step 1: Find all vendors in the specified city
+    const vendors = await Vendor.find({ city: { $regex: new RegExp(city, 'i') } });
+
+    if (!vendors.length) {
+        return res.status(404).json({
+            success: false,
+            message: `No hotel found in ${city}`
+        });
+    }
+
+    // Extract vendor IDs
+    const vendorIds = vendors.map(vendor => vendor._id);
+
+    // Step 2: Find rooms that belong to the vendors in the city and are available for the given date range
+    const availableRooms = await Room.find({
+        vendorId: { $in: vendorIds },
+
+        reservationDates: {
+            $not: {
+                $elemMatch: {
+                    $or: [
+                        { checkIn: { $lt: checkOut }, checkOut: { $gt: checkIn } } // Overlapping reservations
+                    ]
+                }
+            }
+        },
+        availableRooms: { $gt: (rooms - 1) || 0 } // Rooms that have availability
+    });
+
+    // Step 3: If no rooms are found, return a 404 error
+    if (!availableRooms.length) {
+        return res.status(404).json({
+            success: false,
+            message: "No rooms available for the given dates"
+        });
+    }
+
+    // Step 4: Return the list of available rooms
+    return res.status(200).json({
+        success: true,
+        availableRooms
+    });
 });
+
 
 // Book Room
 export const bookRoom = catchAsyncError(async (req, res, next) => {
 
     const { vendorId, roomNo, roomName } = req.query;
-    const { name, adults, children, checkInDate, checkOutDate } = req.body;
+    const { name, adults, children, checkInDate, checkOutDate, noOfRooms } = req.body;
     const guestId = req.guest._id;
 
     // Validate required fields
-    if (!name || !adults || !children || !roomNo || !roomName || !vendorId ||
-        !checkInDate || !checkInDate.date || !checkInDate.month || !checkInDate.year ||
-        !checkOutDate || !checkOutDate.date || !checkOutDate.month || !checkOutDate.year) {
+    if (!name || !adults || !children || !roomNo || !roomName || !vendorId || !checkInDate || !checkOutDate) {
         return next(new ErrorHandler('Please provide all required fields!', 400));
     }
 
@@ -128,8 +163,8 @@ export const bookRoom = catchAsyncError(async (req, res, next) => {
 
 
     // Converting dates into IOS Standard
-    const requestedCheckInDate = new Date(checkInDate.year, checkInDate.month - 1, checkInDate.date);
-    const requestedCheckOutDate = new Date(checkOutDate.year, checkOutDate.month - 1, checkOutDate.date);
+    const requestedCheckInDate = new Date(checkInDate);
+    const requestedCheckOutDate = new Date(checkOutDate);
     let isDatesAvailable = true;
 
 
@@ -138,8 +173,8 @@ export const bookRoom = catchAsyncError(async (req, res, next) => {
         console.log("first");
 
         isRoom.reservationDates?.forEach((reservation) => {
-            const existingCheckInDate = new Date(reservation.checkInDate.year, reservation.checkInDate.month - 1, reservation.checkInDate.date);
-            const existingCheckOutDate = new Date(reservation.checkOutDate.year, reservation.checkOutDate.month - 1, reservation.checkOutDate.date);
+            const existingCheckInDate = new Date(reservation.checkOutDate);
+            const existingCheckOutDate = new Date(checkInDate);
 
             if (
                 (requestedCheckInDate < existingCheckOutDate && requestedCheckOutDate > existingCheckInDate) ||
@@ -162,6 +197,7 @@ export const bookRoom = catchAsyncError(async (req, res, next) => {
             guestId,
             roomId: isRoom._id,
             roomNo: isRoom.roomArray[0],
+            noOfBookedRooms: noOfRooms,
             customerDetails: { name, adults, children },
             reservationDates: { from: requestedCheckInDate, to: requestedCheckOutDate }
         });

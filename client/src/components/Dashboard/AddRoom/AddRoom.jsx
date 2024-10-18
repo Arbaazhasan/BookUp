@@ -3,11 +3,51 @@ import './addRoom.scss';
 import { useDropzone } from 'react-dropzone';
 
 import { WiCloudUp } from "react-icons/wi";
+import toast from 'react-hot-toast';
 
 const AddRoom = () => {
 
+    const [roomNo, setRoomNo] = useState();
+    const [roomName, setRoomName] = useState();
+    const [noOfRooms, setNoOfRooms] = useState();
+    const [availableRooms, setAvailableRooms] = useState();
+    const [roomType, setRoomType] = useState();
+    const [servies, setServices] = useState();
+    const [description, setDescription] = useState();
+    const [prince, setPrice] = useState();
+
+    useEffect(() => {
+
+    }, [roomNo,
+        roomName,
+        noOfRooms,
+        availableRooms,
+        roomType,
+        servies,
+        description,
+        prince]);
 
     const [images, setImages] = useState([]);
+
+
+    const onSubmitHandler = (e) => {
+
+        e.preventDefault();
+
+        if (!roomNo || !roomName || !noOfRooms || !availableRooms || !roomType || !servies || !description || !prince) {
+            toast.error("Please fill all fields!");
+        }
+
+        if (noOfRooms > availableRooms)
+            toast.error("No of Room should be greater than Availble Rooms");
+
+        if (images.length < -1) {
+
+            toast.error("please select atleast 1 image");
+        }
+        console.log(images.length);
+    };
+
 
 
     const onDrop = useCallback((acceptedFiles) => {
@@ -24,7 +64,6 @@ const AddRoom = () => {
         onDrop,
     });
 
-
     const removeImage = (name) => {
         const imageFiles = images.filter((file) => file.name !== name && file);
         setImages(imageFiles);
@@ -34,7 +73,7 @@ const AddRoom = () => {
     return (
         <div className='addRoom'>
 
-            <form action="">
+            <form action="" onSubmit={onSubmitHandler}>
 
                 <div className="images">
 
@@ -102,42 +141,45 @@ const AddRoom = () => {
                 <div className="details">
 
                     <div>
-                        <input type="text" placeholder='Room No.' />
+                        <input type="text" placeholder='Room No.' required onChange={(e) => setRoomNo(e.target.value)} />
                     </div>
 
 
 
                     <div>
-                        <input type="text" placeholder='Room Name' />
+                        <input type="text" placeholder='Room Name' required onChange={(e) => setRoomName(e.target.value)} />
                     </div>
 
 
                     <div>
-                        <input type="text" placeholder='Number of Rooms.' />
-                    </div>
+                        <input
 
+                            type="number" placeholder='Number of Rooms.' required min={1} max={5} onChange={(e) => setNoOfRooms(e.target.value)} />
 
-
-                    <div>
-                        <input type="text" placeholder='No. of Available Room ' />
-                    </div>
-
-
-
-                    <div>
-                        <input type="text" placeholder='Room Type' />
                     </div>
 
 
 
                     <div>
-                        <input type="text" placeholder='Services' />
+                        <input type="number" placeholder='No. of Available Room ' required min={1} max={5} onChange={(e) => setAvailableRooms(e.target.value)} />
                     </div>
 
 
 
                     <div>
-                        <input type="text" placeholder='Description' />
+                        <input type="text" placeholder='Room Type' required onChange={(e) => setRoomType(e.target.value)} />
+                    </div>
+
+
+
+                    <div>
+                        <input type="text" placeholder='Services' required minLength={10} maxLength={30} onChange={(e) => setServices(e.target.value)} />
+                    </div>
+
+
+
+                    <div>
+                        <input type="text" placeholder='Description' required minLength={10} maxLength={500} onChange={(e) => setDescription(e.target.value)} />
                     </div>
 
 
@@ -146,7 +188,7 @@ const AddRoom = () => {
 
 
                     <div>
-                        <input type="text" placeholder='Price' />
+                        <input type="number" placeholder='Price' required min={10} onChange={(e) => setPrice(e.target.value)} />
                     </div>
 
                     <div>

@@ -19,6 +19,12 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    noOfBookedRooms: {
+        type: Number,
+        default: 1,
+        min: 1
+    },
     customerDetails: {
         type: {},
         required: true

@@ -57,8 +57,6 @@ export const guestLoginAction = async (dispatch, email, password) => {
 
         dispatch(guestLoginSuccess(data));
 
-        console.log(data);
-
         toast.success(data.message);
 
     } catch (error) {

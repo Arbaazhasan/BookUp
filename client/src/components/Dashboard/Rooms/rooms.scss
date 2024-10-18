@@ -5,9 +5,9 @@
     background-color: white;
     border-radius: 1vw;
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
     gap: 3rem 0rem;
     padding: 2.5rem;
     overflow: scroll;
@@ -102,6 +102,7 @@
             }
 
             >p {
+                height: 100%;
                 font-size: small;
                 color: gray;
                 font-weight: 400;
@@ -117,23 +118,25 @@
                     font-size: large;
                 }
 
-                >a {
+                >div {
+                    >a {
 
-                    >button {
-                        padding: .5rem 1.5rem;
-                        background-color: #fb6340;
-                        color: white;
-                        border: 2px solid transparent;
-                        font-size: small;
-                        transition: .3s all;
-                        cursor: pointer;
-
-
-                        &:hover {
-                            background-color: white;
-                            color: #fb6340;
-                            border: 2px solid #fb6340;
+                        >button {
+                            padding: .5rem 1.5rem;
+                            background-color: #fb6340;
+                            color: white;
+                            border: 2px solid transparent;
+                            font-size: small;
                             transition: .3s all;
+                            cursor: pointer;
+
+
+                            &:hover {
+                                background-color: white;
+                                color: #fb6340;
+                                border: 2px solid #fb6340;
+                                transition: .3s all;
+                            }
                         }
                     }
                 }

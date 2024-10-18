@@ -5,21 +5,23 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 
-const List = () => {
+const List = ({ _id, image, name, description, price }) => {
+
   return (
-    <div className='list'>
+    <div className='list' key={_id}>
 
       <div className="hotel">
 
         <div className="hotemImage">
-          <img src="images/Hotels/img3.jpg" alt="" />
+          {/* <img src="images/Hotels/img3.jpg" alt="" /> */}
+          <img src={image && image[0].url} alt="" />
         </div>
 
         <div className="details">
           <div className="name">
-            <h1>Hotel Vertix</h1>
+            <h1>{name}</h1>
 
-            <p>Mahipalpur, Delhi | 4.2 km drive to Indira Gandhi Internatioin Airport</p>
+            <p>{description}</p>
 
             <p>Free Cancellation till check-in</p>
 
@@ -41,8 +43,7 @@ const List = () => {
         <div className="bookBtn">
           <div className="price">
             <span>Price</span>
-            <h1>₹ 1,561/-</h1>
-
+            <h1>₹ {price}/-</h1>
           </div>
 
           <Link to={'/hotel'}>

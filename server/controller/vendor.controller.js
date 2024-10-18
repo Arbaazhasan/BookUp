@@ -57,7 +57,8 @@ export const vendorLogin = catchAsyncError(async (req, res, next) => {
         httpOnly: true,
     }).json({
         success: true,
-        message: 'Login'
+        message: `Welcome ${isVendor.firstName}`,
+        vendor: isVendor._id
     });
 
 });
@@ -78,8 +79,9 @@ export const vendorLogout = catchAsyncError((req, res, next) => {
 // Update profile
 export const updateVendorProfile = catchAsyncError(async (req, res, next) => {
 
-    const { vendorId } = req.params;
     const { username, email, firstName, lastName, address, city, country, postalCode, about } = req.body;
+
+    const vendorId = req.vendor._id;
 
     // check vendor id is valid or not
     if (!vendorId || !mongoose.Types.ObjectId.isValid(vendorId))

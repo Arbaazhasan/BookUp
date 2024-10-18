@@ -10,9 +10,19 @@ import { MdOutlineDelete } from "react-icons/md";
 import { MdOutlineUpdate } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from 'react-router-dom';
+import { getRoomListAction } from '../../../Redux/actions/controlPanelAction';
+import { useDispatch } from 'react-redux';
 
 
 const Sidebar = () => {
+
+    const dispatch = useDispatch();
+
+    const getRoomListHandler = () => {
+        getRoomListAction(dispatch);
+    };
+
+
     return (
         <div className='sidebar'>
 
@@ -28,52 +38,67 @@ const Sidebar = () => {
                     <p>Statistics</p>
                 </div>
 
-                <Link to={'/dashboard'}>
-                    <span><MdDashboard /></span>
-                    <p>Dashbaord</p>
-                </Link>
+                <div>
+                    <Link to={'/dashboard'}>
+                        <span><MdDashboard /></span>
+                        <p>Dashbaord</p>
+                    </Link>
+                </div>
 
-                <Link to={'/dashboard/profile'}>
-                    <span><FaRegUser /></span>
-                    <p>Profile</p>
-                </Link>
+                <div>
+                    <Link to={'/dashboard/profile'}>
+                        <span><FaRegUser /></span>
+                        <p>Profile</p>
+                    </Link>
+                </div>
 
-                <Link to={'/dashboard/bookings'}>
-                    <span><RiReservedLine /></span>
-                    <p>Bookings</p>
-                </Link>
-
+                <div>
+                    <Link to={'/dashboard/bookings'}>
+                        <span><RiReservedLine /></span>
+                        <p>Bookings</p>
+                    </Link>
+                </div>
 
 
                 <div className="heading">
                     <p>Control Panel</p>
                 </div>
 
-                <Link to={'/dashboard/rooms'}>
-                    <span><MdOutlineBedroomChild /></span>
-                    <p>Rooms</p>
-                </Link>
+                <div onClick={() => getRoomListHandler()}>
+                    <Link to={'/dashboard/rooms'}>
+                        <span><MdOutlineBedroomChild /></span>
+                        <p>Rooms</p>
+                    </Link>
+                </div>
 
-                <Link to={'/dashboard/add'}>
-                    <span><IoIosAddCircleOutline /></span>
+                <div >
 
-                    <p>Add Room</p>
-                </Link>
+                    <Link to={'/dashboard/add'} >
+                        <span><IoIosAddCircleOutline /></span>
 
-                <Link to={'/dashboard/update'}>
-                    <span><MdOutlineUpdate /></span>
-                    <p>Update Room</p>
-                </Link>
+                        <p>Add Room</p>
+                    </Link>
 
+                </div>
 
-                <Link to={'/dashboard/delete'}>
-                    <span><MdOutlineDelete /></span>
+                <div>
 
-                    <p>Delete Room</p>
+                    <Link to={'/dashboard/update'}>
+                        <span><MdOutlineUpdate /></span>
+                        <p>Update Room</p>
+                    </Link>
+                </div>
 
-                </Link>
+                <div>
 
+                    <Link to={'/dashboard/delete'}>
+                        <span><MdOutlineDelete /></span>
 
+                        <p>Delete Room</p>
+
+                    </Link>
+
+                </div>
 
             </div>
 

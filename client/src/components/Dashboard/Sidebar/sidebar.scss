@@ -58,52 +58,55 @@
 
         }
 
-        >a {
-            // border: 2px solid red;
-            display: flex;
-            padding: 1.5rem;
-            gap: 1rem;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(174, 174, 174, 0.39);
-            color: gray;
-            text-decoration: none;
+        >div {
+            >a {
+                // border: 2px solid red;
+                display: flex;
+                padding: 1.5rem;
+                gap: 1rem;
+                cursor: pointer;
+                border-bottom: 1px solid rgba(174, 174, 174, 0.39);
+                color: gray;
+                text-decoration: none;
 
 
-            &:hover {
-                background-color: rgba(235, 235, 235, 0.706);
-                border-bottom: 1px solid rgb(220, 220, 220);
+                &:hover {
+                    background-color: rgba(235, 235, 235, 0.706);
+                    border-bottom: 1px solid rgb(220, 220, 220);
+
+                    >span {
+                        font-weight: bolder;
+                    }
+
+                    >p {
+                        font-weight: bold;
+                        color: rgb(95, 95, 95);
+
+                    }
+                }
+
+                &:nth-child(4) {
+                    border: none;
+                }
+
 
                 >span {
+                    color: crimson;
+                    display: flex;
+                    align-items: center;
+                    font-size: large;
                     font-weight: bolder;
                 }
 
                 >p {
-                    font-weight: bold;
-                    color: rgb(95, 95, 95);
-
+                    font-size: .9rem;
+                    font-weight: 300;
                 }
+
             }
 
-            &:nth-child(4) {
-                border: none;
-            }
-
-
-            >span {
-                color: crimson;
-                display: flex;
-                align-items: center;
-                font-size: large;
-                font-weight: bolder;
-            }
-
-            >p {
-                font-size: .9rem;
-                font-weight: 300;
-            }
 
         }
-
 
     }
 

@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 router.post('/bookroom', bookRoom);
-router.get('/searchrooms', searchRooms);
+router.post('/searchrooms', searchRooms);
 router.get('/guestbookings', guestAuthontication, getGuestBookings);
 router.get('/guestbookingrecords', guestAuthontication, getGuestBookingRecords);
 router.post('/cancelbooking/:bookingId', guestAuthontication, cancelBooking);

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { MdKeyboardArrowRight } from "react-icons/md";
 import toast from 'react-hot-toast';
+import { getHotelListAction } from '../../Redux/actions/bookingAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SearchBar = () => {
 
@@ -13,19 +15,30 @@ const SearchBar = () => {
     const [noOfRoom, setNoOfRoom] = useState(1);
     const [children, setChildren] = useState(0);
     const [adult, setAdult] = useState(1);
+    const [searchCity, setSearchCity] = useState('');
+
+    const dispatch = useDispatch();
+    const { hotelList } = useSelector(state => state.bookingReducer);
 
     useEffect(() => {
-        console.log(cityName, checkIn, checkOut, noOfRoom, children, adult);
-
 
     }, [cityName, checkIn, checkOut, noOfRoom, children, adult]);
 
+
+    const searchBarHandler = (e) => {
+        e.preventDefault();
+        setSearchCity(cityName);
+        getHotelListAction(dispatch, cityName, checkIn, checkOut, noOfRoom);
+    };
+
+
+    // Verify that check-out-date should not be less than check-in-date 
     const checkOutOnChange = (e) => {
         const selectedCheckOut = e.target.value;
 
         if (checkIn && new Date(checkIn) > new Date(selectedCheckOut)) {
-            toast.error("Please select a correct date!", {
-                duration: 500
+            toast.error("CheckOut can't bee less then CheckIn!", {
+                duration: 2000
             });
             setCheckOut('');
         } else {
@@ -35,7 +48,7 @@ const SearchBar = () => {
 
     return (
         <div className='searchBar'>
-            <form className="searchTab">
+            <form className="searchTab" onSubmit={searchBarHandler}>
                 <div>
                     <p>City, Area of Property</p>
                     <input type="text" placeholder="Goa" value={cityName} onChange={(e) => setCityName(e.target.value)} />
@@ -92,18 +105,23 @@ const SearchBar = () => {
                 </div>
 
                 <div>
-                    <button type="button">Search</button>
+                    <button type="submit" >Search</button>
                 </div>
             </form>
 
             <div className="currentPath">
                 <Link to="/"> Home </Link>
                 <span><MdKeyboardArrowRight /></span>
-                <p>Hotels and more in Goa</p>
+                <p>Hotels and more in {searchCity.charAt(0).toUpperCase() + searchCity.slice(1)}</p>
             </div>
 
             <div className="searchResult">
-                <h1>2734 Properties in Goa</h1>
+                {
+                    hotelList.length ?
+                        <h1>{hotelList.length} Properties in {searchCity.charAt(0).toUpperCase() + searchCity.slice(1)}</h1>
+                        :
+                        <h1>Search hotel</h1>
+                }
             </div>
         </div>
     );
