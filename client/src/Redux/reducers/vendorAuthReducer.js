@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
 
     status: false,
-    isVendorAuthonticated: false,
+    isVendorAuthonticated: true,
     loading: false,
     error: null,
 
@@ -51,10 +51,10 @@ const vendorAuthReducer = createSlice({
         },
 
 
-
         vendorAuthonticated: (state, action) => {
             state.isVendorAuthonticated = true;
-        }
+        },
+
 
     }
 });
@@ -69,7 +69,8 @@ export const {
     vendorLogoutSuccess,
     vendorLogoutFail,
 
-    vendorAuthonticated
+    vendorAuthonticated,
+
 
 } = vendorAuthReducer.actions;
 

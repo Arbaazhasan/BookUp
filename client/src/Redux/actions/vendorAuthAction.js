@@ -21,7 +21,6 @@ export const vendorLoginAction = async (dispatch, email, password) => {
             withCredentials: true
         });
 
-        console.log(data);
         toast.success(data.message);
 
         dispatch(vendorLoginSuccess(data.vendor));

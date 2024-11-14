@@ -1,5 +1,5 @@
-import { bookRoom, checkAvailability } from "../controller/booking.controller.js";
-import { getGuest, logout, register, userLogin } from "../controller/guestLogin.controller.js";
+import { bookRoom } from "../controller/booking.controller.js";
+import { getGuest, getRoomDetails, logout, register, userLogin } from "../controller/guestLogin.controller.js";
 import express from 'express';
 import { guestAuthontication } from "../middleware/authontication.js";
 
@@ -14,7 +14,8 @@ router.post("/logout", logout);
 router.post("/getguest", getGuest);
 
 router.post("/bookroom", guestAuthontication, bookRoom);
-router.post("/checkavailability", guestAuthontication, checkAvailability);
+
+router.get('/getRoomDetails/:id', getRoomDetails);
 
 
 export default router;

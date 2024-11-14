@@ -21,7 +21,7 @@ const List = ({ _id, image, name, description, price }) => {
           <div className="name">
             <h1>{name}</h1>
 
-            <p>{description}</p>
+            <p>{description.slice(0, 280)}</p>
 
             <p>Free Cancellation till check-in</p>
 
@@ -46,7 +46,7 @@ const List = ({ _id, image, name, description, price }) => {
             <h1>₹ {price}/-</h1>
           </div>
 
-          <Link to={'/hotel'}>
+          <Link to={`/hotel/${_id}`}>
             <button>Book Now</button>
           </Link>
         </div>

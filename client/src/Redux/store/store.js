@@ -9,7 +9,7 @@ const store = configureStore({
         guestAuthReducer: guestAuthReducer,
         vendorAuthReducer: vendorAuthReducer,
         bookingReducer: bookingReducer,
-        controlPanelReducer : controlPanelReducer
+        controlPanelReducer: controlPanelReducer
     },
 
 });

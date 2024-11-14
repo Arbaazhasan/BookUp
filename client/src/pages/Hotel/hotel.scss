@@ -150,25 +150,27 @@
 
                     }
 
-                    >button {
-                        width: 100%;
-                        height: 3rem;
-                        color: white;
-                        background-color: #b81010;
-                        border: 2px solid transparent;
-                        font-weight: bold;
-                        transition: .5s all;
-                        cursor: pointer;
+                    >.bookingBtn {
+                        >button {
+                            width: 100%;
+                            height: 2.7rem;
+                            background-color: #b81010;
+                            color: white;
+                            border: 3px solid transparent;
+                            transition: .4s all;
+                            cursor: pointer;
+
+                            &:hover {
+                                color: #b81010;
+                                background-color: white;
+                                border: 3px solid #b81010;
+                                transition: .4s all;
+                            }
 
 
-                        &:hover {
-                            background-color: transparent;
-                            border: 2px solid #b81010;
-                            color: #b81010;
-                            transition: .5s all;
                         }
-                    }
 
+                    }
 
 
 

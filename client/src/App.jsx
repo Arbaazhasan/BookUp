@@ -34,8 +34,8 @@ function App() {
   const dispatch = useDispatch();
   const { loading: guestLoading, error: guestAuthError, isGuestAuthonticated } = useSelector(state => state.guestAuthReducer);
   const { loading: vendorLoading, error: vendorAuthError, isVendorAuthonticated } = useSelector(state => state.vendorAuthReducer);
-  const { loading: bookingLoading, error: bookingError } = useSelector(state => state.bookingReducer);
-  const { loading: controlPanelLoading, error: controlPanelError } = useSelector(state => state.bookingReducer);
+  const { loading: bookingLoading, error: bookingError, checkAvailabilityWindow } = useSelector(state => state.bookingReducer);
+  const { loading: controlPanelLoading, error: controlPanelError } = useSelector(state => state.controlPanelReducer);
 
 
   useEffect(() => {
@@ -58,7 +58,7 @@ function App() {
 
     isGuestAuthonticatedAction(dispatch);
     isVendorAuthonticatedAction(dispatch);
-  }, [dispatch, guestAuthError, vendorAuthError, bookingError]);
+  }, [dispatch, guestAuthError, vendorAuthError, bookingError, controlPanelError]);
 
 
   useEffect(() => {
@@ -84,10 +84,14 @@ function App() {
 
 
       {/* Check Room Availability  */}
-      {/* <CheckAvailability />  */}
+      {
+        checkAvailabilityWindow && <CheckAvailability />
+      }
 
       {/* Dashboardore ImageViewer */}
       {/* <ImageViewer /> */}
+
+
 
 
       <Routes>
@@ -99,7 +103,7 @@ function App() {
         <Route path='/list' element={<HotelsList />} />
 
         {/* Search Hotel Description */}
-        <Route path='/hotel' element={<Hotel />} />
+        <Route path='/hotel/:id' element={<Hotel />} />
 
 
         {/* Guest Protected Routes */}
@@ -165,7 +169,6 @@ function App() {
           <Route path='/dashboard/imageviewer' element={<ImageViewer />} />
 
         </Route>
-
 
 
         <Route path='*' element={<Home />} />

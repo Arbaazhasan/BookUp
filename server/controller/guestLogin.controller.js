@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt';
 import ErrorHandler from "../utils/errorHandler.js";
 import { catchAsyncError } from "../middleware/catchAsyncError.js";
 import jwt from "jsonwebtoken";
+import { Room } from "../model/room.model.js";
+import { Vendor } from "../model/vendor.model.js";
 
 
 export const register = catchAsyncError(async (req, res, next) => {
@@ -95,3 +97,38 @@ export const getGuest = catchAsyncError(async (req, res) => {
     });
 
 });
+
+
+
+export const getRoomDetails = catchAsyncError((async (req, res, next) => {
+
+
+    const { id } = req.params;
+
+    if (!id) return next(new ErrorHandler("Incorrect Room Id!", 404));
+
+    const isRoom = await Room.findById(id);
+
+    if (!isRoom) return next(new ErrorHandler("Room does not exits!", 404));
+
+    const getVendorDetails = await Vendor.findById(isRoom.vendorId);
+
+    if (!getVendorDetails) return next(new ErrorHandler("Room does not exits!", 404));
+
+    const roomDetails = {
+        _id: isRoom._id,
+        address: getVendorDetails.address + ", " + getVendorDetails.city + ", " + getVendorDetails.country,
+        name: isRoom.name,
+        roomType: isRoom.roomType,
+        description: isRoom.description,
+        price: isRoom.price,
+        services: isRoom.services,
+        images: isRoom.images,
+    };
+
+    res.status(200).json({
+        success: true,
+        message: roomDetails
+    });
+
+}));

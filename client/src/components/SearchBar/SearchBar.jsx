@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './searchBar.scss';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 import { MdKeyboardArrowRight } from "react-icons/md";
 import toast from 'react-hot-toast';
@@ -24,11 +24,12 @@ const SearchBar = () => {
 
     }, [cityName, checkIn, checkOut, noOfRoom, children, adult]);
 
+    const navigate = useNavigate();
 
     const searchBarHandler = (e) => {
         e.preventDefault();
-        setSearchCity(cityName);
         getHotelListAction(dispatch, cityName, checkIn, checkOut, noOfRoom);
+        navigate('/list');
     };
 
 

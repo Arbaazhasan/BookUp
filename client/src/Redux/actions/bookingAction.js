@@ -1,6 +1,7 @@
 import axios from "axios";
 import { server } from "../store/store";
-import { getHotelListFail, getHotelListRequest, getHotelListSuccess } from "../reducers/bookingReducer";
+import { checkRoomAvailabilityFail, checkRoomAvailabilityRequest, checkRoomAvailabilitySuccess, getHotelListFail, getHotelListRequest, getHotelListSuccess, getRoomDetailsFail, getRoomDetailsRequest, getRoomDetailsSuccess } from "../reducers/bookingReducer";
+import toast from "react-hot-toast";
 
 export const getHotelListAction = async (
     dispatch,
@@ -34,5 +35,63 @@ export const getHotelListAction = async (
         dispatch(getHotelListFail(error.response.data.message));
     }
 
+
+};
+
+
+export const getHotelDetailsAction = async (dispatch, id) => {
+
+    try {
+        dispatch(getRoomDetailsRequest());
+
+        const { data } = await axios.get(`${server}/guest/getRoomDetails/${id}`, {
+            headers: {
+                "Content-Type": "applicaton/json",
+            },
+            withCredentials: true
+        });
+
+        dispatch(getRoomDetailsSuccess(data.message));
+
+    } catch (error) {
+
+        dispatch(getRoomDetailsFail(error.response.data.message));
+        console.log(error);
+
+    }
+
+
+};
+
+
+
+export const checkRoomAvailabilityAction = async (dispatch, checkInDate, checkOutDate, roomId) => {
+
+    try {
+
+        dispatch(checkRoomAvailabilityRequest());
+
+        const { data } = await axios.post(`${server}/booking/checkavailability`, {
+            checkInDate,
+            checkOutDate,
+            roomId
+        }, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
+        });
+
+        dispatch(checkRoomAvailabilitySuccess());
+
+        toast.success(data.message);
+
+        return data.success;
+
+    } catch (error) {
+
+        dispatch(checkRoomAvailabilityFail(error.response.data.message));
+        console.log(error);
+    }
 
 };

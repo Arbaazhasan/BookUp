@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './rooms.scss';
 
 import { CiImageOn } from "react-icons/ci";
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRoomListAction } from '../../../Redux/actions/controlPanelAction';
 
 const Rooms = () => {
 
     const { roomList } = useSelector(state => state.controlPanelReducer);
+    const dispatch = useDispatch();
+
+    // getting rooms if page get Refresh
+    useEffect(() => {
+        getRoomListAction(dispatch);
+    }, []);
+
 
     return (
         <div className='rooms'>

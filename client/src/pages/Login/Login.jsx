@@ -35,6 +35,8 @@ const Login = () => {
 
         loginMethod === 'Vendor Login' && vendorLoginAction(dispatch, email, password);
 
+        loginMethod === 'Vendor Sign Up' && vendorLoginAction(dispatch, email, password);
+
 
     };
 

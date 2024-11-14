@@ -38,7 +38,25 @@ const controlPanelReducer = createSlice({
         getRoomDetailsFail: (state, action) => {
             state.loading = false;
             state.error = action.payload;
-        }
+        },
+
+
+
+        vendorLaodingRequest: (state, action) => {
+            state.loading = true;
+            state.error = null;
+        },
+        vendorLoadingSuccess: (state, action) => {
+            state.loading = false;
+        },
+        vendorLoadingFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
+
+
+
 
     }
 });
@@ -50,7 +68,13 @@ export const {
 
     getRoomDetailsRequest,
     getRoomDetailsSuccess,
-    getRoomDetailsFail
+    getRoomDetailsFail,
+
+
+    vendorLaodingRequest,
+    vendorLoadingSuccess,
+    vendorLoadingFail
+
 } = controlPanelReducer.actions;
 
 export default controlPanelReducer.reducer;

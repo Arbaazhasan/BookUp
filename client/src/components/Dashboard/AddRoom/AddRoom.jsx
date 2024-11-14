@@ -4,29 +4,20 @@ import { useDropzone } from 'react-dropzone';
 
 import { WiCloudUp } from "react-icons/wi";
 import toast from 'react-hot-toast';
+import { addRoomAction } from '../../../Redux/actions/controlPanelAction';
+import { useDispatch } from 'react-redux';
 
 const AddRoom = () => {
+    const dispatch = useDispatch();
 
     const [roomNo, setRoomNo] = useState();
     const [roomName, setRoomName] = useState();
     const [noOfRooms, setNoOfRooms] = useState();
     const [availableRooms, setAvailableRooms] = useState();
     const [roomType, setRoomType] = useState();
-    const [servies, setServices] = useState();
+    const [roomArray, setRoomArray] = useState();
     const [description, setDescription] = useState();
-    const [prince, setPrice] = useState();
-
-    useEffect(() => {
-
-    }, [roomNo,
-        roomName,
-        noOfRooms,
-        availableRooms,
-        roomType,
-        servies,
-        description,
-        prince]);
-
+    const [price, setPrice] = useState();
     const [images, setImages] = useState([]);
 
 
@@ -34,18 +25,37 @@ const AddRoom = () => {
 
         e.preventDefault();
 
-        if (!roomNo || !roomName || !noOfRooms || !availableRooms || !roomType || !servies || !description || !prince) {
-            toast.error("Please fill all fields!");
+        if (!roomNo || !roomName || !noOfRooms || !availableRooms || !roomType || !roomArray || !description || !price) {
+            return toast.error("Please fill all fields!");
         }
 
         if (noOfRooms > availableRooms)
-            toast.error("No of Room should be greater than Availble Rooms");
+            return toast.error("No of Room should be greater than equal Availble Rooms");
 
-        if (images.length < -1) {
+        if (images.length == 0) {
 
-            toast.error("please select atleast 1 image");
+            return toast.error("please select atleast 1 image");
         }
-        console.log(images.length);
+
+        const success = addRoomAction(dispatch,
+            roomNo,
+            roomName,
+            noOfRooms,
+            availableRooms,
+            roomType,
+            roomArray,
+            description,
+            price,
+            images,
+
+        );
+
+        if (success === true) {
+            setImages([]);
+            e.target.reset();
+        }
+
+
     };
 
 
@@ -73,7 +83,7 @@ const AddRoom = () => {
     return (
         <div className='addRoom'>
 
-            <form action="" onSubmit={onSubmitHandler}>
+            <form action="" onSubmit={onSubmitHandler} encType="multipart/form-data">
 
                 <div className="images">
 
@@ -173,7 +183,7 @@ const AddRoom = () => {
 
 
                     <div>
-                        <input type="text" placeholder='Services' required minLength={10} maxLength={30} onChange={(e) => setServices(e.target.value)} />
+                        <input type="text" placeholder='Enter the room No sperate by , ' required maxLength={100} onChange={(e) => setRoomArray(e.target.value)} />
                     </div>
 
 

@@ -10,22 +10,22 @@ import { Vendor } from "../model/vendor.model.js";
 
 export const checkAvailability = catchAsyncError(async (req, res, next) => {
 
-    const { roomNo, roomName, vendorId } = req.query;
-    const { checkInDate, checkOutDate } = req.body;
+    const { checkInDate, checkOutDate, roomId } = req.body;
 
-    if (!roomNo || !roomName || !vendorId || !checkInDate || !checkInDate.date || !checkInDate.month || !checkInDate.year || !checkOutDate || !checkOutDate.date || !checkOutDate.month || !checkOutDate.year)
+    console.log(roomId);
+    if (!checkInDate || !checkOutDate || !roomId)
         return next(new ErrorHandler('Please select dates!', 400));
 
     // Check if the room exists
-    const isRoom = await Room.findOne({ roomNo, name: roomName, vendorId });
+    const isRoom = await Room.findById(roomId);
     if (!isRoom) return next(new ErrorHandler('Room does not exist', 404));
 
     // Check if the room is available
     const isAvailable = isRoom.availableRooms > 0;
     if (!isAvailable) return next(new ErrorHandler('Room is not available', 400));
 
-    const requestedCheckInDate = new Date(checkInDate.year, checkInDate.month - 1, checkInDate.date);
-    const requestedCheckOutDate = new Date(checkOutDate.year, checkOutDate.month - 1, checkOutDate.date);
+    const requestedCheckInDate = new Date(checkInDate);
+    const requestedCheckOutDate = new Date(checkOutDate);
 
     const reservationDates = isRoom.reservationDates;
     let isDatesAvailable = true;
@@ -42,8 +42,8 @@ export const checkAvailability = catchAsyncError(async (req, res, next) => {
         }
 
         isRoom.reservationDates.forEach((reservation) => {
-            const existingCheckInDate = new Date(reservation.checkInDate.year, reservation.checkInDate.month - 1, reservation.checkInDate.date);
-            const existingCheckOutDate = new Date(reservation.checkOutDate.year, reservation.checkOutDate.month - 1, reservation.checkOutDate.date);
+            const existingCheckInDate = new Date(reservation.checkOutDate);
+            const existingCheckOutDate = new Date(checkInDate);
 
             if (
                 (requestedCheckInDate < existingCheckOutDate && requestedCheckOutDate > existingCheckInDate) ||

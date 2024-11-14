@@ -45,16 +45,28 @@ export const addRoom = catchAsyncError(async (req, res, next) => {
 
     const files = req.files;
 
-    const { roomNo, name, roomArray, noOfRooms, availableRooms, roomType, services, description, price } = req.body;
+    const { roomNo, name, roomArray, noOfRooms, availableRooms, roomType, description, price } = req.body;
 
     const vendor = req.vendor;
-
 
     if (!files.length || !files)
         return next(new ErrorHandler('Please upload at least one Image!', 400));
 
-    if (!roomNo || !name || !roomArray.length || !noOfRooms || !availableRooms || !roomType || !services || !description || !price)
-        return next(new ErrorHandler('Please fill all fields!', 400));
+    const requiredFields = { roomNo, name, roomArray, noOfRooms, availableRooms, roomType, description, price };
+
+    const missingFields = [];
+
+    // Check for missing fields
+    Object.entries(requiredFields).forEach(([key, value]) => {
+        if (!value) {
+            missingFields.push(key);
+        }
+    });
+
+    if (missingFields.length)
+        return next(new ErrorHandler(`Please fill all fields!, ${missingFields.join(' , ')}`, 400));
+
+    let arr = roomArray.split(',').map(item => item.trim());
 
 
     const isRoom = await Room.findOne({ roomNo, vendorId: vendor._id });
@@ -83,7 +95,7 @@ export const addRoom = catchAsyncError(async (req, res, next) => {
     // Uploading Data in database
     await Room.create({
         vendorId: vendor._id,
-        roomNo, name, roomArray, noOfRooms, availableRooms, roomType, services, description, price,
+        roomNo, name, roomArray: arr, noOfRooms, availableRooms, roomType, description, price,
         images
     });
 
@@ -339,3 +351,4 @@ export const getVendorRooms = catchAsyncError(async (req, res, next) => {
 
 
 });
+

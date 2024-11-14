@@ -10,14 +10,20 @@ import { MdOutlinePets } from "react-icons/md";
 import { FaSwimmer } from "react-icons/fa";
 import { CiCreditCard1 } from "react-icons/ci";
 import { FaMoneyBillAlt } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 
 const Booking = () => {
+
+    const { roomDetails } = useSelector(state => state.bookingReducer);
+
+    console.log(roomDetails);
+
     return (
         <div className='bookings'>
 
             <div className="bookingHeader">
                 <div>
-                    <Link to={'/hotel'} ><FaArrowLeft /></Link>
+                    <Link to={`/hotel/${roomDetails._id}`} ><FaArrowLeft /></Link>
                     <h1>
 
                         Booking Page

@@ -13,4 +13,6 @@ router.delete('/deleteroom/:roomNo', vendorAuthontication, deleteRoom);
 router.patch('/updateroomstatus/:bookingId', vendorAuthontication, updateRoomStatus);
 router.get('/getallrooms', vendorAuthontication, getVendorRooms);
 
+
+
 export default router;

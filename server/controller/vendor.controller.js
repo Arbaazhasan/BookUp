@@ -14,7 +14,7 @@ export const vendorResigter = catchAsyncError(async (req, res, next) => {
     const isVendor = await Vendor.findOne({ email });
 
     if (isVendor) return next(new ErrorHandler('Vendor already exits!', 409));
-
+//pre event
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const vendor = await Vendor.create({
@@ -124,7 +124,6 @@ export const updateVendorProfile = catchAsyncError(async (req, res, next) => {
 export const getVendor = catchAsyncError((req, res) => {
 
     const { vendorToken } = req.cookies;
-    console.log(vendorToken);
 
     if (!vendorToken) return res.status(200).json({
         success: false
