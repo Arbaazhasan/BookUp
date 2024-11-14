@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './header.scss';
 import { vendorLogoutAction } from '../../../Redux/actions/vendorAuthAction';
 import { useDispatch } from 'react-redux';
+import { searchRoomAction } from '../../../Redux/actions/controlPanelAction';
+import { useParams } from 'react-router-dom';
 
 const Header = ({ currentPath }) => {
 
     const dispatch = useDispatch();
-
+    const [roomNo, setRoomNo] = useState('');
     const logoutHandler = () => vendorLogoutAction(dispatch);
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        console.log("Done")
+        searchRoomAction(dispatch, roomNo);
+    };
+
 
     return (
         <div className='header'>
@@ -18,10 +27,11 @@ const Header = ({ currentPath }) => {
                 </div>
                 <h2>{currentPath}</h2>
             </div>
-            <div className="right">
-                <input type="text" placeholder='Type here...' />
+            <form className="right" onSubmit={submitHandler}>
+                <input type="text" placeholder='Type here...' onChange={(e) => setRoomNo(e.target.value)} />
+                <button type='submit'>Search</button>
                 <button onClick={logoutHandler}>Log out</button>
-            </div>
+            </form>
 
         </div>
     );

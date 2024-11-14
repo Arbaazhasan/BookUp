@@ -13,6 +13,24 @@ const controlPanelReducer = createSlice({
     initialState,
     reducers: {
 
+        clearPreviousRoomDetailsAction: (state, action) => {
+            state.roomDetails = [];
+        },
+
+        getSearchRoomRequest: (state, action) => {
+            state.loading = true;
+            state.error = null;
+        },
+        getSearchRoomSuccess: (state, action) => {
+            state.loading = false;
+            state.roomDetails = action.payload;
+        },
+        getSearchRoomFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
+
         getRoomListRequest: (state, action) => {
             state.loading = true;
             state.error = null;
@@ -41,6 +59,18 @@ const controlPanelReducer = createSlice({
         },
 
 
+        deleteRoomRequest: (state, action) => {
+            state.loading = true;
+            state.error = null;
+        },
+        deleteRoomSuccess: (state, action) => {
+            state.loading = false;
+        },
+        deleteRoomFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
 
         vendorLaodingRequest: (state, action) => {
             state.loading = true;
@@ -62,6 +92,13 @@ const controlPanelReducer = createSlice({
 });
 
 export const {
+
+    clearPreviousRoomDetailsAction,
+
+    getSearchRoomRequest,
+    getSearchRoomSuccess,
+    getSearchRoomFail,
+
     getRoomListRequest,
     getRoomListSuccess,
     getRoomListFail,
@@ -69,6 +106,10 @@ export const {
     getRoomDetailsRequest,
     getRoomDetailsSuccess,
     getRoomDetailsFail,
+
+    deleteRoomRequest,
+    deleteRoomSuccess,
+    deleteRoomFail,
 
 
     vendorLaodingRequest,

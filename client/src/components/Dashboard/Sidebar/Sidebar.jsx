@@ -12,16 +12,21 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from 'react-router-dom';
 import { getRoomListAction } from '../../../Redux/actions/controlPanelAction';
 import { useDispatch } from 'react-redux';
+import { clearPreviousRoomDetailsAction } from '../../../Redux/reducers/controlPanelReducer';
 
 
 const Sidebar = () => {
 
     const dispatch = useDispatch();
 
+
     const getRoomListHandler = () => {
         getRoomListAction(dispatch);
     };
 
+    const onClickHandler = () => {
+        dispatch(clearPreviousRoomDetailsAction());
+    };
 
     return (
         <div className='sidebar'>
@@ -83,7 +88,7 @@ const Sidebar = () => {
 
                 <div>
 
-                    <Link to={'/dashboard/update'}>
+                    <Link to={'/dashboard/update'} onClick={onClickHandler}>
                         <span><MdOutlineUpdate /></span>
                         <p>Update Room</p>
                     </Link>
@@ -91,7 +96,7 @@ const Sidebar = () => {
 
                 <div>
 
-                    <Link to={'/dashboard/delete'}>
+                    <Link to={'/dashboard/delete'} onClick={onClickHandler}>
                         <span><MdOutlineDelete /></span>
 
                         <p>Delete Room</p>

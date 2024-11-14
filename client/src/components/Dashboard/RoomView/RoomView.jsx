@@ -6,7 +6,7 @@ import { MdFullscreenExit, MdOutlineStar, MdOutlineStarBorder } from "react-icon
 import ImageViewer from '../../ImageViewer/ImageViewer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getRoomDetailsAction } from '../../../Redux/actions/controlPanelAction';
+import { deleteRoomAction, getRoomDetailsAction } from '../../../Redux/actions/controlPanelAction';
 
 
 const RoomView = ({ isDelete }) => {
@@ -18,6 +18,13 @@ const RoomView = ({ isDelete }) => {
     const [currentImage, setCurrentImage] = useState(0);
 
     const { roomNo } = useParams();
+
+
+    const deleteRoomHandler = () => {
+        deleteRoomAction(dispatch, roomDetails.roomNo);
+        setImageArray([]);
+    };
+
 
     const nextImage = () => {
 
@@ -39,7 +46,7 @@ const RoomView = ({ isDelete }) => {
 
     useEffect(() => {
 
-        getRoomDetailsAction(dispatch, roomNo);
+        !isDelete && getRoomDetailsAction(dispatch, roomNo);
 
     }, [dispatch, roomNo]);
 
@@ -66,7 +73,7 @@ const RoomView = ({ isDelete }) => {
 
                 {
                     isDelete && <div className="deleteBtn">
-                        <button>Delete</button>
+                        <button onClick={deleteRoomHandler}>Delete</button>
                     </div>
                 }
 

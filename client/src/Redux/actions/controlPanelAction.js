@@ -1,7 +1,30 @@
 import axios from "axios";
-import { getRoomDetailsFail, getRoomDetailsRequest, getRoomDetailsSuccess, getRoomListFail, getRoomListRequest, getRoomListSuccess, vendorLaodingRequest, vendorLoadingFail, vendorLoadingSuccess } from "../reducers/controlPanelReducer";
+import { clearPreviousRoomDetailsAction, deleteRoomFail, deleteRoomRequest, deleteRoomSuccess, getRoomDetailsFail, getRoomDetailsRequest, getRoomDetailsSuccess, getRoomListFail, getRoomListRequest, getRoomListSuccess, getSearchRoomFail, getSearchRoomRequest, getSearchRoomSuccess, vendorLaodingRequest, vendorLoadingFail, vendorLoadingSuccess } from "../reducers/controlPanelReducer";
 import { server } from "../store/store";
 import toast from "react-hot-toast";
+import { DiAndroid } from "react-icons/di";
+
+
+export const searchRoomAction = async (dispatch, id) => {
+    try {
+
+        dispatch(getSearchRoomRequest());
+
+        const { data } = await axios.get(`${server}/vendor/room/searchroom/${id}`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
+        });
+
+        dispatch(getSearchRoomSuccess(data.message));
+
+    } catch (error) {
+        dispatch(getSearchRoomFail(error.response.data.message));
+        console.log(error);
+
+    }
+};
 
 
 export const getRoomListAction = async (dispatch) => {
@@ -164,5 +187,30 @@ export const updateRoomAction = async (dispatch,
         console.log(error);
 
         dispatch(vendorLoadingFail(error.response.data.message));
+    }
+};
+
+
+
+export const deleteRoomAction = async (dispatch, roomId) => {
+    try {
+
+        dispatch(deleteRoomRequest());
+
+        const { data } = await axios.delete(`${server}/vendor/room/deleteroom/${roomId}`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
+        });
+
+
+        dispatch(deleteRoomSuccess());
+        toast.success(data.message);
+        dispatch(clearPreviousRoomDetailsAction());
+
+    } catch (error) {
+        dispatch(deleteRoomFail(error.response.data.message));
+        console.log(error);
     }
 };
