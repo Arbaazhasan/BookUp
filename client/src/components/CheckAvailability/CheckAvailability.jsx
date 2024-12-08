@@ -16,6 +16,8 @@ const CheckAvailability = () => {
     const [checkOutDate, setCheckOutDate] = useState('');
     const [roomType, setRoomType] = useState('');
 
+    
+
     const closeWindowHandler = () => {
         dispatch(checkAvailabilityAction());
     };
@@ -29,7 +31,7 @@ const CheckAvailability = () => {
         const date = new Date();
         const currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 
-        if (currentDate > checkInDate) return toast.error("Please select the valid check-in date!");
+        if (currentDate < checkInDate) return toast.error("Please select the valid check-in date!");
 
         if (checkInDate > checkOutDate) return toast.error("please select the valid check-Out Data!");
 

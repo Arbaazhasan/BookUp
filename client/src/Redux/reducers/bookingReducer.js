@@ -8,6 +8,17 @@ const initialState = {
     checkAvailabilityWindow: false,
     isRoomAvailable: false,
 
+    checkInDate: "",
+    checkOutDate: "",
+    userFirstName: "",
+    userLastName: "",
+    userEmail: "",
+    userPhoneNo: "",
+    userCity: "",
+    userCountry: "",
+
+
+
 };
 
 const bookingReducer = createSlice({
@@ -48,10 +59,18 @@ const bookingReducer = createSlice({
         },
         checkRoomAvailabilitySuccess: (state, action) => {
             state.loading = false;
+            state.checkInDate = action.payload.checkInDate;
+            state.checkOutDate = action.payload.checkOutDate;
         },
         checkRoomAvailabilityFail: (state, action) => {
             state.loading = false;
             state.error = action.payload;
+        },
+
+
+        setBookingDates: (state, action) => {
+            state.checkInDate = action.payload.checkInData;
+            state.checkOutDate = action.payload.checkOutDate;
         },
 
 
@@ -78,6 +97,9 @@ export const {
     checkRoomAvailabilityRequest,
     checkRoomAvailabilitySuccess,
     checkRoomAvailabilityFail,
+
+    setBookingDates,
+
 
     checkAvailabilityAction
 

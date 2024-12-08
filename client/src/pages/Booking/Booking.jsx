@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './booking.scss';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from "react-icons/fa";
@@ -11,15 +11,51 @@ import { FaSwimmer } from "react-icons/fa";
 import { CiCreditCard1 } from "react-icons/ci";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { useSelector } from 'react-redux';
+import { IoLocation } from "react-icons/io5";
 
 const Booking = () => {
 
-    const { roomDetails } = useSelector(state => state.bookingReducer);
+    const {
+        roomDetails,
+        checkInDate,
+        checkOutDate
 
-    console.log(roomDetails);
+    } = useSelector(state => state.bookingReducer);
+
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState();
+    const [city, setCity] = useState("");
+    const [country, setCountry] = useState("");
+    const [isCOD, setIsCOD] = useState(false);
+
+
+
+    const getDayName = (val) => {
+        const dayNameArray = ["Sun", "Mon", "Tues", "Wed", "Thus", "Fri", "Sat"];
+        const date = new Date(val);
+        const getDay = date.getDay();
+
+        // console.log(dayNameArray[getDay]);
+
+        return dayNameArray[getDay] + " " + checkInDate;
+    };
+
+
+
+    useEffect(() => {
+
+        console.log(roomDetails);
+
+    }, [checkInDate,
+        checkOutDate,
+    ]);
+
+
 
     return (
-        <div className='bookings'>
+        <form className='bookings'>
 
             <div className="bookingHeader">
                 <div>
@@ -40,13 +76,16 @@ const Booking = () => {
                         <p>Hotel Details</p>
 
                         <div className="hotelInfo">
-                            <h3>TATA Rio De Goa - Resort style apt,6 KM from Airport</h3>
-                            <p>Tata Housing - Rio de Goa - Tower 6 , Flat no. 405, Vidya Nagar Colony, Near MES College 4, 403726 Chicalim, India</p>
+                            <h3>{roomDetails.name}</h3>
+
+                            <p>{roomDetails.description.slice(0, 500) + "..."}</p>
 
                         </div>
                         <div className="hotelRating">
-                            <div className="rating">7.9</div>
-                            <p>Good | 61 reviews</p>
+                            {/* <div className="rating">7.9</div> */}
+                            {/* <p>Good | 61 reviews</p> */}
+                            <p><IoLocation /></p>
+                            <p>{roomDetails.address}</p>
                         </div>
 
                         <div className="hotelfacilities">
@@ -65,13 +104,13 @@ const Booking = () => {
                         <div className="reservationDates">
                             <div>
                                 <p>Check-in</p>
-                                <p>Sun 15 Sept 2024</p>
+                                <p>{getDayName(checkInDate)}</p>
                                 <p>12:00 - 23:30</p>
                             </div>
 
                             <div>
-                                <p>Check-in</p>
-                                <p>Sun 15 Sept 2024</p>
+                                <p>Check-out</p>
+                                <p>{getDayName(checkOutDate)}</p>
                                 <p>12:00 - 23:30</p>
                             </div>
                         </div>
@@ -93,32 +132,40 @@ const Booking = () => {
 
                             <div>
                                 <p>First Name <span>*</span></p>
-                                <input type="text" />
+                                <input type="text" pattern='[A-Za-z]{1,20}' maxLength={20} required title="Enter alphabet only." onChange={(e) => setFirstName(e.target.value)} />
+
                             </div>
 
                             <div>
                                 <p>Lasr Name <span>*</span></p>
-                                <input type="text" />
+                                <input type="text" pattern='[A-Za-z]{1,20}' maxLength={20} required title="Enter alphabet only." onChange={(e) => setLastName(e.target.value)} />
                             </div>
 
                             <div>
                                 <p>email <span>*</span></p>
-                                <input type="text" />
+                                <input type="email" maxLength={30} required onChange={(e) => setEmail(e.target.value)} />
                             </div>
 
                             <div>
                                 <p>Phone Number <span>*</span></p>
-                                <input type="text" />
+                                <input
+                                    type="text"
+                                    pattern="[0-9]{10}"
+                                    title="Please enter a valid phone number with 10 digits."
+                                    maxLength="10"
+                                    required
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                />
                             </div>
 
                             <div>
                                 <p>City <span>*</span></p>
-                                <input type="text" />
+                                <input type="text" pattern='[A-Za-z]{1,20}' maxLength={20} title="Enter alphabet only." required onChange={(e) => setCity(e.target.value)} />
                             </div>
 
                             <div>
                                 <p>Country <span>*</span></p>
-                                <input type="text" />
+                                <input type="text" pattern='[A-Za-z]{1,20}' maxLength={20} title="Enter alphabet only." required onChange={(e) => setCountry(e.target.value)} />
                             </div>
 
 
@@ -133,6 +180,7 @@ const Booking = () => {
                             <h3>Payment Method </h3>
 
                             <div className="paymentType">
+
                                 <div>
                                     <input type="radio" name="paymentMethod" id="paymentMethod" />
                                     <span><CiCreditCard1 /></span>
@@ -140,13 +188,16 @@ const Booking = () => {
                                 </div>
 
                                 <div>
+
                                     <input type="radio" name="paymentMethod" id="paymentMethod" />
-                                    <span><FaMoneyBillAlt /></span>
-                                    <p>Check In Time</p>
+                                    <span> <FaMoneyBillAlt /> </span>
+                                    <p> Check In Time </p>
+
                                 </div>
+
                             </div>
 
-                            <button>Pay Now</button>
+                            <button> Pay Now </button>
 
                         </div>
 
@@ -156,9 +207,9 @@ const Booking = () => {
                                 <div className="amount">
                                     <div>
                                         <p>Price </p>
-                                        <p>₹ 4,009.50</p>
+                                        <p>₹{roomDetails.price}</p>
                                     </div>
-                                    <p>+₹ 1,081 taxes and charges</p>
+                                    {/* <p>+₹ 1,081 taxes and charges</p> */}
                                 </div>
 
                                 <div className="priceInformation">
@@ -166,10 +217,9 @@ const Booking = () => {
                                     <div className="information">
                                         <p><FaMoneyBillAlt /></p>
                                         <div>
-                                            <p>Excludes ₹ 1,081.14 in taxes and charges</p>
+                                            {/* <p>Excludes ₹ 1,081.14 in taxes and charges</p> */}
                                             <div>
-                                                <p>Goods & services tax</p>
-                                                <p>₹ 481.14</p>
+                                                <p>Goods & services tax ₹500</p>
                                             </div>
 
                                             <div>
@@ -187,7 +237,7 @@ const Booking = () => {
                 </div>
             </div>
 
-        </div>
+        </form>
     );
 };
 

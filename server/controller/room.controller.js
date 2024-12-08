@@ -116,6 +116,11 @@ export const updateRoom = catchAsyncError(async (req, res, next) => {
 
     const { roomNo, name, noOfRooms, availableRooms, roomType, services, description, price, deleteImages } = req.body;
 
+    console.log(
+
+        "deleteImages : " , deleteImages
+    );
+
     const vendor = req.vendor;
 
     const isRoom = await Room.findOne({ roomNo, vendorId: vendor._id });

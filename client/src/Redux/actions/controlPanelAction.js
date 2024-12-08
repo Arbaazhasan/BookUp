@@ -133,7 +133,8 @@ export const addRoomAction = async (dispatch, roomNo,
 };
 
 
-export const updateRoomAction = async (dispatch,
+export const updateRoomAction = async (
+    dispatch,
     roomNo,
     roomName,
     noOfRooms,
@@ -142,54 +143,40 @@ export const updateRoomAction = async (dispatch,
     roomArray,
     description,
     price,
-    deleteImagesArray
+    deleteImagesArray,
+    images
 ) => {
     try {
-
         dispatch(vendorLaodingRequest());
 
         const formData = new FormData();
+        formData.append("roomNo", roomNo);
+        formData.append("name", roomName);
+        formData.append("noOfRooms", noOfRooms);
+        formData.append("availableRooms", availableRooms);
+        formData.append("roomType", roomType);
+        formData.append("roomArray", roomArray);
+        formData.append("description", description);
+        formData.append("price", price);
 
-        formData.append('roomNo', roomNo);
-        formData.append('name', roomName);
-        formData.append('noOfRooms', noOfRooms);
-        formData.append('availableRooms', availableRooms);
-        formData.append('roomType', roomType);
-        formData.append('roomArray', roomArray);
-        formData.append('description', description);
-        formData.append('price', price);
-
-        images.map((deleteImagesArray) => {
-            formData.append('files', image);
+        deleteImagesArray.forEach((publicId) => formData.append("deleteImages[]", publicId));
+        images.forEach((file) => {
+            if (file instanceof File) formData.append("files", file);
         });
 
-        const { data } = await axios.patch(`${server}/vendor/room/updateroom`,
-
-            formData
-
-            , {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                },
-                withCredentials: true
-            });
-
-        console.log(data);
+        const { data } = await axios.patch(`${server}/vendor/room/updateroom`, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+            withCredentials: true,
+        });
 
         dispatch(vendorLoadingSuccess());
-
-        toast.success(data.message);
-
-        return data.success === true ? true : false;
-
-
+        return data.success;
     } catch (error) {
-        console.log(error);
-
-        dispatch(vendorLoadingFail(error.response.data.message));
+        dispatch(vendorLoadingFail(error.response?.data?.message || "Failed to update room"));
+        toast.error(error.response?.data?.message || "An error occurred.");
+        return false;
     }
 };
-
 
 
 export const deleteRoomAction = async (dispatch, roomId) => {

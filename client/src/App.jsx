@@ -126,10 +126,10 @@ function App() {
 
 
           {/* Booking Confermation Page & Payment Method */}
-          <Route path='/guestProfile/booking' element={<Booking />} />
 
 
         </Route>
+        <Route path='/guestProfile/booking' element={<Booking />} />
 
 
 

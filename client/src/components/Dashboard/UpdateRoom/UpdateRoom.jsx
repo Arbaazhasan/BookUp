@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { WiCloudUp } from "react-icons/wi";
 import { getRoomDetailsAction, updateRoomAction } from '../../../Redux/actions/controlPanelAction';
 import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 
 const UpdateRoom = () => {
     const dispatch = useDispatch();
@@ -26,31 +27,42 @@ const UpdateRoom = () => {
         getRoomDetailsAction(dispatch, searchRoom);
     };
 
-    const onSubmitHandler = (e) => {
-
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         if (!roomNo || !roomName || !noOfRooms || !availableRooms || !roomType || !roomArray || !description || !price) {
             return toast.error("Please fill all fields!");
         }
 
-        if (noOfRooms > availableRooms) {
-            return toast.error("No of Room should be greater than equal Available Rooms");
+        if (noOfRooms < availableRooms) {
+            return toast.error("Number of Rooms should be greater than or equal to Available Rooms.");
         }
 
         if (images.length === 0) {
-            return toast.error("Please select at least 1 image");
+            return toast.error("Please select at least one image.");
         }
 
-        const success = updateRoomAction(dispatch, roomNo, roomName, noOfRooms, availableRooms, roomType, roomArray, description, price, deleteImagesArray);
+        const success = await updateRoomAction(
+            dispatch,
+            roomNo,
+            roomName,
+            noOfRooms,
+            availableRooms,
+            roomType,
+            roomArray,
+            description,
+            price,
+            deleteImagesArray,
+            images
+        );
 
-        if (success === true) {
-            searchHandler();
+        if (success) {
+            toast.success("Room updated successfully!");
+            searchHandler(e);
         }
     };
 
     useEffect(() => {
-
         if (roomDetails) {
             setRoomNo(roomDetails.roomNo || "");
             setRoomName(roomDetails.name || "");
@@ -62,42 +74,45 @@ const UpdateRoom = () => {
             setPrice(roomDetails.price || 0);
             setImages(roomDetails.images || []);
         }
-
     }, [roomDetails]);
 
-    useEffect(() => {
-
-    }, [deleteImagesArray]);
-
-
     const onDrop = useCallback((acceptedFiles) => {
-        const imageFiles = acceptedFiles.map((file) => Object.assign(file, {
-            preview: URL.createObjectURL(file)
-        }));
+        const imageFiles = acceptedFiles.map((file) =>
+            Object.assign(file, {
+                preview: URL.createObjectURL(file),
+            })
+        );
         setImages((prevImages) => [...prevImages, ...imageFiles]);
     }, []);
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-    });
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-    const removeImage = (name) => {
-        const imageFiles = images.filter((file) => file.public_id !== name.public_id);
-        setImages(imageFiles);
-
-        const deleteImage = images.filter((file) => file.public_id === name.public_id);
-        const delteImages = deleteImage.concat(deleteImagesArray);
-
-        setDeleteImagesArray(delteImages);
-
-
+    const removeImage = (image) => {
+        setImages((prevImages) => prevImages.filter((img) => img !== image));
+        if (image.public_id) {
+            setDeleteImagesArray((prev) => [...prev, image.public_id]);
+        }
+        if (image.preview) {
+            URL.revokeObjectURL(image.preview); // Clean up the preview URL
+        }
     };
+
+    // Cleanup generated preview URLs
+    useEffect(() => {
+        return () => {
+            images.forEach((image) => {
+                if (image.preview) {
+                    URL.revokeObjectURL(image.preview);
+                }
+            });
+        };
+    }, [images]);
 
     return (
         <div className='addRoom'>
             <form className='inputBar' onSubmit={searchHandler}>
                 <input type="text" placeholder='Type here...' value={searchRoom} onChange={(e) => setSearchRoom(e.target.value)} />
-                <button>Search</button>
+                <button type='submit'>Search</button>
             </form>
 
             <form onSubmit={onSubmitHandler}>
@@ -105,7 +120,7 @@ const UpdateRoom = () => {
                     <div className='dragNdrop' {...getRootProps()}>
                         <input {...getInputProps()} />
                         {isDragActive ? (
-                            ""
+                            <p>Drop the files here...</p>
                         ) : (
                             <>
                                 <h1>
@@ -126,7 +141,7 @@ const UpdateRoom = () => {
                                 {images.map((file, index) => (
                                     <div className='image' key={index}>
                                         <button type='button' onClick={() => removeImage(file)}>x</button>
-                                        <img src={file.url} alt="" />
+                                        <img src={file.url || file.preview} alt="Room" />
                                     </div>
                                 ))}
                             </div>

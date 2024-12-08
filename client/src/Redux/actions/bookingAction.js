@@ -71,6 +71,8 @@ export const checkRoomAvailabilityAction = async (dispatch, checkInDate, checkOu
 
         dispatch(checkRoomAvailabilityRequest());
 
+
+
         const { data } = await axios.post(`${server}/booking/checkavailability`, {
             checkInDate,
             checkOutDate,
@@ -82,7 +84,7 @@ export const checkRoomAvailabilityAction = async (dispatch, checkInDate, checkOu
             withCredentials: true
         });
 
-        dispatch(checkRoomAvailabilitySuccess());
+        dispatch(checkRoomAvailabilitySuccess({ checkInDate, checkOutDate }));
 
         toast.success(data.message);
 
