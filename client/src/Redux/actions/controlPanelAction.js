@@ -201,3 +201,51 @@ export const deleteRoomAction = async (dispatch, roomId) => {
         console.log(error);
     }
 };
+
+
+
+export const updateUserProfileAction = async (
+    dispatch,
+    userName,
+    email,
+    firstName,
+    lastName,
+    address,
+    city,
+    country,
+    postalCode,
+    aboutMe
+) => {
+
+    try {
+        dispatch(vendorLaodingRequest());
+
+        const { data } = await axios.patch(`${server}/vendor/updatevendorprofile`, {
+            userName,
+            email,
+            firstName,
+            lastName,
+            address,
+            city,
+            country,
+            postalCode,
+            aboutMe
+        }, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
+        });
+
+        dispatch(vendorLoadingSuccess());
+        toast.success(data.message);
+
+    } catch (error) {
+
+        dispatch(vendorLoadingFail());
+        toast.error(error.response.data.message);
+        console.log(error.response.data.message);
+
+    }
+
+};

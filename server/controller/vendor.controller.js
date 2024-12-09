@@ -14,7 +14,7 @@ export const vendorResigter = catchAsyncError(async (req, res, next) => {
     const isVendor = await Vendor.findOne({ email });
 
     if (isVendor) return next(new ErrorHandler('Vendor already exits!', 409));
-//pre event
+    //pre event
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const vendor = await Vendor.create({
