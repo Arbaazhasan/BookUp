@@ -8,16 +8,28 @@ import { useDispatch } from 'react-redux';
 import { FcGoogle } from "react-icons/fc";
 import { IoMdHome } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import { vendorLoginAction } from '../../Redux/actions/vendorAuthAction';
+import { vendorLoginAction, vendorSignUpAction } from '../../Redux/actions/vendorAuthAction';
 
 const Login = () => {
 
     const dispatch = useDispatch();
 
     const [loginMethod, setLoginMethod] = useState('Sign In');
+    const [isSignUp, setIsSignUp] = useState("false");
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+
+    useEffect(() => {
+        console.log(loginMethod);
+    }, [loginMethod])
+
+
+    const loginMethodHandler = (method) => {
+        console.log(method)
+        setLoginMethod(method)
+    }
 
     const submithHandler = (e) => {
 
@@ -35,7 +47,7 @@ const Login = () => {
 
         loginMethod === 'Vendor Login' && vendorLoginAction(dispatch, email, password);
 
-        loginMethod === 'Vendor Sign Up' && vendorLoginAction(dispatch, email, password);
+        loginMethod === 'Vendor Sign Up' && vendorSignUpAction(dispatch, email, password);
 
 
     };
@@ -97,20 +109,31 @@ const Login = () => {
                 <div className="anotherLinks">
 
                     {
-                        loginMethod === 'Sign Up' ?
 
-                            <p>Already have an account? <span onClick={() => setLoginMethod('Sign Up')}>Sign In</span></p>
+                        (loginMethod === 'Vendor Sign Up' || loginMethod === 'Vendor Login') ?
+
+                            loginMethod === 'Vendor Sign Up' ?
+
+                                <p>Already have an account?
+                                    <span onClick={() => loginMethodHandler('Vendor Login')}> Sign In</span>
+                                </p>
+
+                                :
+                                <p>Don't have an account?<span onClick={() => loginMethodHandler('Vendor Sign Up')}> Sign Up</span></p>
 
                             :
-                            <p>Don't have an account?<span onClick={() => setLoginMethod('Sign In')}>Sign Up</span></p>
+
+                            ""
+
 
                     }
+
 
                 </div>
 
                 <hr />
 
-                <div className="signWith">
+                {/* <div className="signWith">
 
                     <div>
                         <FcGoogle />
@@ -118,7 +141,7 @@ const Login = () => {
 
                     <p>Sign in with Google</p>
 
-                </div>
+                </div> */}
 
             </div>
 

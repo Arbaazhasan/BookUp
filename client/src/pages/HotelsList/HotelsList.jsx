@@ -21,13 +21,13 @@ const HotelsList = () => {
     <div>
       <SearchBar />
 
-      <Filter />
+      {/* <Filter /> */}
 
       <div className="hotelsAndPriceFilter">
 
-        <div className='left'>
+        {/* <div className='left'>
           <PriceFilter />
-        </div>
+        </div> */}
 
         <div className='right'>
           {hotelList.map(hotel => {

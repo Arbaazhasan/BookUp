@@ -16,6 +16,9 @@ const initialState = {
     userPhoneNo: "",
     userCity: "",
     userCountry: "",
+    adults: "",
+    children: "",
+    noOfRooms: "",
 
 
 
@@ -33,7 +36,13 @@ const bookingReducer = createSlice({
         },
         getHotelListSuccess: (state, action) => {
             state.loading = false;
-            state.hotelList = action.payload;
+            state.hotelList = action.payload.availableRooms;
+            state.adults = action.payload.adult;
+            state.children = action.payload.children;
+            state.noOfRooms = action.payload.noOfRoom;
+            console.log(action.payload.adult)
+            
+
         },
         getHotelListFail: (state, action) => {
             state.loading = false;
@@ -68,6 +77,20 @@ const bookingReducer = createSlice({
         },
 
 
+        getBookingRequest: (state, action) => {
+            state.loading = true;
+            state.error = null;
+        },
+        getBookingSuccess: (state, action) => {
+            state.loading = false;
+        },
+        getBookingFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
+
+
         setBookingDates: (state, action) => {
             state.checkInDate = action.payload.checkInData;
             state.checkOutDate = action.payload.checkOutDate;
@@ -97,6 +120,10 @@ export const {
     checkRoomAvailabilityRequest,
     checkRoomAvailabilitySuccess,
     checkRoomAvailabilityFail,
+
+    getBookingRequest,
+    getBookingSuccess,
+    getBookingFail,
 
     setBookingDates,
 

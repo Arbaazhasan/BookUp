@@ -28,9 +28,9 @@ const SearchBar = () => {
 
     const searchBarHandler = (e) => {
         e.preventDefault();
-        getHotelListAction(dispatch, cityName, checkIn, checkOut, noOfRoom);
+        getHotelListAction(dispatch, cityName, checkIn, checkOut, noOfRoom, children, adult);
         navigate('/list');
-    };
+    };  
 
 
     // Verify that check-out-date should not be less than check-in-date 
@@ -119,7 +119,7 @@ const SearchBar = () => {
             <div className="searchResult">
                 {
                     hotelList.length ?
-                        <h1>{hotelList.length} Properties in {searchCity.charAt(0).toUpperCase() + searchCity.slice(1)}</h1>
+                        <h1>{hotelList.length} Properties in {searchCity.charAt(0).toUpperCase() + cityName.toUpperCase()}</h1>
                         :
                         <h1>Search hotel</h1>
                 }

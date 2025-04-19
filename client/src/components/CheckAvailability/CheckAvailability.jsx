@@ -16,7 +16,7 @@ const CheckAvailability = () => {
     const [checkOutDate, setCheckOutDate] = useState('');
     const [roomType, setRoomType] = useState('');
 
-    
+
 
     const closeWindowHandler = () => {
         dispatch(checkAvailabilityAction());
@@ -73,7 +73,13 @@ const CheckAvailability = () => {
                     <tr className='tr2'>
                         <td>
                             <p>Check in date</p>
-                            <input type="date" id='checkDate' name="" onChange={(e) => setCheckInDate(e.target.value)} />
+                            {/* <input type="date" id='checkDate' name="" onChange={(e) => setCheckInDate(e.target.value)} /> */}
+                            <input
+                                type="date"
+                                id='checkInDate'
+                                min={new Date().toISOString().split('T')[0]}
+                                onChange={(e) => setCheckInDate(e.target.value)}
+                            />
 
                         </td>
                     </tr>
@@ -81,7 +87,13 @@ const CheckAvailability = () => {
                     <tr className='tr3'>
                         <td>
                             <p>Check out date</p>
-                            <input type="date" placeholder='Check out date' name="" id="" onChange={(e) => setCheckOutDate(e.target.value)} />
+                            {/* <input type="date" placeholder='Check out date' name="" id="" onChange={(e) => setCheckOutDate(e.target.value)} /> */}
+                            <input
+                                type="date"
+                                id='checkOutDate'
+                                min={checkInDate || new Date().toISOString().split('T')[0]}
+                                onChange={(e) => setCheckOutDate(e.target.value)}
+                            />
                         </td>
                     </tr>
 

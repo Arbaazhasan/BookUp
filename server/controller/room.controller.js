@@ -118,7 +118,7 @@ export const updateRoom = catchAsyncError(async (req, res, next) => {
 
     console.log(
 
-        "deleteImages : " , deleteImages
+        "deleteImages : ", deleteImages
     );
 
     const vendor = req.vendor;

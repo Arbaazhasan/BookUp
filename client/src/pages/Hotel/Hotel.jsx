@@ -88,13 +88,13 @@ const Hotel = () => {
                     <div className="right">
                         <div>
 
-                            <h2>Perfect for a 9-night stay!</h2>
+                            <h2>Perfect for a night stay!</h2>
 
                             <p>Located in the real heart of karakow,
                                 this property has an excellent Location score of 9.8!
                             </p>
 
-                            <h1>₹{roomDetails.price} <span>(9 nights)</span></h1>
+                            <h1>₹{roomDetails.price} <span>(nights)</span></h1>
 
 
                             <div className="bookingBtn" onClick={checkAvailabilityHandler}>

@@ -145,17 +145,23 @@ export const searchRooms = catchAsyncError(async (req, res, next) => {
 // Book Room
 export const bookRoom = catchAsyncError(async (req, res, next) => {
 
-    const { vendorId, roomNo, roomName } = req.query;
+    const { roomId } = req.query;
     const { name, adults, children, checkInDate, checkOutDate, noOfRooms } = req.body;
     const guestId = req.guest._id;
 
     // Validate required fields
-    if (!name || !adults || !children || !roomNo || !roomName || !vendorId || !checkInDate || !checkOutDate) {
+    if (!name || !adults || !children.toString() || !checkInDate || !checkOutDate) {
         return next(new ErrorHandler('Please provide all required fields!', 400));
     }
 
+    const customerDetails = {
+        ...name,
+        adults,
+        children,
+    }
+
     // Check if room exists
-    const isRoom = await Room.findOne({ roomNo, vendorId, name: roomName });
+    const isRoom = await Room.findById({ _id: roomId });
     if (!isRoom) return next(new ErrorHandler('Room does not exist!', 404));
 
     // Check if room is available
@@ -194,11 +200,12 @@ export const bookRoom = catchAsyncError(async (req, res, next) => {
         // Save booking information
         const booking = await BookingModel.create({
             bookingId,
+            vendorId: isRoom.vendorId,
             guestId,
             roomId: isRoom._id,
             roomNo: isRoom.roomArray[0],
             noOfBookedRooms: noOfRooms,
-            customerDetails: { name, adults, children },
+            customerDetails,
             reservationDates: { from: requestedCheckInDate, to: requestedCheckOutDate }
         });
 
@@ -235,10 +242,11 @@ export const bookRoom = catchAsyncError(async (req, res, next) => {
         // Save booking information
         const booking = await BookingModel.create({
             bookingId,
+            vendorId: isRoom.vendorId,
             guestId,
             roomId: isRoom._id,
             roomNo: isRoom.roomArray[0],
-            customerDetails: { name, adults, children },
+            customerDetails,
             reservationDates: { from: requestedCheckInDate, to: requestedCheckOutDate }
 
         });

@@ -134,3 +134,16 @@ export const getVendor = catchAsyncError((req, res) => {
     });
 
 });
+
+
+
+export const getAllBookings = catchAsyncError(async (req, res) => {
+
+    const vendorId = req.vendor._id;
+
+    const getBookings = await BookingModel.find();
+
+    
+
+
+});

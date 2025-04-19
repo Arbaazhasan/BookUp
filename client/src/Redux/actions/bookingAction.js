@@ -1,14 +1,15 @@
 import axios from "axios";
 import { server } from "../store/store";
-import { checkRoomAvailabilityFail, checkRoomAvailabilityRequest, checkRoomAvailabilitySuccess, getHotelListFail, getHotelListRequest, getHotelListSuccess, getRoomDetailsFail, getRoomDetailsRequest, getRoomDetailsSuccess } from "../reducers/bookingReducer";
+import { checkRoomAvailabilityFail, checkRoomAvailabilityRequest, checkRoomAvailabilitySuccess, getBookingFail, getBookingRequest, getBookingSuccess, getHotelListFail, getHotelListRequest, getHotelListSuccess, getRoomDetailsFail, getRoomDetailsRequest, getRoomDetailsSuccess } from "../reducers/bookingReducer";
 import toast from "react-hot-toast";
 
 export const getHotelListAction = async (
     dispatch,
     cityName,
-    noOfRoom,
     checkIn,
     checkOut,
+    noOfRoom,
+    children, adult,
 ) => {
 
     try {
@@ -28,7 +29,12 @@ export const getHotelListAction = async (
         });
 
 
-        dispatch(getHotelListSuccess(data.availableRooms));
+        dispatch(getHotelListSuccess({
+            availableRooms: data.availableRooms,
+            children,
+            adult,
+            noOfRoom
+        }));
 
     } catch (error) {
         console.log(error);
@@ -97,3 +103,45 @@ export const checkRoomAvailabilityAction = async (dispatch, checkInDate, checkOu
     }
 
 };
+
+
+export const bookingAction = async (dispatch,
+    roomId,
+    name,
+    adults,
+    children,
+    noOfRooms,
+    checkInDate,
+    checkOutDate) => {
+
+    try {
+
+        dispatch(getBookingRequest());
+
+
+        console.log(roomId)
+
+        const { data } = await axios.post(`${server}/guest/bookroom?roomId=${roomId}`, {
+            name,
+            adults,
+            children,
+            checkInDate,
+            checkOutDate,
+            noOfRooms
+        }, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true,
+        });
+
+
+        dispatch(getBookingSuccess());
+        toast.success(data.message);
+
+        return data.success;
+    } catch (error) {
+        dispatch(getBookingFail(error.response.data.message));
+        console.log(error);
+    }
+}

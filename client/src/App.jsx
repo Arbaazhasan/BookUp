@@ -27,6 +27,7 @@ import GuestProfile from './pages/Profile/Profile';
 import Booking from './pages/Booking/Booking';
 import { isVendorAuthonticatedAction } from './Redux/actions/vendorAuthAction';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Confirmation from './pages/Confirmation/Confirmation';
 
 
 function App() {
@@ -104,6 +105,8 @@ function App() {
 
         {/* Search Hotel Description */}
         <Route path='/hotel/:id' element={<Hotel />} />
+        <Route path="/booked" element={<Confirmation />} />
+
 
 
         {/* Guest Protected Routes */}

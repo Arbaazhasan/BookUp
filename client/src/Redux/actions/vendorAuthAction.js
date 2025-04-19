@@ -1,6 +1,6 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { vendorAuthonticated, vendorLoginFail, vendorLoginRequest, vendorLoginSuccess, vendorLogoutFail, vendorLogoutRequest, vendorLogoutSuccess } from "../reducers/vendorAuthReducer";
+import { vendorAuthonticated, vendorLoginFail, vendorLoginRequest, vendorLoginSuccess, vendorLogoutFail, vendorLogoutRequest, vendorLogoutSuccess, vendorRegisterFail, vendorRegisterRequest, vendorRegisterSuccess } from "../reducers/vendorAuthReducer";
 import { server } from "../store/store";
 import { FaLessThanEqual } from "react-icons/fa6";
 
@@ -57,6 +57,33 @@ export const vendorLogoutAction = async (dispatch) => {
         dispatch(vendorLogoutFail(error.response.data.message));
     }
 };
+
+
+export const vendorSignUpAction = async (dispatch, email, password) => {
+    try {
+
+        dispatch(vendorRegisterRequest());
+
+        const { data } = await axios.post(`${server}/vendor/register`, {
+            email,
+            password
+        },
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                withCredentials: true
+            });
+
+        dispatch(vendorRegisterSuccess());
+
+        toast.success(data.message);
+
+    } catch (error) {
+        console.log(error);
+        dispatch(vendorRegisterFail(error.response.data.message));
+    }
+}
 
 
 export const isVendorAuthonticatedAction = async (dispatch) => {
