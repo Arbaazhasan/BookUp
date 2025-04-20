@@ -1,6 +1,6 @@
 import axios from "axios";
 import { server } from "../store/store";
-import { checkRoomAvailabilityFail, checkRoomAvailabilityRequest, checkRoomAvailabilitySuccess, getBookingFail, getBookingRequest, getBookingSuccess, getHotelListFail, getHotelListRequest, getHotelListSuccess, getRoomDetailsFail, getRoomDetailsRequest, getRoomDetailsSuccess } from "../reducers/bookingReducer";
+import { checkRoomAvailabilityFail, checkRoomAvailabilityRequest, checkRoomAvailabilitySuccess, getAllBookingListFail, getAllBookingListRequest, getAllBookingListSuccess, getBookingFail, getBookingRequest, getBookingSuccess, getHotelListFail, getHotelListRequest, getHotelListSuccess, getRoomDetailsFail, getRoomDetailsRequest, getRoomDetailsSuccess } from "../reducers/bookingReducer";
 import toast from "react-hot-toast";
 
 export const getHotelListAction = async (
@@ -142,6 +142,28 @@ export const bookingAction = async (dispatch,
         return data.success;
     } catch (error) {
         dispatch(getBookingFail(error.response.data.message));
+        console.log(error);
+    }
+};
+
+
+
+export const getAllBookingListAction = async (dispatch) => {
+
+    try {
+        dispatch(getAllBookingListRequest());
+
+        const { data } = await axios.get(`${server}/booking/guestbookings`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
+        });
+
+        dispatch(getAllBookingListSuccess(data.message));
+
+    } catch (error) {
+        dispatch(getAllBookingListFail(error.response.data.message))
         console.log(error);
     }
 }

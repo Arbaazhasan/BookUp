@@ -352,11 +352,11 @@ export const getGuestBookings = catchAsyncError(async (req, res, next) => {
 
     const guestId = req.guest._id;
 
-    const getBookings = await BookingModel.find({ guestId });
+    const getBookings = await BookingModel.find({ guestId }).populate("vendorId");
 
     res.status(200).json({
         success: true,
-        message: getBookings
+        message: getBookings,
     });
 
 });

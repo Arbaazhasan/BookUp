@@ -79,7 +79,7 @@ export const vendorLogout = catchAsyncError((req, res, next) => {
 // Update profile
 export const updateVendorProfile = catchAsyncError(async (req, res, next) => {
 
-    const { username, email, firstName, lastName, address, city, country, postalCode, about } = req.body;
+    const { userName, email, firstName, lastName, address, city, country, postalCode, about } = req.body;
 
     const vendorId = req.vendor._id;
 
@@ -94,7 +94,7 @@ export const updateVendorProfile = catchAsyncError(async (req, res, next) => {
 
     //update vendor profile 
     const isUpdate = await Vendor.findByIdAndUpdate(isVendor._id, {
-        username,
+        username: userName,
         email,
         firstName,
         lastName,
@@ -143,7 +143,7 @@ export const getAllBookings = catchAsyncError(async (req, res) => {
 
     const getBookings = await BookingModel.find();
 
-    
+
 
 
 });

@@ -20,6 +20,8 @@ const initialState = {
     children: "",
     noOfRooms: "",
 
+    allBookingList: [],
+
 
 
 };
@@ -41,7 +43,7 @@ const bookingReducer = createSlice({
             state.children = action.payload.children;
             state.noOfRooms = action.payload.noOfRoom;
             console.log(action.payload.adult)
-            
+
 
         },
         getHotelListFail: (state, action) => {
@@ -89,6 +91,19 @@ const bookingReducer = createSlice({
             state.error = action.payload;
         },
 
+        getAllBookingListRequest: (state, action) => {
+            state.loading = true;
+            state.error = null;
+        },
+        getAllBookingListSuccess: (state, action) => {
+            state.loading = false;
+            state.allBookingList = action.payload;
+        },
+        getAllBookingListFail: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+
 
 
         setBookingDates: (state, action) => {
@@ -124,6 +139,10 @@ export const {
     getBookingRequest,
     getBookingSuccess,
     getBookingFail,
+
+    getAllBookingListRequest,
+    getAllBookingListSuccess,
+    getAllBookingListFail,
 
     setBookingDates,
 

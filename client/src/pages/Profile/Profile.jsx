@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './profile.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { guestLogout } from '../../Redux/actions/guestAuthActions';
+import { getAllBookingListAction } from '../../Redux/actions/bookingAction';
 
 const Profile = () => {
 
     const dispatch = useDispatch();
-    const [isProfile, setIsProfile] = useState(true);
+    const { allBookingList } = useSelector(state => state.bookingReducer)
+    const [isProfile, setIsProfile] = useState(false);
 
     const profileToggler = () => {
 
@@ -14,7 +16,16 @@ const Profile = () => {
     };
 
     useEffect(() => {
-    }, [isProfile]);
+
+        getAllBookingListAction(dispatch);
+
+    }, [isProfile,]);
+
+    useEffect(() => {
+
+        console.log(allBookingList);
+    }, [allBookingList])
+
 
 
     return (
@@ -129,323 +140,53 @@ const Profile = () => {
 
                         <div className="bookings">
 
+                            {
+                                allBookingList?.map((val, index) => (
+                                    <div className="booking">
 
+                                        <div className="hotelDetails">
+                                            <div className="hotelImage">
+                                                <div>
+                                                    <img src="/images/Hotels/img3.jpg" alt="" />
+                                                </div>
+                                            </div>
 
-
-                            <div className="booking">
-
-                                <div className="hotelDetails">
-                                    <div className="hotelImage">
-                                        <div>
-                                            <img src="/images/Hotels/img3.jpg" alt="" />
+                                            <div className="details">
+                                                <h2>{val.vendorId.username} </h2>
+                                                <p>{val.vendorId.address} </p>
+                                                <p>{val.vendorId.city}, {val.vendorId.country} </p>
+                                                <p>9058714187</p>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="details">
-                                        <h2>Hotel Grand </h2>
-                                        <p>Bazar Mufti Nawabpura </p>
-                                        <p>Moradbad - 24004, India  </p>
-                                        <p>9058714187</p>
-                                    </div>
-                                </div>
+                                        <div className="bookingDetails">
+                                            <div>
+                                                <p>Booking Id : </p>
+                                                <p>{val.bookingId}</p>
+                                            </div>
 
-                                <div className="bookingDetails">
-                                    <div>
-                                        <p>Booking Id : </p>
-                                        <p>#235876UO4</p>
-                                    </div>
+                                            <div>
+                                                <p>Booking Date :</p>
+                                                <p>{new Date(val.reservationDates.from).toLocaleDateString()} to {new Date(val.reservationDates.to).toLocaleDateString()}</p>
 
-                                    <div>
-                                        <p>Booking Date :</p>
-                                        <p>13-09-2024</p>
+                                            </div>
 
-                                    </div>
-
-                                </div>
-
-
-                                <div className="userDetails">
-                                    <h3>User Details </h3>
-                                    <p>Arbaz Hasan</p>
-                                    <p>Bazar Mufti Nawabpura </p>
-                                    <p>Moradbad - 24004, India  </p>
-                                    <p>9058714187</p>
-                                    <p>3 Adults, 2 Childrens</p>
-                                </div>
-
-                            </div>
-
-
-
-                            <div className="booking">
-
-                                <div className="hotelDetails">
-                                    <div className="hotelImage">
-                                        <div>
-                                            <img src="/images/Hotels/img3.jpg" alt="" />
                                         </div>
-                                    </div>
-
-                                    <div className="details">
-                                        <h2>Hotel Grand </h2>
-                                        <p>Bazar Mufti Nawabpura </p>
-                                        <p>Moradbad - 24004, India  </p>
-                                        <p>9058714187</p>
-                                    </div>
-                                </div>
-
-                                <div className="bookingDetails">
-                                    <div>
-                                        <p>Booking Id : </p>
-                                        <p>#235876UO4</p>
-                                    </div>
-
-                                    <div>
-                                        <p>Booking Date :</p>
-                                        <p>13-09-2024</p>
-
-                                    </div>
-
-                                </div>
 
 
-                                <div className="userDetails">
-                                    <h3>User Details </h3>
-                                    <p>Arbaz Hasan</p>
-                                    <p>Bazar Mufti Nawabpura </p>
-                                    <p>Moradbad - 24004, India  </p>
-                                    <p>9058714187</p>
-                                    <p>3 Adults, 2 Childrens</p>
-                                </div>
-
-                            </div>
-
-
-
-                            <div className="booking">
-
-                                <div className="hotelDetails">
-                                    <div className="hotelImage">
-                                        <div>
-                                            <img src="/images/Hotels/img3.jpg" alt="" />
+                                        <div className="userDetails">
+                                            <h3>User Details </h3>
+                                            <p>{val.customerDetails.name}</p>
+                                            <p>{val.customerDetails.phoneNumber}</p>
+                                            <p>{val.customerDetails.city}, {val.customerDetails.country}</p>
+                                            <p>{val.customerDetails.adults} Adults, {val.customerDetails.adults} Childrens</p>
+                                            <p>No of Rooms : {val.noOfBookedRooms}</p>
                                         </div>
-                                    </div>
-
-                                    <div className="details">
-                                        <h2>Hotel Grand </h2>
-                                        <p>Bazar Mufti Nawabpura </p>
-                                        <p>Moradbad - 24004, India  </p>
-                                        <p>9058714187</p>
-                                    </div>
-                                </div>
-
-                                <div className="bookingDetails">
-                                    <div>
-                                        <p>Booking Id : </p>
-                                        <p>#235876UO4</p>
-                                    </div>
-
-                                    <div>
-                                        <p>Booking Date :</p>
-                                        <p>13-09-2024</p>
 
                                     </div>
 
-                                </div>
-
-
-                                <div className="userDetails">
-                                    <h3>User Details </h3>
-                                    <p>Arbaz Hasan</p>
-                                    <p>Bazar Mufti Nawabpura </p>
-                                    <p>Moradbad - 24004, India  </p>
-                                    <p>9058714187</p>
-                                    <p>3 Adults, 2 Childrens</p>
-                                </div>
-
-                            </div>
-
-
-
-                            <div className="booking">
-
-                                <div className="hotelDetails">
-                                    <div className="hotelImage">
-                                        <div>
-                                            <img src="/images/Hotels/img3.jpg" alt="" />
-                                        </div>
-                                    </div>
-
-                                    <div className="details">
-                                        <h2>Hotel Grand </h2>
-                                        <p>Bazar Mufti Nawabpura </p>
-                                        <p>Moradbad - 24004, India  </p>
-                                        <p>9058714187</p>
-                                    </div>
-                                </div>
-
-                                <div className="bookingDetails">
-                                    <div>
-                                        <p>Booking Id : </p>
-                                        <p>#235876UO4</p>
-                                    </div>
-
-                                    <div>
-                                        <p>Booking Date :</p>
-                                        <p>13-09-2024</p>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div className="userDetails">
-                                    <h3>User Details </h3>
-                                    <p>Arbaz Hasan</p>
-                                    <p>Bazar Mufti Nawabpura </p>
-                                    <p>Moradbad - 24004, India  </p>
-                                    <p>9058714187</p>
-                                    <p>3 Adults, 2 Childrens</p>
-                                </div>
-
-                            </div>
-
-
-
-                            <div className="booking">
-
-                                <div className="hotelDetails">
-                                    <div className="hotelImage">
-                                        <div>
-                                            <img src="/images/Hotels/img3.jpg" alt="" />
-                                        </div>
-                                    </div>
-
-                                    <div className="details">
-                                        <h2>Hotel Grand </h2>
-                                        <p>Bazar Mufti Nawabpura </p>
-                                        <p>Moradbad - 24004, India  </p>
-                                        <p>9058714187</p>
-                                    </div>
-                                </div>
-
-                                <div className="bookingDetails">
-                                    <div>
-                                        <p>Booking Id : </p>
-                                        <p>#235876UO4</p>
-                                    </div>
-
-                                    <div>
-                                        <p>Booking Date :</p>
-                                        <p>13-09-2024</p>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div className="userDetails">
-                                    <h3>User Details </h3>
-                                    <p>Arbaz Hasan</p>
-                                    <p>Bazar Mufti Nawabpura </p>
-                                    <p>Moradbad - 24004, India  </p>
-                                    <p>9058714187</p>
-                                    <p>3 Adults, 2 Childrens</p>
-                                </div>
-
-                            </div>
-
-
-
-                            <div className="booking">
-
-                                <div className="hotelDetails">
-                                    <div className="hotelImage">
-                                        <div>
-                                            <img src="/images/Hotels/img3.jpg" alt="" />
-                                        </div>
-                                    </div>
-
-                                    <div className="details">
-                                        <h2>Hotel Grand </h2>
-                                        <p>Bazar Mufti Nawabpura </p>
-                                        <p>Moradbad - 24004, India  </p>
-                                        <p>9058714187</p>
-                                    </div>
-                                </div>
-
-                                <div className="bookingDetails">
-                                    <div>
-                                        <p>Booking Id : </p>
-                                        <p>#235876UO4</p>
-                                    </div>
-
-                                    <div>
-                                        <p>Booking Date :</p>
-                                        <p>13-09-2024</p>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div className="userDetails">
-                                    <h3>User Details </h3>
-                                    <p>Arbaz Hasan</p>
-                                    <p>Bazar Mufti Nawabpura </p>
-                                    <p>Moradbad - 24004, India  </p>
-                                    <p>9058714187</p>
-                                    <p>3 Adults, 2 Childrens</p>
-                                </div>
-
-                            </div>
-
-
-
-                            <div className="booking">
-
-                                <div className="hotelDetails">
-                                    <div className="hotelImage">
-                                        <div>
-                                            <img src="/images/Hotels/img3.jpg" alt="" />
-                                        </div>
-                                    </div>
-
-                                    <div className="details">
-                                        <h2>Hotel Grand </h2>
-                                        <p>Bazar Mufti Nawabpura </p>
-                                        <p>Moradbad - 24004, India  </p>
-                                        <p>9058714187</p>
-                                    </div>
-                                </div>
-
-                                <div className="bookingDetails">
-                                    <div>
-                                        <p>Booking Id : </p>
-                                        <p>#235876UO4</p>
-                                    </div>
-
-                                    <div>
-                                        <p>Booking Date :</p>
-                                        <p>13-09-2024</p>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div className="userDetails">
-                                    <h3>User Details </h3>
-                                    <p>Arbaz Hasan</p>
-                                    <p>Bazar Mufti Nawabpura </p>
-                                    <p>Moradbad - 24004, India  </p>
-                                    <p>9058714187</p>
-                                    <p>3 Adults, 2 Childrens</p>
-                                </div>
-
-                            </div>
-
-
+                                ))
+                            }
 
 
                         </div>
