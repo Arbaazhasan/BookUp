@@ -22,8 +22,7 @@ export const vendorLoginAction = async (dispatch, email, password) => {
         });
 
         toast.success(data.message);
-
-        dispatch(vendorLoginSuccess(data.vendor));
+        dispatch(vendorLoginSuccess({ token: data.vendor, venderData: data.isVendor }));
 
     } catch (error) {
         // const errorMessage =  || "Something went wrong!";
@@ -99,15 +98,15 @@ export const isVendorAuthonticatedAction = async (dispatch) => {
         // Call backend to verify the token
         const { data } = await axios.post(`${server}/vendor/getvendor`, {}, {
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}` // Pass token in Authorization header
+                // "Content-Type": "application/json",
+                // "Authorization": `Bearer ${token}` // Pass token in Authorization header
             },
             withCredentials: true
         });
 
         // If success, authenticate vendor
         if (data.success) {
-            dispatch(vendorAuthonticated());
+            dispatch(vendorAuthonticated(data.venderData));
         } else {
             // If token invalid, log the vendor out
             dispatch(vendorLogoutSuccess());

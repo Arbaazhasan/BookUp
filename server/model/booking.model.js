@@ -46,7 +46,11 @@ const bookingSchema = new mongoose.Schema({
     checkOutDate: {
         type: Date,
     },
-
+    status: {
+        type: String,
+        enum: ["New Booking", "Check-In", "Check-Out", "Cancelled"],
+        default: "New Booking"
+    }
 
 }, {
     timestamps: true

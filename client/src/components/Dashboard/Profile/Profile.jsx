@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useDeferredValue, useEffect, useState } from 'react';
 import "./profile.scss";
 import Widgets from '../Widgets/Widgets';
 
@@ -8,12 +8,15 @@ import { TbDoorEnter } from "react-icons/tb";
 import { TbDoorExit } from "react-icons/tb";
 import { PiDoorBold } from "react-icons/pi";
 import { updateUserProfileAction } from '../../../Redux/actions/controlPanelAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const Profile = () => {
 
     const dispatch = useDispatch();
+
+    const { vendorProfile } = useSelector(state => state.vendorAuthReducer)
+
     const [userName, setUserName] = useState();
     const [email, setEmail] = useState();
     const [firstName, setFirstName] = useState();
@@ -42,6 +45,10 @@ const Profile = () => {
     };
 
 
+    useEffect(() => {
+        console.log(vendorProfile)
+    }, [vendorProfile])
+
     return (
         <div className='profile'>
 
@@ -51,7 +58,7 @@ const Profile = () => {
                 </div>
 
                 <div className='heading'>
-                    <h1>Grand Hotel</h1>
+                    <h1>{vendorProfile?.username}</h1>
                 </div>
 
             </div>
@@ -74,22 +81,22 @@ const Profile = () => {
 
                             <div>
                                 <p>Username</p>
-                                <input type="text" maxLength={40} onChange={(e) => setUserName(e.target.value)} />
+                                <input type="text" maxLength={40} onChange={(e) => setUserName(e.target.value)} placeholder={vendorProfile?.username} />
                             </div>
 
                             <div>
                                 <p>Email Address</p>
-                                <input type="email" maxLength={40} onChange={(e) => setEmail(e.target.value)} />
+                                <input type="email" maxLength={40} onChange={(e) => setEmail(e.target.value)} placeholder={vendorProfile?.email} />
                             </div>
 
                             <div>
                                 <p>First name</p>
-                                <input type="text" pattern='[A-Za-z]*$' title='Enter the text only' onChange={(e) => setFirstName(e.target.value)} />
+                                <input type="text" pattern='[A-Za-z]*$' title='Enter the text only' onChange={(e) => setFirstName(e.target.value)} placeholder={vendorProfile?.firstName} />
                             </div>
 
                             <div>
                                 <p>Last Name</p>
-                                <input type="text" pattern='[A-Za-z]*$' title='Enter the text only' maxLength={40} onChange={(e) => setLastName(e.target.value)} />
+                                <input type="text" pattern='[A-Za-z]*$' title='Enter the text only' maxLength={40} onChange={(e) => setLastName(e.target.value)} placeholder={vendorProfile?.lastName} />
                             </div>
                         </div>
 
@@ -99,26 +106,26 @@ const Profile = () => {
 
                             <div>
                                 <p>Address</p>
-                                <input type="text" maxLength={40} onChange={(e) => setAddress(e.target.value)} />
+                                <input type="text" maxLength={40} onChange={(e) => setAddress(e.target.value)} placeholder={vendorProfile?.address} />
                             </div>
 
                             <div className="addressDetails">
 
                                 <div>
                                     <p>City</p>
-                                    <input type="text" pattern='[A-Za-z]*$' title='Enter the text only.' maxLength={40} onChange={(e) => setCity(e.target.value)} />
+                                    <input type="text" pattern='[A-Za-z]*$' title='Enter the text only.' maxLength={40} onChange={(e) => setCity(e.target.value)} placeholder={vendorProfile?.city} />
                                 </div>
 
 
                                 <div>
                                     <p>Country</p>
-                                    <input type="text" pattern='[A-Za-z]*$' title='Enter the text only.' maxLength={40} onChange={(e) => setCountry(e.target.value)} />
+                                    <input type="text" pattern='[A-Za-z]*$' title='Enter the text only.' maxLength={40} onChange={(e) => setCountry(e.target.value)} placeholder={vendorProfile?.country} />
                                 </div>
 
 
                                 <div>
                                     <p>Postal Code</p>
-                                    <input type="number" pattern='[0-9]{10}' title='Enter Number only ' maxLength={10} onChange={(e) => setPostalCode(e.target.value)} />
+                                    <input type="number" pattern='[0-9]{10}' title='Enter Number only ' maxLength={10} onChange={(e) => setPostalCode(e.target.value)} placeholder={vendorProfile?.postalCode} />
                                 </div>
 
                             </div>
@@ -129,12 +136,12 @@ const Profile = () => {
 
                         <div className="ContactInformaiton">
 
-                            <div className='heading'>About Me</div>
+                            {/* <div className='heading'>About Me</div> */}
 
-                            <div>
+                            {/* <div>
                                 <p>About Me</p>
                                 <input type="text" maxLength={40} onChange={(e) => setAboutMe(e.target.value)} />
-                            </div>
+                            </div> */}
                         </div>
 
 
@@ -146,7 +153,7 @@ const Profile = () => {
                 </div>
 
 
-                <div className="right">
+                {/* <div className="right">
 
 
                     <Widgets heading={6} title={'New Bookings'} icon={<FaRegBookmark />} />
@@ -156,7 +163,7 @@ const Profile = () => {
                     <Widgets heading={9} title={'Available Rooms'} icon={<PiDoorBold />} />
 
 
-                </div>
+                </div> */}
 
 
             </div>

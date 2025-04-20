@@ -5,6 +5,7 @@ const initialState = {
 
     status: false,
     isVendorAuthonticated: true,
+    vendorProfile: [],
     loading: false,
     error: null,
 
@@ -24,7 +25,8 @@ const vendorAuthReducer = createSlice({
         vendorLoginSuccess: (state, action) => {
             state.loading = false;
             state.isVendorAuthonticated = true;
-            localStorage.setItem('vendorToken', action.payload || null);
+            localStorage.setItem('vendorToken', action.payload.token || null);
+            state.vendorProfile = action.payload.venderData;
         },
         vendorLoginFail: (state, action) => {
             state.success = false;
@@ -70,6 +72,7 @@ const vendorAuthReducer = createSlice({
 
         vendorAuthonticated: (state, action) => {
             state.isVendorAuthonticated = true;
+            state.vendorProfile = action.payload;
         },
 
 

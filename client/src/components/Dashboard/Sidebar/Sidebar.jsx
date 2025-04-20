@@ -43,15 +43,16 @@ const Sidebar = () => {
                     <p>Statistics</p>
                 </div>
 
-                <div>
+                {/* <div>
                     <Link to={'/dashboard'}>
                         <span><MdDashboard /></span>
                         <p>Dashbaord</p>
                     </Link>
-                </div>
+                </div> */}
 
                 <div>
-                    <Link to={'/dashboard/profile'}>
+                    {/* <Link to={'/dashboard/profile'}> */}
+                    <Link to={'/dashboard'}>
                         <span><FaRegUser /></span>
                         <p>Profile</p>
                     </Link>

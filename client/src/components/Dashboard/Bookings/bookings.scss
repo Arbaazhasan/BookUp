@@ -3,7 +3,7 @@
     height: 88%;
     width: 100%;
     border-radius: 1vw;
-    overflow: hidden;
+    overflow: scroll;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -49,8 +49,6 @@
         background-color: white;
         border-collapse: collapse;
 
-        // border: 2px solid red;
-
         >thead {
 
             >tr {
@@ -83,6 +81,7 @@
         }
 
         tbody {
+            // border: 2px solid red;
 
             >tr {
                 display: grid;

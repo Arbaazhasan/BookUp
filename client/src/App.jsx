@@ -37,6 +37,7 @@ function App() {
   const { loading: vendorLoading, error: vendorAuthError, isVendorAuthonticated } = useSelector(state => state.vendorAuthReducer);
   const { loading: bookingLoading, error: bookingError, checkAvailabilityWindow } = useSelector(state => state.bookingReducer);
   const { loading: controlPanelLoading, error: controlPanelError } = useSelector(state => state.controlPanelReducer);
+  const { loading: vendorBookingLoading, error: vendorBookingError } = useSelector(state => state.vendorBookingReducer);
 
 
   useEffect(() => {
@@ -55,11 +56,14 @@ function App() {
 
       if (controlPanelError)
         toast.error(controlPanelError);
+
+      if (vendorBookingError)
+        toast.error(vendorBookingError);
     }
 
     isGuestAuthonticatedAction(dispatch);
     isVendorAuthonticatedAction(dispatch);
-  }, [dispatch, guestAuthError, vendorAuthError, bookingError, controlPanelError]);
+  }, [dispatch, guestAuthError, vendorAuthError, bookingError, controlPanelError, vendorBookingError]);
 
 
   useEffect(() => {
@@ -78,7 +82,8 @@ function App() {
         guestLoading ||
         vendorLoading ||
         bookingLoading ||
-        controlPanelLoading
+        controlPanelLoading ||
+        vendorBookingLoading
         && <Loading />
 
       }
@@ -150,9 +155,10 @@ function App() {
         } >
 
           {/* Default Route (when url redirect on "Dashbaord" so it will render)*/}
-          <Route index element={<Dashboard currentPath={'Control Panel'} dashboardComponent={<ControlPanel />} />} />
+          {/* <Route index element={<Dashboard currentPath={'Control Panel'} dashboardComponent={<ControlPanel />} />} /> */}
 
-          <Route path='/dashboard/profile' element={<Dashboard currentPath={'Profile'} dashboardComponent={<Profile />} />} />
+          {/* <Route path='/dashboard/profile' element={<Dashboard currentPath={'Profile'} dashboardComponent={<Profile />} />} /> */}
+          <Route index element={<Dashboard currentPath={'Profile'} dashboardComponent={<Profile />} />} />
 
           <Route path='/dashboard/bookings' element={<Dashboard currentPath={'Bookings'} dashboardComponent={<Bookings />} />} />
 

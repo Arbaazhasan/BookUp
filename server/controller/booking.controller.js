@@ -362,16 +362,3 @@ export const getGuestBookings = catchAsyncError(async (req, res, next) => {
 });
 
 
-// get Guest bookings record
-export const getGuestBookingRecords = catchAsyncError(async (req, res, next) => {
-
-    const guestId = req.guest._id;
-
-    const getRecords = await BookingsRecord.find({ guestId });
-
-    res.status(200).json({
-        success: true,
-        message: getRecords
-    });
-
-});

@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import ErrorHandler from "../utils/errorHandler.js";
 import mongoose from "mongoose";
+import { BookingModel } from "../model/booking.model.js";
 
 
 // Vendor Registration
@@ -58,7 +59,8 @@ export const vendorLogin = catchAsyncError(async (req, res, next) => {
     }).json({
         success: true,
         message: `Welcome ${isVendor.firstName}`,
-        vendor: isVendor._id
+        vendor: isVendor._id,
+        isVendor
     });
 
 });
@@ -121,7 +123,7 @@ export const updateVendorProfile = catchAsyncError(async (req, res, next) => {
 });
 
 
-export const getVendor = catchAsyncError((req, res) => {
+export const getVendor = catchAsyncError(async (req, res) => {
 
     const { vendorToken } = req.cookies;
 
@@ -129,21 +131,60 @@ export const getVendor = catchAsyncError((req, res) => {
         success: false
     });
 
+
+    const id = jwt.verify(vendorToken, process.env.JWT_SECRET);
+
+    const venderData = await Vendor.findById({ _id: id._id });
+
     res.status(200).json({
         success: true,
+        venderData
     });
 
 });
 
 
-
-export const getAllBookings = catchAsyncError(async (req, res) => {
-
+export const getBookings = catchAsyncError(async (req, res) => {
     const vendorId = req.vendor._id;
+    const { type } = req.body;
 
-    const getBookings = await BookingModel.find();
+    // Initialize the query with vendorId
+    const query = { vendorId };
 
+    // If type is passed, filter by that specific status
+    if (type === "New Booking" || type === "Check-In") {
+        query.status = type;  // Filter by the provided status ("New Booking" or "Check-In")
+    } else {
+        // Otherwise, exclude "New Booking" and "Check-In"
+        query.status = { $nin: ["New Booking", "Check-In"] };
+    }
 
+    // Fetch bookings based on the constructed query
+    const getBookings = await BookingModel.find(query).populate("vendorId");
 
-
+    // Return the result
+    res.status(200).json({
+        success: true,
+        message: getBookings,
+    });
 });
+
+
+export const updateBookingStatus = catchAsyncError(async (req, res, next) => {
+
+    const { status, bookingId } = req.body;
+
+    if (!status || !bookingId)
+        return next(new ErrorHandler("Select Status ", 400));
+
+    await BookingModel.findByIdAndUpdate({ _id: bookingId }, {
+        $set: { status: status }
+    });
+
+    res.status(200).json({
+        success: true,
+        message: "Status Update"
+    });
+
+
+})
