@@ -1,5 +1,5 @@
 import axios from "axios";
-import { clearPreviousRoomDetailsAction, deleteRoomFail, deleteRoomRequest, deleteRoomSuccess, getRoomDetailsFail, getRoomDetailsRequest, getRoomDetailsSuccess, getRoomListFail, getRoomListRequest, getRoomListSuccess, getSearchRoomFail, getSearchRoomRequest, getSearchRoomSuccess, vendorLaodingRequest, vendorLoadingFail, vendorLoadingSuccess } from "../reducers/controlPanelReducer";
+import { clearPreviousRoomDetailsAction, deleteRoomFail, deleteRoomRequest, deleteRoomSuccess, getRoomDetailsFail, getRoomDetailsRequest, getRoomDetailsSuccess, getRoomListFail, getRoomListRequest, getRoomListSuccess, getSearchRoomFail, getSearchRoomRequest, getSearchRoomSuccess, vendorLoadingFail, vendorLoadingRequest, vendorLoadingSuccess } from "../reducers/controlPanelReducer";
 import { server } from "../store/store";
 import toast from "react-hot-toast";
 import { DiAndroid } from "react-icons/di";
@@ -88,7 +88,7 @@ export const addRoomAction = async (dispatch, roomNo,
 
     try {
 
-        dispatch(vendorLaodingRequest());
+        dispatch(vendorLoadingRequest());
 
         const formData = new FormData();
 
@@ -147,7 +147,7 @@ export const updateRoomAction = async (
     images
 ) => {
     try {
-        dispatch(vendorLaodingRequest());
+        dispatch(vendorLoadingRequest());
 
         const formData = new FormData();
         formData.append("roomNo", roomNo);
@@ -218,7 +218,7 @@ export const updateUserProfileAction = async (
 ) => {
 
     try {
-        dispatch(vendorLaodingRequest());
+        dispatch(vendorLoadingRequest());
 
         const { data } = await axios.patch(`${server}/vendor/updatevendorprofile`, {
             userName,

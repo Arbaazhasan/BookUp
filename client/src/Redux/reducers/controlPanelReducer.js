@@ -36,6 +36,7 @@ const controlPanelReducer = createSlice({
             state.error = null;
         },
         getRoomListSuccess: (state, action) => {
+
             state.loading = false;
             state.roomList = action.payload;
         },
@@ -72,7 +73,7 @@ const controlPanelReducer = createSlice({
         },
 
 
-        vendorLaodingRequest: (state, action) => {
+        vendorLoadingRequest: (state, action) => {
             state.loading = true;
             state.error = null;
         },
@@ -112,7 +113,7 @@ export const {
     deleteRoomFail,
 
 
-    vendorLaodingRequest,
+    vendorLoadingRequest,
     vendorLoadingSuccess,
     vendorLoadingFail
 

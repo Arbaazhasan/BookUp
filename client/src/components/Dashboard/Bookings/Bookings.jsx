@@ -220,7 +220,7 @@ const Bookings = () => {
 
         <tbody>
           {
-            updatedBookings.map((val, index) => (
+            [...updatedBookings].reverse().map((val, index) => (
               <tr key={val._id}>
                 <td>{index + 1}</td>
                 <td>{val.bookingId}</td>

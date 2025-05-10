@@ -23,7 +23,7 @@ export const guestRegisterAction = async (dispatch, name, email, password) => {
         });
 
 
-        dispatch(guestRegisterSuccess());
+        dispatch(guestRegisterSuccess(data));
 
 
         console.log(data);
@@ -31,8 +31,8 @@ export const guestRegisterAction = async (dispatch, name, email, password) => {
         toast.success(data.message);
 
     } catch (error) {
-        dispatch(guestRegisterFail(error.response.data.message));
         console.log(error);
+        dispatch(guestRegisterFail(error.response.data.message));
     }
 };
 

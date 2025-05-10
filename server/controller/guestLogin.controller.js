@@ -27,7 +27,7 @@ export const register = catchAsyncError(async (req, res, next) => {
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
-    res.status(200).cookie('toekn', token, {
+    res.status(200).cookie('token', token, {
         maxAge: 1000 * 60 * 100,
         httpOnly: true
 

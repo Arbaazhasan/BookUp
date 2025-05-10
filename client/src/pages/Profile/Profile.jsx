@@ -141,7 +141,7 @@ const Profile = () => {
                     <div className="bookings">
 
                         {
-                            allBookingList?.map((val, index) => (
+                            [...allBookingList]?.reverse().map((val, index) => (
                                 <div className="booking">
 
                                     <div className="hotelDetails">

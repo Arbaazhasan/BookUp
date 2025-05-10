@@ -23,7 +23,7 @@ const CheckAvailability = () => {
     };
 
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
 
         if (!checkInDate || !checkOutDate || !roomType) return toast.error("Please fill all the fields.");
@@ -35,9 +35,9 @@ const CheckAvailability = () => {
 
         if (checkInDate > checkOutDate) return toast.error("please select the valid check-Out Data!");
 
-        const isAvailable = checkRoomAvailabilityAction(dispatch, checkInDate, checkOutDate, roomDetails._id);
+        const isAvailable = await checkRoomAvailabilityAction(dispatch, checkInDate, checkOutDate, roomDetails._id);
 
-        if (isAvailable) {
+        if (isAvailable === true) {
             navigate('/guestProfile/booking');
 
             dispatch(checkAvailabilityAction());

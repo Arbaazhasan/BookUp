@@ -67,8 +67,6 @@ function App() {
 
 
   useEffect(() => {
-
-
   }, [dispatch]);
 
 
@@ -79,12 +77,12 @@ function App() {
 
       {
         /* Display Loading Component if loading */
-        guestLoading ||
-        vendorLoading ||
-        bookingLoading ||
-        controlPanelLoading ||
-        vendorBookingLoading
-        && <Loading />
+        (guestLoading ||
+          vendorLoading ||
+          bookingLoading ||
+          controlPanelLoading ||
+          vendorBookingLoading
+        ) && <Loading />
 
       }
 
@@ -132,12 +130,12 @@ function App() {
           {/* Guest Profile */}
           <Route index element={<GuestProfile />} />
 
+          <Route path='/guestProfile/booking' element={<Booking />} />
 
           {/* Booking Confermation Page & Payment Method */}
 
 
         </Route>
-        <Route path='/guestProfile/booking' element={<Booking />} />
 
 
 
