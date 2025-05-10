@@ -63,10 +63,13 @@ const Header = () => {
 
                     </div>
 
-                    <div>
-                        <Link to='/' >About</Link>
-                    </div>
+                    {/* <div>
+                        <Link to='#AboutUs' >About</Link>
+                    </div> */}
 
+                    <div>
+                        <a href="#AboutUs" onClick={burgerMenuHandler}>About</a>
+                    </div>
 
                     <div>
                         <Link to='/' >Contact</Link>
@@ -82,20 +85,22 @@ const Header = () => {
 
 
                 <div>
-                    <Link to='/' >Home</Link>
+                    <a href="#Home" onClick={burgerMenuHandler}>Home</a>
                 </div>
 
                 <div>
                     <Link to='/list' >Rooms</Link>
                 </div>
 
+
                 <div>
-                    <Link to='/' >About</Link>
+                    <a href="#AboutUs" onClick={burgerMenuHandler}>About</a>
                 </div>
 
                 <div>
-                    <Link to='/' >Contact</Link>
+                    <a href="#footer" onClick={burgerMenuHandler}>Contact</a>
                 </div>
+
 
             </div>
 

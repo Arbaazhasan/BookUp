@@ -8,6 +8,71 @@ import { Vendor } from "../model/vendor.model.js";
 
 
 
+// export const checkAvailability = catchAsyncError(async (req, res, next) => {
+
+//     const { checkInDate, checkOutDate, roomId } = req.body;
+
+//     console.log(roomId);
+//     if (!checkInDate || !checkOutDate || !roomId)
+//         return next(new ErrorHandler('Please select dates!', 400));
+
+//     // Check if the room exists
+//     const isRoom = await Room.findById(roomId);
+//     if (!isRoom) return next(new ErrorHandler('Room does not exist', 404));
+
+//     // Check if the room is available
+//     const isAvailable = isRoom.availableRooms > 0;
+//     if (!isAvailable) return next(new ErrorHandler('Room is not available', 400));
+
+//     const requestedCheckInDate = new Date(checkInDate);
+//     const requestedCheckOutDate = new Date(checkOutDate);
+
+//     const reservationDates = isRoom.reservationDates;
+//     let isDatesAvailable = true;
+
+//     // Check single Interface room
+//     if (isRoom.noOfRooms == 1 && isRoom.availableRooms == 1) {
+
+//         // Check if requested dates are free
+//         if (!reservationDates.length) {
+//             return res.status(200).json({
+//                 success: true,
+//                 message: "Room available"
+//             });
+//         }
+
+//         isRoom.reservationDates.forEach((reservation) => {
+//             const existingCheckInDate = new Date(reservation.checkOutDate);
+//             const existingCheckOutDate = new Date(checkInDate);
+
+//             if (
+//                 (requestedCheckInDate < existingCheckOutDate && requestedCheckOutDate > existingCheckInDate) ||
+//                 (requestedCheckInDate <= existingCheckInDate && requestedCheckOutDate >= existingCheckOutDate)
+//             ) {
+//                 isDatesAvailable = false;
+//             }
+//         });
+
+//         if (!isDatesAvailable) return next(new ErrorHandler('Selected date is not available!', 400));
+
+//         return res.status(200).json({
+//             success: true,
+//             message: "Room available"
+//         });
+//     }
+
+//     // Check multiple same Interface room
+//     if (isRoom.noOfRooms > 1 && isRoom.availableRooms > 0) {
+
+//         return res.status(200).json({
+//             success: true,
+//             message: "Room available "
+//         });
+//     }
+
+// });
+
+
 export const checkAvailability = catchAsyncError(async (req, res, next) => {
 
     const { checkInDate, checkOutDate, roomId } = req.body;
@@ -21,8 +86,8 @@ export const checkAvailability = catchAsyncError(async (req, res, next) => {
     if (!isRoom) return next(new ErrorHandler('Room does not exist', 404));
 
     // Check if the room is available
-    const isAvailable = isRoom.availableRooms > 0;
-    if (!isAvailable) return next(new ErrorHandler('Room is not available', 400));
+    // const isAvailable = isRoom.availableRooms > 0;
+    // if (!isAvailable) return next(new ErrorHandler('Room is not available', 400));
 
     const requestedCheckInDate = new Date(checkInDate);
     const requestedCheckOutDate = new Date(checkOutDate);
@@ -30,47 +95,45 @@ export const checkAvailability = catchAsyncError(async (req, res, next) => {
     const reservationDates = isRoom.reservationDates;
     let isDatesAvailable = true;
 
-    // Check single Interface room
-    if (isRoom.noOfRooms == 1 && isRoom.availableRooms == 1) {
-
-        // Check if requested dates are free
-        if (!reservationDates.length) {
-            return res.status(200).json({
-                success: true,
-                message: "Room available"
-            });
-        }
-
-        isRoom.reservationDates.forEach((reservation) => {
-            const existingCheckInDate = new Date(reservation.checkOutDate);
-            const existingCheckOutDate = new Date(checkInDate);
-
-            if (
-                (requestedCheckInDate < existingCheckOutDate && requestedCheckOutDate > existingCheckInDate) ||
-                (requestedCheckInDate <= existingCheckInDate && requestedCheckOutDate >= existingCheckOutDate)
-            ) {
-                isDatesAvailable = false;
-            }
-        });
-
-        if (!isDatesAvailable) return next(new ErrorHandler('Selected date is not available!', 400));
-
+    // Check if requested dates are free
+    if (!reservationDates.length) {
         return res.status(200).json({
             success: true,
             message: "Room available"
         });
     }
 
-    // Check multiple same Interface room
-    if (isRoom.noOfRooms > 1 && isRoom.availableRooms > 0) {
+    isRoom.reservationDates.forEach((reservation) => {
+        const existingCheckInDate = new Date(reservation.to);
+        const existingCheckOutDate = new Date(reservation.from);
 
-        return res.status(200).json({
-            success: true,
-            message: "Room available "
-        });
-    }
+        if (
+            (requestedCheckInDate < existingCheckOutDate && requestedCheckOutDate > existingCheckInDate) ||
+            (requestedCheckInDate <= existingCheckInDate && requestedCheckOutDate >= existingCheckOutDate)
+        ) {
+            isDatesAvailable = false;
+        }
+    });
+
+    if (!isDatesAvailable) return next(new ErrorHandler('Selected date is not available!', 400));
+
+    return res.status(200).json({
+        success: true,
+        message: "Room available"
+    });
+
+    // Check multiple same Interface room
+    // if (isRoom.noOfRooms > 1 && isRoom.availableRooms > 0) {
+
+    //     return res.status(200).json({
+    //         success: true,
+    //         message: "Room available "
+    //     });
+    // }
 
 });
+
+
 
 
 
@@ -123,7 +186,7 @@ export const searchRooms = catchAsyncError(async (req, res, next) => {
                 }
             }
         },
-        availableRooms: { $gt: (rooms - 1) || 0 } // Rooms that have availability
+        // availableRooms: { $gt: (rooms - 1) || 0 } // Rooms that have availability
     });
 
     // Step 3: If no rooms are found, return a 404 error

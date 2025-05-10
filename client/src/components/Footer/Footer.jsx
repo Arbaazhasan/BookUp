@@ -34,7 +34,7 @@ const Footer = () => {
 
                 </div>
 
-                <div>
+                <div id='footer'>
                     <h1>Navigation</h1>
 
                     <div>
@@ -46,7 +46,7 @@ const Footer = () => {
 
                 </div>
 
-                <div>
+                <div >
                     <h1>Newsletter</h1>
                     <div className="btn">
                         <input type="text" placeholder='Enter your mail' />

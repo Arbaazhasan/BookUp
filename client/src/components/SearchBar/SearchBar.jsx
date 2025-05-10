@@ -30,7 +30,7 @@ const SearchBar = () => {
         e.preventDefault();
         getHotelListAction(dispatch, cityName, checkIn, checkOut, noOfRoom, children, adult);
         navigate('/list');
-    };  
+    };
 
 
     // Verify that check-out-date should not be less than check-in-date 
@@ -52,20 +52,28 @@ const SearchBar = () => {
             <form className="searchTab" onSubmit={searchBarHandler}>
                 <div>
                     <p>City, Area of Property</p>
-                    <input type="text" placeholder="Goa" value={cityName} onChange={(e) => setCityName(e.target.value)} />
+                    <input type="text"
+                        placeholder="Goa" value={cityName} onChange={(e) => setCityName(e.target.value)} />
                 </div>
 
                 <div>
                     <p>Check-in</p>
-                    <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} />
+                    <input type="date"
+                        min={new Date().toISOString().split('T')[0]}
+                        id="checkIng"
+
+                        value={checkIn} onChange={(e) => setCheckIn(e.target.value)} />
                 </div>
 
                 <div>
                     <p>Check-out</p>
-                    <input type="date" value={checkOut} onChange={checkOutOnChange} />
+                    <input type="date"
+                        min={new Date().toISOString().split('T')[0]}
+                        value={checkOut} onChange={checkOutOnChange} />
+
                 </div>
 
-                <div>
+                {/* <div>
                     <p>Rooms & Guests</p>
                     <table>
                         <tbody>
@@ -103,7 +111,7 @@ const SearchBar = () => {
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> */}
 
                 <div>
                     <button type="submit" >Search</button>

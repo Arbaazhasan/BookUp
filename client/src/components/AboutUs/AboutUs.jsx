@@ -3,7 +3,7 @@ import './aboutUs.scss';
 
 const AboutUs = ({ contentDirection }) => {
     return (
-        <div className='AboutUs' style={{ flexDirection: contentDirection && "row-reverse" }}>
+        <div className='AboutUs' id='AboutUs' style={{ flexDirection: contentDirection && "row-reverse" }}>
 
             <div className="left">
                 <p>About Us</p>

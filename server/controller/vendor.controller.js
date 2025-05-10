@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import ErrorHandler from "../utils/errorHandler.js";
 import mongoose from "mongoose";
 import { BookingModel } from "../model/booking.model.js";
+import { Room } from "../model/room.model.js";
 
 
 // Vendor Registration
@@ -176,6 +177,35 @@ export const updateBookingStatus = catchAsyncError(async (req, res, next) => {
 
     if (!status || !bookingId)
         return next(new ErrorHandler("Select Status ", 400));
+
+    if (!bookingId || !mongoose.Types.ObjectId.isValid(bookingId))
+        return next(new ErrorHandler('all fileds are required!', 400));
+
+    const isBooking = await BookingModel.findById(bookingId);
+
+    // Check Booking
+    if (!isBooking)
+        return next(new ErrorHandler('Booking does not exists!', 404));
+
+    // Check room exists
+    const isRoom = await Room.findById(isBooking.roomId);
+    if (!isRoom)
+        return next(new ErrorHandler('Room does not exists!', 404));
+
+    const updateRoom = await Room.findByIdAndUpdate(isRoom._id, {
+        $push: {
+            roomArray: isBooking.roomNo,
+        },
+        $inc: { availableRooms: +1 },
+
+        $pull: {
+            reservationDates: {
+                bookingId: isBooking._id
+            }
+        }
+    }, {
+        new: true
+    });
 
     await BookingModel.findByIdAndUpdate({ _id: bookingId }, {
         $set: { status: status }
