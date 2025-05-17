@@ -10,7 +10,7 @@ router.get('/logout', vendorLogout);
 router.post('/getvendor', getVendor);
 
 router.post('/getBookings', vendorAuthontication, getBookings);
-router.post('/updatebookingstatus', vendorAuthontication, updateBookingStatus);
+router.post('/updatebookingstatus', updateBookingStatus);
 
 
 router.patch('/updatevendorprofile', vendorAuthontication, updateVendorProfile);

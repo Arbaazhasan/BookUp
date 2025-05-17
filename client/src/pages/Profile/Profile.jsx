@@ -3,6 +3,7 @@ import './profile.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { guestLogout } from '../../Redux/actions/guestAuthActions';
 import { getAllBookingListAction } from '../../Redux/actions/bookingAction';
+import { updateBookingAction } from '../../Redux/actions/vendorBookingAction';
 
 const Profile = () => {
 
@@ -27,6 +28,11 @@ const Profile = () => {
     }, [allBookingList])
 
 
+    const cancelBtnHandler = async (bookingId) => {
+        await updateBookingAction(dispatch, "Cancelled", bookingId);
+        await getAllBookingListAction(dispatch);
+
+    }
 
     return (
         <div className='guestProfile'>
@@ -142,7 +148,7 @@ const Profile = () => {
 
                         {
                             [...allBookingList]?.reverse().map((val, index) => (
-                                <div className="booking">
+                                <div className="booking" key={index}>
 
                                     <div className="hotelDetails">
                                         <div className="hotelImage">
@@ -181,6 +187,19 @@ const Profile = () => {
                                         <p>{val.customerDetails.city}, {val.customerDetails.country}</p>
                                         <p>{val.customerDetails.adults} Adults, {val.customerDetails.adults} Childrens</p>
                                         <p>No of Rooms : {val.noOfBookedRooms}</p>
+                                    </div>
+
+                                    <div className="cancelBtn">
+
+                                        {
+                                            val.status === "New Booking" ?
+
+                                                <button onClick={() => cancelBtnHandler(val._id)}>Cancel</button>
+
+                                                :
+
+                                                <p>Cancelled</p>
+                                        }
                                     </div>
 
                                 </div>
